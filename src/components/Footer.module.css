@@ -1,0 +1,52 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 3px solid var(--orange-300);
+    color: #ff4f00;
+}
+
+.copyright {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+}
+
+/* Icons */
+
+.links {
+    display: flex;
+    gap: 1rem;
+}
+
+.link {
+    height: 1rem;
+    aspect-ratio: 1/1;
+}
+
+.link > * {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(119, 119, 119);
+}
+
+.discord {
+    -webkit-mask: url("/icons/discord.svg") no-repeat center / contain;
+    mask: url("/icons/discord.svg") no-repeat center / contain;
+}
+
+.instagram {
+    -webkit-mask: url("/icons/instagram.svg") no-repeat center / contain;
+    mask: url("/icons/instagram.svg") no-repeat center / contain;
+}
+
+.youtube {
+    -webkit-mask: url("/icons/youtube.svg") no-repeat center / contain;
+    mask: url("/icons/youtube.svg") no-repeat center / contain;
+}
+
+.facebook {
+    -webkit-mask: url("/icons/facebook.svg") no-repeat center / contain;
+    mask: url("/icons/facebook.svg") no-repeat center / contain;
+}
