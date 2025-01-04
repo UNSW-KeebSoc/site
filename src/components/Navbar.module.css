@@ -7,6 +7,10 @@
     color: #ff4f00;
 }
 
+.navbar h2 {
+    font-size: 1.5rem;
+}
+
 .navbar div {
     display: flex;
     gap: 1rem;

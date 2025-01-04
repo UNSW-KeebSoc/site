@@ -1,0 +1,56 @@
+/* ScrollingBanner.module.css */
+.banner {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    padding: 1rem;
+    background: var(--orange-300);
+    gap: 1rem;
+    color: white;
+}
+
+.banner > div {
+    overflow: clip;
+}
+
+.container {
+    will-change: transform;
+    /* cursor: pointer; */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Pause animation on hover */
+.banner:hover .animate,
+.animate:hover {
+    animation-play-state: paused;
+}
+
+.sponsorWrapper {
+    flex: 1;
+    text-overflow: hidden;
+}
+
+.animate {
+    animation: scroll var(--scroll-duration) linear infinite;
+}
+
+.content {
+    display: inline-flex;
+    white-space: nowrap;
+}
+
+.sentence {
+    margin: 0 2rem;
+    font-size: 1.1rem;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(var(--scroll-width));
+    }
+}
