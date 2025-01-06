@@ -1,7 +1,10 @@
 .card {
     width: 100%;
-    height: calc(100vh - 3.2rem - 1.5rem - 1rem - 1rem - 0.3rem - 6px);
+    height: calc(
+        100vh - 3.2rem - 1.5rem - 1rem - 1rem - 2rem - 1rem - 0.32rem - 12px
+    );
     overflow: clip;
+    position: relative;
 }
 
 .splash {
@@ -13,4 +16,51 @@
 
     /* Zoom in on the image */
     transform: scale(1.1);
+}
+
+.cardText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    z-index: 10;
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+}
+
+/* Vertical */
+.position_top {
+    top: 0;
+}
+
+.position_middle {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.position_bottom {
+    bottom: 0;
+}
+
+/* Horizontal */
+.position_left {
+    left: 0;
+    text-align: left;
+}
+
+.position_center {
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.position_right {
+    right: 0;
+    text-align: right;
+}
+
+/* Special case for center-center */
+.position_middle.position_center {
+    transform: translate(-50%, -50%);
 }

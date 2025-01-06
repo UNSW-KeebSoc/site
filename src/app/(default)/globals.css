@@ -3,33 +3,40 @@
     --orange-200: #ff9000;
     --orange-300: #fe7600;
     --orange-400: #ff4f00;
+    --default-border: 3px solid var(--orange-300);
 }
 
 html,
 body {
     max-width: 100vw;
+    min-height: 100vh;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 main {
     border-left: 3px solid var(--orange-300);
     border-right: 3px solid var(--orange-300);
-    min-height: calc(100vh - 119px);
+    min-height: calc(100vh - 1.6rem - 1.5rem - 2rem - 1.6rem - 12px);
 }
 body {
     color: var(--foreground);
     background: var(--background);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 * {
     box-sizing: border-box;
-    padding: 0;
-    margin: 0;
 }
 
 a {
     color: inherit;
     text-decoration: none;
+}
+
+p {
+    padding: 0;
+    margin: 0;
 }
