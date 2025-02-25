@@ -92,7 +92,6 @@ h6 {
 h1 {
     font-size: 2.5rem;
     color: var(--orange-300);
-    border-bottom: var(--default-border);
     padding-bottom: var(--space-sm);
 }
 

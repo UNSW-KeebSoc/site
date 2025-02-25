@@ -43,7 +43,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
         return (
             <article className={styles.prose}>
                 <h1>{post.fm.title}</h1>
-                <p className={styles.postAuthor}>{post.author}</p>
+                <p className={styles.postAuthor}>{post.fm?.author}</p>
                 <MDXRemote
                     source={post.content}
                     options={options}
