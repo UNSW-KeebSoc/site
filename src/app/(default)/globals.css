@@ -37,7 +37,7 @@ body {
     padding: 0;
     height: 100vh;
     width: 100vw;
-    /* overflow: hidden; */
+    overflow: hidden;
     position: relative; /* For positioning children */
 }
 main {
@@ -46,9 +46,15 @@ main {
     border-left: 3px solid var(--orange-300);
     border-right: 3px solid var(--orange-300);
     flex: 1;
-    overflow-y: auto; /* Enable scrolling for main content */
+    overflow-y: auto;
     overflow-x: hidden;
     align-items: center;
+    width: 100%;
+    scrollbar-width: none;
+}
+
+main::-webkit-scrollbar {
+    display: none;
 }
 
 body {
@@ -60,6 +66,10 @@ body {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
+}
+
+article {
+    max-width: 85ch;
 }
 
 * {
