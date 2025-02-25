@@ -1,0 +1,74 @@
+.blogPage {
+    width: 100%;
+    max-width: 65ch;
+    margin: 2rem 0;
+}
+
+.blogPage h1 {
+    font-family: "RedHatMono", monospace;
+    font-size: 1.8em;
+    margin: 0;
+    margin: 1.5rem 0;
+}
+
+.blogGrid {
+    display: grid;
+    gap: 1.5rem;
+    /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+    grid-auto-flow: dense;
+}
+
+.postLink {
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+}
+
+.postLink:hover {
+    transform: translateY(-2px);
+}
+
+.postCard {
+    padding: 0.5rem;
+    color: var(--foreground);
+}
+
+.postTitle {
+    font-family: "RedHatMono", monospace;
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.postDate {
+    display: block;
+    font-family: "RedHatMono", monospace;
+    font-size: 0.9em;
+    color: var(--cyan);
+    margin: 0.5rem 0;
+}
+
+.postDescription {
+    font-family: "RedHatDisplay", sans-serif;
+    font-size: 0.95em;
+    color: #ab4100;
+    margin: 0.5rem 0;
+    line-height: 1.4;
+}
+
+.tagList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.tag {
+    font-family: "RedHatMono", monospace;
+    font-size: 0.8em;
+    padding: 0.2rem 0.5rem;
+    background-color: var(--orange-400);
+    border: 1px solid var(--cyan);
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+}

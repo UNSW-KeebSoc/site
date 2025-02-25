@@ -1,0 +1,21 @@
+.Card {
+    overflow: hidden;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    color: var(--foreground);
+    border: 3px solid var(--orange-300);
+
+    background-color: var(--box-bg);
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    /* padding: 24px 48px; */
+}
+
+@media (prefers-color-scheme: dark) {
+    .Card {
+        background: #12233d;
+    }
+}
