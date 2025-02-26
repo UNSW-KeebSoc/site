@@ -46,8 +46,8 @@ export default async function EventPage({ params }: EventPageProps) {
                 {/* Splash Image */}
                 <div className={styles.eventSplash}>
                     {/* Conditional splash image */}
-                    {frontmatter.splash ? (
-                        <img src={frontmatter.splash} alt={frontmatter.title} />
+                    {frontmatter.image ? (
+                        <img src={frontmatter.image} alt={frontmatter.title} />
                     ) : (
                         <img
                             src={"/images/events/placeholder.jpg"}
