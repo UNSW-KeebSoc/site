@@ -1,4 +1,3 @@
-// app/events/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import { promises as fs } from "fs";
 import { join } from "path";
@@ -46,7 +45,15 @@ export default async function EventPage({ params }: EventPageProps) {
             <div className={styles.eventPage}>
                 {/* Splash Image */}
                 <div className={styles.eventSplash}>
-                    <img src={frontmatter.image} alt={frontmatter.title} />
+                    {/* Conditional splash image */}
+                    {frontmatter.splash ? (
+                        <img src={frontmatter.splash} alt={frontmatter.title} />
+                    ) : (
+                        <img
+                            src={"/images/events/placeholder.jpg"}
+                            alt={frontmatter.title}
+                        />
+                    )}
                 </div>
                 <article>
                     <header className={styles.eventHeader}>

@@ -86,6 +86,13 @@ p {
     margin: 0;
 }
 
+.mobileHide {
+    display: block;
+    @media (max-width: 600px) {
+        display: none;
+    }
+}
+
 /* Typography */
 h1,
 h2,
@@ -171,7 +178,11 @@ ol {
 }
 
 li {
-    margin-bottom: var(--space-xs);
+    margin-bottom: 0;
+}
+
+li p {
+    padding: 0 0.5rem;
 }
 
 /* Tables */

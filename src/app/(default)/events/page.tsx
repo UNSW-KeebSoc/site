@@ -86,7 +86,7 @@ export default function EventsPage() {
                                 : undefined
                         }
                     >
-                        <Card>
+                        <Card image={event.image}>
                             <article className={styles.eventCard}>
                                 <h3 className={styles.eventTitle}>
                                     {event.title}

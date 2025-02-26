@@ -1,6 +1,6 @@
 export const pages = [
-    "events",
     "gallery",
+    "events",
     "blog",
     "about",
 ];

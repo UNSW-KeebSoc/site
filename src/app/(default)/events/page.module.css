@@ -87,14 +87,6 @@
     font-weight: bold;
 }
 
-.eventSource {
-    font-size: 0.8em;
-    margin-top: 0.75rem;
-    text-align: right;
-    color: var(--gray-800);
-    font-style: italic;
-}
-
 .message {
     text-align: center;
     padding: 2rem;
