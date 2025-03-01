@@ -93,12 +93,13 @@ export default function EventsPage() {
                                 <button className={styles.tag}>x</button>
                             </span>
                         ))}
-                        <button className={styles.button} onClick={() => setSelectedTags([])}>
+                        <button className={styles.clearButton} onClick={() => setSelectedTags([])}>
                             Clear All
                         </button>
                     </div>
                 </div>
             )}
+
 
             <h2>Upcoming Events</h2>
             <EventList events={filterEvents(upcomingEvents)} />
@@ -113,39 +114,46 @@ interface EventListProps {
     events: Event[];
 }
 
+
+
+
 function EventList({ events }: EventListProps) {
     return (
-        <div className={styles.eventsGrid}>
+        <div className={styles.eventsPage}>
             {events.length === 0 ? (
-                <p className={styles.message}>No events found.</p>
+                <p className={styles.message}>
+                    No upcoming events scheduled. Check back soon!
+                </p>
             ) : (
-                events.map(event => (
-                    <Link
-                        href={event.source === "local" ? `/events/${event.slug}` : `https://facebook.com/events/${event.id}`}
-                        key={event.id || event.slug}
-                        className={styles.eventLink}
-                        target={event.source === "facebook" ? "_blank" : undefined}
-                        rel={event.source === "facebook" ? "noopener noreferrer" : undefined}
-                    >
-                        <Card image={event.image}>
-                            <article className={styles.eventCard}>
-                                <h3 className={styles.eventTitle}>{event.title}</h3>
-                                <time className={styles.eventDate}>{formatDate(event.date, event.endDate)}</time>
-                                <div className={styles.eventLocation}>{event.location}</div>
-                                <p className={styles.eventDescription}>
-                                    {event.description.length > 150 ? `${event.description.substring(0, 150)}...` : event.description}
-                                </p>
-                                {event.tags && event.tags.length > 0 && (
-                                    <div className={styles.tagList}>
-                                        {event.tags.map(tag => (
-                                            <span key={tag} className={styles.tag}>{tag}</span>
-                                        ))}
-                                    </div>
-                                )}
-                            </article>
-                        </Card>
-                    </Link>
-                ))
+                <div className={styles.eventsGrid}>
+                    {events.map(event => (
+                        <Link
+                            href={event.source === "local" ? `/events/${event.slug}` : `https://facebook.com/events/${event.id}`}
+                            key={event.id || event.slug}
+                            className={styles.eventLink}
+                            target={event.source === "facebook" ? "_blank" : undefined}
+                            rel={event.source === "facebook" ? "noopener noreferrer" : undefined}
+                        >
+                            <Card image={event.image}>
+                                <article className={styles.eventCard}>
+                                    <h3 className={styles.eventTitle}>{event.title}</h3>
+                                    <time className={styles.eventDate}>{formatDate(event.date, event.endDate)}</time>
+                                    <div className={styles.eventLocation}>{event.location}</div>
+                                    <p className={styles.eventDescription}>
+                                        {event.description.length > 150 ? `${event.description.substring(0, 150)}...` : event.description}
+                                    </p>
+                                    {event.tags && event.tags.length > 0 && (
+                                        <div className={styles.tagList}>
+                                            {event.tags.map(tag => (
+                                                <span key={tag} className={styles.tag}>{tag}</span>
+                                            ))}
+                                        </div>
+                                    )}
+                                </article>
+                            </Card>
+                        </Link>
+                    ))}
+                </div>
             )}
         </div>
     );

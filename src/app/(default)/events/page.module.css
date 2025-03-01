@@ -87,6 +87,19 @@
     font-weight: bold;
 }
 
+.clearButton {
+    font-family: "RedHatMono", monospace;
+    font-size: 0.85em;
+    padding: 0.3rem 0.8rem;
+    background-color: var(--orange-400);
+    border: 1px solid var(--cyan);
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s ease-in-out;
+}
+
 .message {
     text-align: center;
     padding: 2rem;
