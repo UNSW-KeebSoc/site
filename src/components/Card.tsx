@@ -9,11 +9,12 @@ interface CardProps {
 export default function Card({ image, children }: CardProps) {
     return (
         <div className={styles.Card}>
-            {image ? (
-                <img src={image} />
-            ) : (
-                <img src={"/images/events/placeholder.jpg"} />
-            )}
+            <img
+                src={image || "/images/events/placeholder.jpg"}
+                onError={(e) => {
+                    e.currentTarget.src = "/images/events/placeholder.jpg";
+                }}
+            />
             <div>{children}</div>
         </div>
     );
