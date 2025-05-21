@@ -1,128 +1,162 @@
 .eventsPage {
-    width: 100%;
-    max-width: 1200px;
-    /* max-width: 65ch; */
-    margin: 2rem 0;
-    padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  /* max-width: 65ch; */
+  margin: 2rem 0;
+  padding: 2rem;
 }
 
 .eventsPage h1 {
-    font-family: "RedHatMono", monospace;
-    font-size: 1.8em;
-    margin: 1.5rem 0;
-    color: var(--orange-400);
+  font-family: "RedHatMono", monospace;
+  font-size: 1.8em;
+  margin: 1.5rem 0;
+  color: var(--orange-400);
 }
 
 .eventsGrid {
-    display: grid;
-    gap: 1.5rem;
-    grid-auto-flow: dense;
+  display: grid;
+  gap: 1.5rem;
+  grid-auto-flow: dense;
 }
 
 .eventLink {
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
 }
 
 .eventLink:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .eventCard {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .eventTitle {
-    font-family: "RedHatMono", monospace;
-    font-size: 1.2em;
-    margin: 0;
-    color: var(--orange-300);
+  font-family: "RedHatMono", monospace;
+  font-size: 1.2em;
+  margin: 0;
+  color: var(--orange-300);
 }
 
 .eventDate {
-    display: block;
-    font-family: "RedHatMono", monospace;
-    font-size: 0.9em;
-    margin: 0.5rem 0;
-    color: var(--orange-400);
+  display: block;
+  font-family: "RedHatMono", monospace;
+  font-size: 0.9em;
+  margin: 0.5rem 0;
+  color: var(--orange-400);
 }
 
 .eventLocation {
-    font-family: "RedHatMono", monospace;
-    font-size: 0.9em;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
+  font-family: "RedHatMono", monospace;
+  font-size: 0.9em;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .eventDescription {
-    font-family: "RedHatDisplay", sans-serif;
-    font-size: 0.95em;
-    color: #ab4100;
-    margin: 0.5rem 0;
-    line-height: 1.4;
-    flex-grow: 1;
+  font-family: "RedHatDisplay", sans-serif;
+  font-size: 0.95em;
+  color: #ab4100;
+  margin: 0.5rem 0;
+  line-height: 1.4;
+  flex-grow: 1;
 }
 
 .tagList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.75rem;
-    position: relative;
-    /* From bottom */
-    bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  position: relative;
+  /* From bottom */
+  bottom: 0;
 }
 
 .tag {
-    font-family: "RedHatMono", monospace;
-    font-size: 0.8em;
-    padding: 0.2rem 0.5rem;
-    background-color: var(--orange-400);
-    border: 1px solid var(--cyan);
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
+  font-family: "RedHatMono", monospace;
+  font-size: 0.8em;
+  padding: 0.2rem 0.5rem;
+  background-color: var(--orange-400);
+  border: 1px solid var(--cyan);
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  outline: none;
+}
+
+.tag:hover:not(.active) {
+  background-color: var(--orange-300);
+}
+
+.tag:focus-visible {
+  outline: 2px dashed var(--cyan);
+  outline-offset: 2px;
+}
+
+.tag:active:not(.active) {
+  transform: scale(0.96);
+}
+
+.tag.active {
+  background-color: #f0f0f0;
+  border-color: #999;
+  color: #666;
+  opacity: 0.7;
+  cursor: default;
 }
 
 .clearButton {
-    font-family: "RedHatMono", monospace;
-    font-size: 0.85em;
-    padding: 0.3rem 0.8rem;
-    background-color: var(--orange-400);
-    border: 1px solid var(--cyan);
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s ease-in-out;
+  font-family: "RedHatMono", monospace;
+  font-size: 0.85em;
+  padding: 0.3rem 0.8rem;
+  margin-top: 0.75rem;
+  background-color: var(--orange-400);
+  border: 1px solid var(--cyan);
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.clearButton:hover {
+  background-color: var(--orange-300);
+}
+
+.clearButton:active {
+  transform: scale(0.95);
 }
 
 .message {
-    text-align: center;
-    padding: 2rem;
-    color: var(--gray-800);
-    font-family: "RedHatMono", monospace;
+  text-align: center;
+  padding: 2rem;
+  color: var(--gray-800);
+  font-family: "RedHatMono", monospace;
 }
 
 .errorMessage {
-    text-align: center;
-    padding: 2rem;
-    color: #a83232;
-    font-family: "RedHatMono", monospace;
-    border: 3px solid #a83232;
+  text-align: center;
+  padding: 2rem;
+  color: #a83232;
+  font-family: "RedHatMono", monospace;
+  border: 3px solid #a83232;
 }
 
 @media (min-width: 768px) {
-    .eventsGrid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
+  .eventsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
 }
 
 @media (prefers-color-scheme: dark) {
-    .message {
-        color: var(--gray-300);
-    }
+  .message {
+    color: var(--gray-300);
+  }
 }
