@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import links from "../../../../content/links.json";
+import { links } from "@/lib/consts";
 import Button from "@/components/Button";
 import { socials } from "@/lib/consts";
 

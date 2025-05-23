@@ -24,3 +24,22 @@ export const socials = [
         href: "https://www.facebook.com/unswkeebsoc",
     },
 ];
+
+export const links = [
+    {
+        name: "Watch the meet the team video!",
+        link: "https://youtu.be/w5lBtYdMhFc",
+    },
+    {
+        name: "instagram",
+        link: "https://instagram.com/keebsoc",
+    },
+    {
+        name: "youtube",
+        link: "https://youtube.com/@unswkeebsoc",
+    },
+    {
+        name: "facebook",
+        link: "https://www.facebook.com/unswkeebsoc",
+    },
+];
