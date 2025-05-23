@@ -16,6 +16,52 @@
     font-family: var(--font-geist-sans);
 }
 
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+}
+
+/* Icons */
+
+.links {
+    display: flex;
+    gap: 1rem;
+}
+
+.link {
+    height: 1.4rem;
+    aspect-ratio: 1/1;
+}
+
+.link > * {
+    height: 100%;
+    width: 100%;
+    background-color: #fe7600;
+}
+
+.discord {
+    -webkit-mask: url("/icons/discord.svg") no-repeat center / contain;
+    mask: url("/icons/discord.svg") no-repeat center / contain;
+}
+
+.instagram {
+    -webkit-mask: url("/icons/instagram.svg") no-repeat center / contain;
+    mask: url("/icons/instagram.svg") no-repeat center / contain;
+}
+
+.youtube {
+    -webkit-mask: url("/icons/youtube.svg") no-repeat center / contain;
+    mask: url("/icons/youtube.svg") no-repeat center / contain;
+}
+
+.facebook {
+    -webkit-mask: url("/icons/facebook.svg") no-repeat center / contain;
+    mask: url("/icons/facebook.svg") no-repeat center / contain;
+}
+
 @media (prefers-color-scheme: dark) {
     .page {
         --gray-rgb: 255, 255, 255;
@@ -25,11 +71,6 @@
         --button-primary-hover: #ccc;
         --button-secondary-hover: #1a1a1a;
     }
-}
-
-.main {
-    border-left: 3px solid var(--orange-300);
-    border-right: 3px solid var(--orange-300);
 }
 
 /* Enable hover only on non-touch devices */
