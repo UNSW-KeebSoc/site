@@ -29,6 +29,14 @@
 
 .main h1 {
     color: var(--gray-100);
+    margin: 0;
+    padding: 0;
+}
+
+.linklist {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 /* Icons */

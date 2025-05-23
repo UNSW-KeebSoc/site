@@ -8,9 +8,9 @@ export default function Home() {
         <main className={styles.main}>
             <h1>
                 {/* TODO LOGO HERE */}
-                KEEBSOC YAYAYAYAYAYAY
+                KEEBSOC
             </h1>
-            <div style={{ width: "100%", maxWidth: 400, display: "flex", flexDirection: "column", gap: 16 }}>
+            <div className={styles.linklist}>
                 {links.map((link: { name: string; link: string }, idx: number) => (
                     <Button
                         key={idx}
