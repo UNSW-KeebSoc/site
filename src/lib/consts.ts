@@ -31,15 +31,23 @@ export const links = [
         link: "https://youtu.be/w5lBtYdMhFc",
     },
     {
-        name: "instagram",
-        link: "https://instagram.com/keebsoc",
+        name: "Read the AE Boards Satellite Review!",
+        link: "https://keebsoc.com/satellite",
     },
     {
-        name: "youtube",
-        link: "https://youtube.com/@unswkeebsoc",
+        name: "Join us on Discord",
+        link: "https://discord.gg/n66dXGeAMA",
     },
     {
-        name: "facebook",
-        link: "https://www.facebook.com/unswkeebsoc",
+        name: "Join us on Discord",
+        link: "https://discord.gg/n66dXGeAMA",
+    },
+    {
+        name: "Join us on Discord",
+        link: "https://discord.gg/n66dXGeAMA",
+    },
+    {
+        name: "Join us on Discord",
+        link: "https://discord.gg/n66dXGeAMA",
     },
 ];
