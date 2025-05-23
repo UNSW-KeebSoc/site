@@ -208,7 +208,7 @@ hr {
 }
 
 /* Dark Mode */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
     :root {
         --foreground: white;
         --background: rgb(19, 22, 41);
@@ -233,4 +233,4 @@ hr {
     tr:nth-child(even) {
         background: var(--gray-800);
     }
-}
+} */
