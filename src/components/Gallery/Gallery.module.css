@@ -1,0 +1,31 @@
+.albumImage{
+    margin: 0;
+}
+
+.albumFrame {
+    background: white;
+    border: 1.5px solid var(--orange-200);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.albumFrame:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.albumCaption {
+    width: 100%;
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--orange-400);
+    text-align: center;
+    overflow-wrap: break-word;
+}

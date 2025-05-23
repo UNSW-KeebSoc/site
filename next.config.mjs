@@ -13,6 +13,11 @@ const nextConfig = {
                 hostname: "*.b-cdn.net", // This will allow all BunnyCDN subdomains
                 pathname: "/**",
             },
+            {
+                protocol: "https",
+                hostname: "*.googleusercontent.com",
+                pathname: "/**"
+            }
         ],
     },
 };
