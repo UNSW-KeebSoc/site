@@ -1,19 +1,23 @@
 import Image from 'next/image'
 import styles from "./Gallery.module.css"
-import { GalleryAlbum } from '@/lib/gallery'
 
-export default function GalleryAlbumFrame({album}: {album: GalleryAlbum}) {
+type GalleryAlbumFrameProps = {
+  src: string | null | undefined;
+  caption?: string | null;
+};
+
+export default function GalleryAlbumFrame({src, caption}: GalleryAlbumFrameProps) {
     return (
         <div className={styles.albumFrame}>
             <Image
-            src={album.src}
-            loading="lazy"
-            width={500}
-            height={500}
-            alt="photo"
-            className={styles.albumImage}
+                src={src ?? 'null'}
+                loading="lazy"
+                width={400}
+                height={400}
+                alt="photo"
+                className={styles.albumImage}
             />
-            <div className={styles.albumCaption}>{album.caption}</div>
+            <div className={styles.albumCaption}>{caption}</div>
         </div>
         
     )
