@@ -37,11 +37,18 @@ export default function Gallery({ params, searchParams }: { params: { slug: stri
     return (
         <div className={styles.galleryPage}>
             <h1>{name}</h1>
-            <div className={styles.galleryMain}>
+
+            {loading ? (
+                <div className={styles.galleryLoading}>Loading...</div>
+            ) : (
+                <div className={styles.galleryMain}>
                 {images.map((image) => (
+                    <a href={image.viewUrl} target="_blank">
                     <GalleryImgFrame src={image.src} />
+                    </a>
                 ))}
             </div>
+            )}
         </div>
     )
 }

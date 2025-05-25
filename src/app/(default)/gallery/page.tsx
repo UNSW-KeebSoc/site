@@ -5,6 +5,7 @@ import { GalleryFolder } from "@/lib/gallery"
 import styles from "./gallerypage.module.css"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { googlePhotosAlbums } from "../../../../content/gallery/google-photos-albums"
 
 export default function Gallery() {
     const [folders, setFolders] = useState<GalleryFolder[]>([]);
@@ -35,8 +36,12 @@ export default function Gallery() {
     return (
         <div className={styles.galleryPage}>
             <h1>Gallery</h1>
-            <div className={styles.galleryMain}>
-                {folders.map((folder) => (
+
+            {loading ? (
+                <div className={styles.galleryLoading}>Loading...</div>
+            ) : (
+                <div className={styles.galleryMain}>
+                {folders.map((folder, key) => (
                     <Link 
                         href={{
                             pathname: `/gallery/${folder.id}`,
@@ -46,7 +51,13 @@ export default function Gallery() {
                         <GalleryImgFrame src={folder.src} caption={folder.caption} />
                     </Link>
                 ))}
+                {googlePhotosAlbums.map((album, key) => (
+                    <a href={album.src} target="_blank">
+                        <GalleryImgFrame src={album.thumbnail} caption={album.caption} />
+                    </a>
+                ))}
             </div>
+            )}
         </div>
     )
 }

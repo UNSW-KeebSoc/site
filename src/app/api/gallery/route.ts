@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { drive, GalleryFolder } from "@/lib/gallery"
+import { drive, GalleryFolder, getThumbnailUrl } from "@/lib/gallery"
 
 async function getFolders(): Promise<GalleryFolder[]> {
   try {
@@ -21,7 +21,7 @@ async function getFolders(): Promise<GalleryFolder[]> {
         const id = folder.id ?? ''
         const caption = folder.name ?? ''
         const src = firstImage?.id
-            ? `https://drive.google.com/uc?export=view&id=${firstImage?.id}`
+            ? `${getThumbnailUrl(firstImage.id)}`
             : ''
 
         return {

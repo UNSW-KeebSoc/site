@@ -1,4 +1,4 @@
-import { drive, GalleryImg } from "@/lib/gallery"
+import { drive, GalleryImg, getThumbnailUrl, getViewUrl } from "@/lib/gallery"
 import { NextRequest, NextResponse } from "next/server"
 
 async function getImages(folderId: string): Promise<GalleryImg[]> {
@@ -10,9 +10,9 @@ async function getImages(folderId: string): Promise<GalleryImg[]> {
     const images = res.data.files
 
     const imagesOutput: GalleryImg[] = images
-      ?.filter(img => img.id)
-      .map(image => ({
-        src: `https://drive.google.com/thumbnail?id=${image.id}&sz=w500`
+      ?.map(image => ({
+        src: `${getThumbnailUrl(image.id ?? '')}`,
+        viewUrl: `${getViewUrl(image.id ?? '')}`
       })) ?? []
 
     return imagesOutput
@@ -22,7 +22,7 @@ async function getImages(folderId: string): Promise<GalleryImg[]> {
 }
 
 export async function GET(req: NextRequest, { params }: { params: {id: string}}) {
-    const { id } = params
+    const { id } = params 
 
     try {
         const folders = await getImages(id)

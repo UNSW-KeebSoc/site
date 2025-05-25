@@ -14,3 +14,7 @@
     gap: 1rem;
     padding-bottom: 1rem;
 }
+
+.galleryLoading {
+    color: var(--orange-400);
+}
