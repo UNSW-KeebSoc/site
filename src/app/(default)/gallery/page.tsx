@@ -1,23 +1,49 @@
-import GalleryAlbumFrame from "@/components/Gallery/GalleryAlbumFrame"
-import { GalleryAlbum, getFolders, getImages } from "@/lib/gallery"
+'use client'
+
+import GalleryImgFrame from "@/components/Gallery/GalleryImgFrame"
+import { GalleryFolder } from "@/lib/gallery"
 import styles from "./gallerypage.module.css"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 
-export default async function Gallery() {
-    const data = await getFolders()
+export default function Gallery() {
+    const [folders, setFolders] = useState<GalleryFolder[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        async function fetchfolders() {
+            try {
+                const response = await fetch("/api/gallery");
+                if (!response.ok) {
+                    throw new Error("Failed to fetch gallery folders");
+                }
+
+                const data = await response.json();
+                setFolders(data);
+            } catch (err) {
+                setError("Could not load image folders. Please try again later.");
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchfolders();
+    }, []);
 
     return (
         <div className={styles.galleryPage}>
             <h1>Gallery</h1>
             <div className={styles.galleryMain}>
-                {data?.map((album) => (
+                {folders.map((folder) => (
                     <Link 
                         href={{
-                            pathname: `/gallery/${album.id}`,
-                            query: { name: album.caption},
+                            pathname: `/gallery/${folder.id}`,
+                            query: { name: folder.caption },
                         }}
                     >
-                        <GalleryAlbumFrame src={album.src} caption={album.caption} />
+                        <GalleryImgFrame src={folder.src} caption={folder.caption} />
                     </Link>
                 ))}
             </div>

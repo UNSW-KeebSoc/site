@@ -1,16 +1,16 @@
 import Image from 'next/image'
 import styles from "./Gallery.module.css"
 
-type GalleryAlbumFrameProps = {
-  src: string | null | undefined;
-  caption?: string | null;
+type GalleryImgFrameProps = {
+  src: string;
+  caption?: string;
 };
 
-export default function GalleryAlbumFrame({src, caption}: GalleryAlbumFrameProps) {
+export default function GalleryImgFrame({src, caption}: GalleryImgFrameProps) {
     return (
         <div className={styles.albumFrame}>
             <Image
-                src={src ?? 'null'}
+                src={src}
                 loading="lazy"
                 width={400}
                 height={400}
