@@ -23,8 +23,22 @@ const CustomImage = (props: ComponentProps<"img">) => {
     );
 };
 
+const CustomAudio = (props: ComponentProps<"audio">) => {
+    const { src, ...rest } = props;
+    if (!src) return null;
+    return (
+        <div>
+            <audio controls {...rest}>
+                <source src={src} />
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    );
+};
+
 const components = {
     img: CustomImage,
+    audio: CustomAudio,
 };
 
 const options: MDXRemoteProps["options"] = {
