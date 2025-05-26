@@ -4,8 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./SponsorScroller.module.css";
 // import Image from "next/image";
 
+interface Sponsor {
+    name: string;
+    link: string;
+}
+
 interface SponsorScrollerProps {
-    sentences: string[];
+    sentences: Sponsor[];
     speed?: number;
     label?: string;
 }
@@ -82,8 +87,9 @@ export default function SponsorScroller({
             <div className={styles.scrollWrapper}>
                 <div ref={containerRef} className={styles.container}>
                     <div ref={contentRef} className={styles.content}>
-                        {repeatedContent.map((sentence, index) => (
-                            <span key={index} className={styles.sentence}>
+                        {repeatedContent.map((sponsor, index) => (
+                            <a key={index} className={styles.sentence} href={sponsor.link}>
+                                {sponsor.name}
                                 {/* <Image
                                     src={`/icons/${sentence.toLowerCase()}.png`}
                                     alt={sentence}
@@ -91,9 +97,7 @@ export default function SponsorScroller({
                                     height={24}
                                     className={styles.sponsor}
                                 /> */}
-
-                                {sentence}
-                            </span>
+                            </a>
                         ))}
                     </div>
                 </div>
