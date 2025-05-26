@@ -18,6 +18,7 @@
     font-size: 1.2rem;
     padding: 0;
     margin: 0;
+    color: var(--gray-200);
 }
 
 .container {
@@ -51,8 +52,12 @@
 .sentence {
     margin: 0 2rem;
     font-size: 1.1rem;
+    color: var(--gray-100)
 }
 
+.sentence:hover {
+    color: var(--orange-400);
+}
 @keyframes scroll {
     from {
         transform: translateX(0);
