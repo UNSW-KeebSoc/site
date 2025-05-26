@@ -1,9 +1,4 @@
-export const pages = [
-    "events",
-    "gallery",
-    "blog",
-    "about",
-];
+export const pages = ["gallery", "events", "blog", "about"];
 
 export const socials = [
     {
@@ -51,3 +46,74 @@ export const links = [
         link: "https://discord.gg/n66dXGeAMA",
     },
 ];
+
+type Execs = {
+    [year: string]: {
+        executives: { position: string; name: string }[];
+        directors: { position: string; name: string }[];
+    };
+};
+
+export const executives: Execs = {
+    "2025": {
+        executives: [
+            { position: "President", name: "Catherine Wong" },
+            {
+                position: "Vice President + Treasurer",
+                name: "Jake Takada Wong",
+            },
+            { position: "Secretary", name: "Daiva Addia" },
+            { position: "Arc Delegate", name: "Winston Kwan" },
+            { position: "Returning Officer", name: "Jake Huang" },
+        ],
+        directors: [
+            { position: "Events Director", name: "Ben George" },
+            { position: "Marketing Director", name: "Jarret Phong" },
+            {
+                position: "Dev Director",
+                name: "Xuan Li",
+            },
+        ],
+    },
+    "2024": {
+        executives: [
+            { position: "President", name: "Xuan Li" },
+            { position: "Vice President", name: "Anson Qiu" },
+            { position: "Treasurer", name: "firstname lastname" },
+            { position: "Secretary", name: "firstname lastname" },
+            { position: "Arc Delegate", name: "firstname lastname" },
+        ],
+        directors: [
+            { position: "Marketing Director", name: "firstname lastname" },
+            { position: "Creative Director", name: "firstname lastname" },
+        ],
+    },
+    "2023": {
+        executives: [
+            { position: "President", name: "Xuan Li" },
+            { position: "Secretary", name: "Andrew Lu" },
+            { position: "Treasurer", name: "Anson Qiu" },
+            { position: "Arc Delegate", name: "Jake Huang" },
+            { position: "EDI Officer", name: "Willow Heller" },
+        ],
+        directors: [
+            { position: "Marketing Director", name: "firstname lastname" },
+            { position: "Creative Director", name: "firstname lastname" },
+        ],
+    },
+    "2022": {
+        executives: [
+            { position: "President", name: "Xuan Li" },
+            { position: "Secretary", name: "Andrew Lu" },
+            { position: "Treasurer", name: "Anson Qiu" },
+            { position: "Arc Delegate", name: "Jake Huang" },
+            { position: "EDI Officer", name: "Edward Jiang" },
+        ],
+        directors: [
+            { position: "Events Director", name: "Jack Walsh" },
+            { position: "Marketing Director", name: "Akhi Sodemba, Sophia" },
+            { position: "Creative Director", name: "Xuan Li" },
+            { position: "Projects Director", name: "Ben Liew" },
+        ],
+    },
+};

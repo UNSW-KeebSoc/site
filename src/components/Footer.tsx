@@ -18,7 +18,9 @@ export default function Footer() {
                 ))}
             </div>
             <div className={styles.copyright}>
-                <p>KeebSoc 2022 - {new Date().getFullYear()}</p>
+                <p className="mobileHide">
+                    KeebSoc 2022 - {new Date().getFullYear()}
+                </p>
                 <p>made with 🧡</p>
             </div>
         </footer>

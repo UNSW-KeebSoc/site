@@ -4,10 +4,11 @@
     align-items: center;
     padding: 0.8rem 1rem;
     border: 3px solid var(--orange-300);
-    color: #ff4f00;
+    background-color: var(--orange-300);
 }
 
 .navbar h2 {
+    color: white !important;
     font-size: 1.5rem;
     margin: 0;
     padding: 0;
@@ -16,4 +17,36 @@
 .navbar div {
     display: flex;
     gap: 1rem;
+}
+
+.navbar div a {
+    color: white !important;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar div a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--orange-100);
+    transition: width 0.3s ease;
+}
+
+.navbar div a:hover::after {
+    width: 100%;
+}
+
+.home {
+    display: flex;
+    align-items: center;
+}
+
+.home img {
+    height: 24px;
+    margin: 0;
 }
