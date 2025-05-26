@@ -88,7 +88,7 @@ export default function SponsorScroller({
                 <div ref={containerRef} className={styles.container}>
                     <div ref={contentRef} className={styles.content}>
                         {repeatedContent.map((sponsor, index) => (
-                            <a key={index} className={styles.sentence} href={sponsor.link}>
+                            <a key={index} className={styles.sentence} href={sponsor.link} target="_blank" rel="noopener noreferrer">
                                 {sponsor.name}
                                 {/* <Image
                                     src={`/icons/${sentence.toLowerCase()}.png`}
