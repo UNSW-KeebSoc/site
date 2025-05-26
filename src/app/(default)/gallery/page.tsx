@@ -5,7 +5,7 @@ import { GalleryFolder } from "@/lib/gallery"
 import styles from "./gallerypage.module.css"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { googlePhotosAlbums } from "../../../../content/gallery/google-photos-albums"
+import { googlePhotosAlbums } from "@/lib/consts"
 
 export default function Gallery() {
     const [folders, setFolders] = useState<GalleryFolder[]>([]);
