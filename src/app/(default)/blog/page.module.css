@@ -1,20 +1,20 @@
 .blogPage {
     width: 100%;
-    max-width: 65ch;
+    max-width: 900px;
     margin: 2rem 0;
+    padding: 2rem;
 }
 
-.blogPage h1 {
+.blogPage h2 {
     font-family: "RedHatMono", monospace;
-    font-size: 1.8em;
     margin: 0;
     margin: 1.5rem 0;
+    color: var(--orange-400);
 }
 
 .blogGrid {
     display: grid;
     gap: 1.5rem;
-    /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
     grid-auto-flow: dense;
 }
 
@@ -71,4 +71,12 @@
     border-radius: 4px;
     color: white;
     font-weight: bold;
+}
+
+.prose {
+    padding: 2rem;
+    max-width: 90ch;
+    margin: 48px auto;
+    line-height: 1.75;
+    width: 100%;
 }

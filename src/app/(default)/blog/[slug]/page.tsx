@@ -1,7 +1,7 @@
 import { getPostBySlug } from "@/lib/blog";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import styles from "../../../blog.module.css";
+import styles from "../page.module.css";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { ComponentProps } from "react";

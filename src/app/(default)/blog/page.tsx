@@ -15,7 +15,7 @@ export default function Blog() {
                         key={post.slug}
                         className={styles.postLink}
                     >
-                        <Card>
+                        <Card image={post.image}>
                             <article className={styles.postCard}>
                                 <h3 className={styles.postTitle}>
                                     {post.title}

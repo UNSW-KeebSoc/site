@@ -4,7 +4,9 @@
     align-items: center;
     padding: 1rem;
     border: 3px solid var(--orange-300);
-    color: #ff4f00;
+    color: var(--orange-300);
+
+    border: 3px solid var(--orange-300);
     padding: 0.5rem 1rem;
 }
 
@@ -29,7 +31,7 @@
 .link > * {
     height: 100%;
     width: 100%;
-    background-color: rgb(119, 119, 119);
+    background-color: var(--gray-400);
 }
 
 .discord {
