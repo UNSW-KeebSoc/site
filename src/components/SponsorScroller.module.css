@@ -56,8 +56,9 @@
 }
 
 .sentence:hover {
-    color: var(--orange-400);
+    color: rgb(250, 195, 120);
 }
+
 @keyframes scroll {
     from {
         transform: translateX(0);
