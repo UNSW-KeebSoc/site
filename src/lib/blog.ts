@@ -4,6 +4,7 @@ import matter from "gray-matter";
 
 export interface BlogFrontMatter {
     title: string;
+    image?: string;
     author?: string;
     date: string;
     description?: string;
@@ -68,6 +69,7 @@ export function getAllPosts(): BlogFrontMatter[] {
             description: data.description || "",
             slug: data.slug,
             tags: data.tags || [],
+            image: data.image,
         };
     });
 

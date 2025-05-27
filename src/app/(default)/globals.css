@@ -1,5 +1,6 @@
 :root {
     /* Original orange palette */
+    --orange-000: #fff0d5;
     --orange-100: #feaa00;
     --orange-200: #ff9000;
     --orange-300: #fe7600;
@@ -9,6 +10,7 @@
     --gray-100: #f5f5f5;
     --gray-200: #e5e5e5;
     --gray-300: #d4d4d4;
+    --gray-400: #777777;
     --gray-800: #1d283e;
     --gray-900: #1a1a1a;
 
@@ -46,9 +48,15 @@ main {
     border-left: 3px solid var(--orange-300);
     border-right: 3px solid var(--orange-300);
     flex: 1;
-    overflow-y: auto; /* Enable scrolling for main content */
+    overflow-y: auto;
     overflow-x: hidden;
     align-items: center;
+    width: 100%;
+    scrollbar-width: none;
+}
+
+main::-webkit-scrollbar {
+    display: none;
 }
 
 body {
@@ -60,6 +68,10 @@ body {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
+}
+
+article {
+    max-width: 85ch;
 }
 
 * {
@@ -74,6 +86,13 @@ a {
 p {
     padding: 0;
     margin: 0;
+}
+
+.mobileHide {
+    display: block;
+    @media (max-width: 600px) {
+        display: none;
+    }
 }
 
 /* Typography */
@@ -161,7 +180,11 @@ ol {
 }
 
 li {
-    margin-bottom: var(--space-xs);
+    margin-bottom: 0;
+}
+
+li p {
+    padding: 0 0.5rem;
 }
 
 /* Tables */

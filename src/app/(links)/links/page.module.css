@@ -16,6 +16,110 @@
     font-family: var(--font-geist-sans);
 }
 
+.linklist .pink {
+    color: #f769b0;
+    border-color: #f769b0;
+}
+
+.linklist .blue {
+    color: #21b1f3;
+    border-color: #21b1f3;
+}
+
+.linklist .orange {
+    color: var(--orange-300);
+    border-color: var(--orange-300);
+}
+
+.linklist .purple {
+    color: #bd57cf;
+    border-color: #bd57cf;
+}
+
+.linklist .button {
+    padding-inline: 30px;
+    text-align: center;
+    font-weight: normal;
+    border-radius: 30px;
+    padding: var( --space-lg);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    background-image: url('/orange-splash.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.main h1 {
+    color: var(--gray-100);
+    margin: 0;
+    padding: 0;
+}
+
+.main h4 {
+    color: var(--gray-100);
+    margin: 0;
+    padding: 0;
+}
+
+.linklist {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 30%;
+}
+
+.link {
+    text-align: center;
+    border: 2px solid;
+    padding: 0.5em 1em;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+/* Icons */
+.socials {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social {
+    height: 2rem;
+    aspect-ratio: 1/1;
+}
+
+.social > * {
+    height: 100%;
+    width: 100%;
+    background-color: var(--gray-200);
+}
+
+.discord {
+    -webkit-mask: url("/icons/discord.svg") no-repeat center / contain;
+    mask: url("/icons/discord.svg") no-repeat center / contain;
+}
+
+.instagram {
+    -webkit-mask: url("/icons/instagram.svg") no-repeat center / contain;
+    mask: url("/icons/instagram.svg") no-repeat center / contain;
+}
+
+.youtube {
+    -webkit-mask: url("/icons/youtube.svg") no-repeat center / contain;
+    mask: url("/icons/youtube.svg") no-repeat center / contain;
+}
+
+.facebook {
+    -webkit-mask: url("/icons/facebook.svg") no-repeat center / contain;
+    mask: url("/icons/facebook.svg") no-repeat center / contain;
+}
+
 @media (prefers-color-scheme: dark) {
     .page {
         --gray-rgb: 255, 255, 255;
@@ -25,11 +129,6 @@
         --button-primary-hover: #ccc;
         --button-secondary-hover: #1a1a1a;
     }
-}
-
-.main {
-    border-left: 3px solid var(--orange-300);
-    border-right: 3px solid var(--orange-300);
 }
 
 /* Enable hover only on non-touch devices */
