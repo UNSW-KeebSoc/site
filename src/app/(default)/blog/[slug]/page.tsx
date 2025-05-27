@@ -10,7 +10,7 @@ const CustomImage = (props: ComponentProps<"img">) => {
     const { src, alt } = props;
     if (!src) return null;
     return (
-        <div className={styles.imgContainer}>
+        <a href={src} target="_blank" rel="noopener noreferrer" className={styles.imgContainer}>
             <Image
                 src={src}
                 alt={alt || ""}
@@ -19,7 +19,7 @@ const CustomImage = (props: ComponentProps<"img">) => {
                 className="w-full h-auto"
                 style={{ objectFit: "contain" }}
             />
-        </div>
+        </a>
     );
 };
 
@@ -36,9 +36,22 @@ const CustomAudio = (props: ComponentProps<"audio">) => {
     );
 };
 
+const CustomLink = (props: ComponentProps<"a">) => {
+    return (
+        <a
+            {...props}
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            {props.children}
+        </a>
+    );
+};
+
 const components = {
     img: CustomImage,
     audio: CustomAudio,
+    a: CustomLink,
 };
 
 const options: MDXRemoteProps["options"] = {
