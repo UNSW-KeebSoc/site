@@ -6,7 +6,10 @@ export default function Navbar() {
     return (
         <nav className={styles.navbar}>
             <Link href="/">
-                <h2>KeebSoc</h2>
+                <div className={styles.home}>
+                    <img src="/keebsoc.png" />
+                    <h2>KeebSoc</h2>
+                </div>
             </Link>
             <div>
                 {pages.map((page) => (

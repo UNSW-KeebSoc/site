@@ -1,7 +1,7 @@
 import { getPostBySlug } from "@/lib/blog";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import styles from "../../../blog.module.css";
+import styles from "../page.module.css";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { ComponentProps } from "react";
@@ -10,7 +10,7 @@ const CustomImage = (props: ComponentProps<"img">) => {
     const { src, alt } = props;
     if (!src) return null;
     return (
-        <div className={styles.imgContainer}>
+        <a href={src} target="_blank" rel="noopener noreferrer" className={styles.imgContainer}>
             <Image
                 src={src}
                 alt={alt || ""}
@@ -19,12 +19,39 @@ const CustomImage = (props: ComponentProps<"img">) => {
                 className="w-full h-auto"
                 style={{ objectFit: "contain" }}
             />
+        </a>
+    );
+};
+
+const CustomAudio = (props: ComponentProps<"audio">) => {
+    const { src, ...rest } = props;
+    if (!src) return null;
+    return (
+        <div>
+            <audio controls {...rest}>
+                <source src={src} />
+                Your browser does not support the audio element.
+            </audio>
         </div>
+    );
+};
+
+const CustomLink = (props: ComponentProps<"a">) => {
+    return (
+        <a
+            {...props}
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            {props.children}
+        </a>
     );
 };
 
 const components = {
     img: CustomImage,
+    audio: CustomAudio,
+    a: CustomLink,
 };
 
 const options: MDXRemoteProps["options"] = {
