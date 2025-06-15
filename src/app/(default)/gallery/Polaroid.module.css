@@ -1,0 +1,228 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.cardWrapper {
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.polaroid {
+    position: relative;
+    background: rgb(230, 230, 230);
+    transition: all 0.3s ease-out;
+    width: 340px;
+    border-radius: 2px 2px 6px 6px;
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.3),
+        0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.polaroid::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/texture.png");
+    background-size: 18%;
+    background-repeat: repeat;
+    filter: blur(1px);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.polaroid::after {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    /* Apply blur to background image */
+    filter: blur(1px);
+    /* Apply the effect to the background image */
+    /* background-color: rgba(0, 0, 0, 0.1); */
+    background-blend-mode: overlay;
+    /* background-image: url("/texture.png"); */
+    background-image: url("/texture-inverse.png");
+    background-size: 18%;
+    background-repeat: repeat;
+    /* Use the radial gradient as a mask */
+    mask: radial-gradient(
+        ellipse var(--ellipse-width, 80px) var(--ellipse-height, 60px) at
+            var(--ellipse-x, 30%) var(--ellipse-y, 40%),
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.7) 30%,
+        transparent 60%
+    );
+
+    /* Webkit prefix for better browser support */
+    -webkit-mask: radial-gradient(
+        ellipse var(--ellipse-width, 80px) var(--ellipse-height, 60px) at
+            var(--ellipse-x, 30%) var(--ellipse-y, 40%),
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.7) 30%,
+        transparent 60%
+    );
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.photoFrameSection {
+    position: relative;
+    padding: 2.2rem 1.5rem 1.2rem 1.5rem;
+    /* background: white; */
+    transition: all 0.3s ease-out;
+    border-radius: 2px 2px 0px 0px;
+}
+
+.radialBlur {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    z-index: 15;
+    border-radius: 2px 2px 0px 0px;
+}
+/* .polaroid {
+    position: relative;
+    padding: 2rem 1.5rem 1.25rem 1.5rem;
+    width: 340px;
+    border-radius: 2px;
+} */
+
+.paperTexture {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.surfaceReflection {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    opacity: 0.8;
+}
+
+.dynamicLightBand {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: all 0.5s;
+}
+
+.edgeBeveling {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 2px;
+}
+
+.photoArea {
+    position: relative;
+    width: 100%;
+    height: 18rem;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.photo {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    object-fit: cover;
+    transition: all 0.3s;
+}
+
+.glossySurface {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    box-shadow: inset 0px 0px 2px rgba(0, 0, 0, 0.5),
+        inset 0px 0px 8px rgba(106, 0, 255, 0.2);
+}
+
+.lightStreak {
+    inset: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: all 0.5s ease-in-out;
+    pointer-events: none;
+    border-radius: 4px;
+    mix-blend-mode: overlay;
+}
+
+.photoEdgeGloss {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.caption {
+    color: #374151;
+    text-align: center;
+    font-size: 24px;
+    transition: all 0.3s;
+    margin: 0;
+    font-family: "Gaegu";
+}
+
+.realisticLighting {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 8px;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+}
+
+.ambientReflection {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: all 0.4s;
+    mix-blend-mode: soft-light;
+}
+
+.edgeHighlight {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    box-shadow: inset 0 -10px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Caption */
+.captionContainer {
+    /* background-color: white; */
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05),
+        inset 0 -3px 3px rgba(0, 0, 0, 0.2);
+
+    position: relative;
+    padding: 1rem 0;
+    border-radius: 0px 0px 6px 6px;
+}
