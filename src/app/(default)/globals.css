@@ -43,6 +43,7 @@ body {
     position: relative; /* For positioning children */
 }
 main {
+    position: relative;
     display: flex;
     flex-direction: column;
     border-left: 3px solid var(--orange-300);
@@ -53,6 +54,20 @@ main {
     align-items: center;
     width: 100%;
     scrollbar-width: none;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/paper.jpg");
+    background-position: center;
+    background-size: cover;
+    opacity: 0.5; /* Adjust this value as needed */
+    z-index: -1; /* Puts it behind the content */
 }
 
 main::-webkit-scrollbar {

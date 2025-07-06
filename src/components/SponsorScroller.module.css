@@ -4,7 +4,7 @@
     width: 100%;
     overflow: hidden;
     padding: 1rem;
-    background: var(--orange-300);
+    background: var(--orange-100);
     gap: 1rem;
     color: white;
 }
@@ -18,7 +18,6 @@
     font-size: 1.2rem;
     padding: 0;
     margin: 0;
-    color: var(--gray-200);
 }
 
 .container {
@@ -52,11 +51,13 @@
 .sentence {
     margin: 0 2rem;
     font-size: 1.1rem;
-    color: var(--gray-100)
+    color: var(--orange-000);
 }
 
 .sentence:hover {
-    color: rgb(250, 195, 120);
+    color: white;
+    transform: translateY(-1px);
+    border-bottom-color: white;
 }
 
 @keyframes scroll {

@@ -5,9 +5,9 @@ import styles from "./page.module.css";
 import Card from "@/components/Card";
 import { formatDate } from "@/lib/time";
 
-interface Event {
+export interface Event {
     id?: string;
-    slug?: string;
+    slug: string;
     emoji?: string;
     title: string;
     description: string;
