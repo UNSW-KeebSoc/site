@@ -54,7 +54,10 @@ export default async function Blog({ params }: { params: { slug: string } }) {
         return (
             <article className={styles.prose}>
                 <h1>{post.fm.title}</h1>
-                <p className={styles.postAuthor}>{post.fm?.author}</p>
+                <div className={styles.postMetaInline}>
+                    <p className={styles.postAuthor}>{post.fm?.author}</p>
+                    <p className={styles.postDate}>{post.fm?.date}</p>
+                </div>
                 <MDXRemote
                     source={post.content}
                     options={options}

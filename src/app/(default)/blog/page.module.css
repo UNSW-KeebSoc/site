@@ -39,12 +39,42 @@
     margin: 0;
 }
 
+/* Alternative: Inline author and date */
+.postMetaInline {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-300);
+}
+
+.postMetaInline .postAuthor {
+    margin-bottom: 0;
+}
+
+.postMetaInline .postDate {
+    margin-bottom: 0;
+}
+
+.postMetaInline .postAuthor::after {
+    content: "•";
+    margin-left: 0.5rem;
+    color: #d1d5db;
+}
+
+.postAuthor {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+}
+
 .postDate {
-    display: block;
-    font-family: "RedHatMono", monospace;
-    font-size: 0.9em;
-    color: var(--cyan);
-    margin: 0.5rem 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
 }
 
 .postDescription {
