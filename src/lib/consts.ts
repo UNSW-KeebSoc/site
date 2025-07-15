@@ -1,4 +1,5 @@
-export const pages = ["gallery", "events", "blog", "about"];
+// export const pages = ["gallery", "events", "blog", "about"];
+export const pages = ["events", "blog", "about"];
 
 export const socials = [
     {
@@ -28,18 +29,6 @@ export const links = [
     {
         name: "Read the AE Boards Satellite Review!",
         link: "https://keebsoc.com/satellite",
-    },
-    {
-        name: "Join us on Discord",
-        link: "https://discord.gg/n66dXGeAMA",
-    },
-    {
-        name: "Join us on Discord",
-        link: "https://discord.gg/n66dXGeAMA",
-    },
-    {
-        name: "Join us on Discord",
-        link: "https://discord.gg/n66dXGeAMA",
     },
     {
         name: "Join us on Discord",

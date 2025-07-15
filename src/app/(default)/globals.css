@@ -63,11 +63,11 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("/paper.jpg");
+    background-image: url("/asfalt-dark.png");
     background-position: center;
-    background-size: cover;
-    opacity: 0.5; /* Adjust this value as needed */
-    z-index: -1; /* Puts it behind the content */
+    background-size: tile;
+    opacity: 0.7;
+    z-index: -1;
 }
 
 main::-webkit-scrollbar {
@@ -145,12 +145,7 @@ p {
 a {
     color: var(--orange-300);
     text-decoration: none;
-    border-bottom: 2px solid transparent;
     transition: border-color 0.2s ease;
-}
-
-a:hover {
-    border-bottom-color: var(--orange-300);
 }
 
 /* Code blocks */
