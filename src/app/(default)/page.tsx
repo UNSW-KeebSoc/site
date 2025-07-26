@@ -26,11 +26,12 @@ const sponsors = [
     },
 ];
 
+// TODO: make this smarter
 const highlightedEventSlugs = [
+    "25t1-jeopardy",
     "25t1-artisan-workshop",
     "25t1-intro-workshop",
     "24t3-pretty-pad",
-    "24t3-egm-movie",
 ];
 
 export default function Home() {
