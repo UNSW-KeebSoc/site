@@ -5,11 +5,15 @@
     padding: 2rem;
 }
 
+.blogPage p {
+    color: var(--foreground);
+}
+
 .blogPage h2 {
     font-family: "RedHatMono", monospace;
     margin: 0;
     margin: 1.5rem 0;
-    color: var(--orange-400);
+    color: var(--header-alt);
 }
 
 .blogGrid {
@@ -46,7 +50,7 @@
     gap: 1rem;
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--gray-300);
+    border-bottom: 1px solid var(--gray-200);
 }
 
 .postMetaInline .postAuthor {
@@ -60,21 +64,29 @@
 .postMetaInline .postAuthor::after {
     content: "•";
     margin-left: 0.5rem;
-    color: #d1d5db;
+    color: var(--gray-300);
 }
 
 .postAuthor {
     font-weight: 600;
-    color: #374151;
+    color: var(--gray-400);
     margin-bottom: 0.25rem;
     font-size: 0.875rem;
 }
 
 .postDate {
-    color: #6b7280;
+    color: var(--gray-400);
     font-size: 0.875rem;
     margin-bottom: 1.5rem;
     font-style: italic;
+}
+@media (prefers-color-scheme: dark) {
+    .postAuthor {
+        color: var(--gray-300);
+    }
+    .postMetaInline .postAuthor::after {
+        color: var(--gray-400);
+    }
 }
 
 .postDescription {
@@ -101,6 +113,13 @@
     border-radius: 4px;
     color: white;
     font-weight: bold;
+}
+
+@media (prefers-color-scheme: dark) {
+    .tag {
+        background-color: var(--orange-300);
+        color: var(--orange-100);
+    }
 }
 
 .prose {

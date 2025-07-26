@@ -28,7 +28,7 @@
 
 .eventHeader {
     margin-bottom: 2rem;
-    border-bottom: 3px solid var(--orange-300);
+    border-bottom: var(--default-border);
     padding-bottom: 1rem;
 }
 
@@ -111,7 +111,7 @@
 
 .eventContent h2 {
     font-family: "RedHatMono", monospace;
-    color: var(--orange-300);
+    /* color: var(--orange-300); */
     margin-top: 1.5rem;
     margin-bottom: 1rem;
 }
@@ -141,5 +141,21 @@
 
     .registerBlock {
         margin-left: auto;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .eventHeader h1 {
+        color: var(--orange-200);
+    }
+    .metaLabel {
+        color: var(--orange-200);
+    }
+    .metaValue {
+        color: var(--orange-000);
+    }
+    .tag {
+        background-color: var(--orange-300);
+        color: var(--orange-100);
     }
 }

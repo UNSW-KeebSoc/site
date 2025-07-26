@@ -16,7 +16,7 @@
 
 /* Year Selector */
 .yearSelector {
-    border: 3px solid var(--orange-300);
+    border: var(--default-border);
     border-bottom: 0px;
     width: fit-content;
     margin-left: auto;
@@ -40,12 +40,13 @@
 
 .activeYear {
     background-color: var(--orange-300) !important;
-    color: white;
+    color: var(--orange-100) !important;
+    font-weight: 600;
 }
 
 /* Section Cards */
 .sectionCard {
-    border: 3px solid var(--orange-300);
+    border: var(--default-border);
     margin-bottom: 32px;
     padding: 48px;
     padding-top: 24px;
@@ -98,8 +99,31 @@
 .executiveAvatar {
     width: 48px;
     height: 48px;
-    background-color: #ffedd5;
+    background-color: var(--orange-100);
     border-radius: 24px;
     margin-right: 24px;
     flex-shrink: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sectionCard h2 {
+        color: var(--orange-200);
+    }
+    .executiveItem h4 {
+        color: var(--orange-200);
+    }
+    .executiveAvatar {
+        background-color: var(--orange-300);
+    }
+    .yearButton {
+        color: var(--orange-200);
+    }
+    .yearButton:hover {
+        color: white;
+        background-color: var(--orange-300);
+        cursor: pointer;
+    }
+    .sectionCard {
+        background-color: var(--orange-400);
+    }
 }

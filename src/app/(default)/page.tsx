@@ -38,9 +38,9 @@ export default function Home() {
         // <div>
         <div className={styles.main}>
             <div className={styles.mainObject}>
-                <p>Welcome to Keebsoc!</p>
+                <h1>Welcome to Keebsoc!</h1>
                 <img src="/glowbird.png" />
-                <p>Take a look around :)</p>
+                <h1>Take a look around :)</h1>
             </div>
             <Highlights eventSlugs={highlightedEventSlugs} />
             <SponsorScroller sentences={sponsors} />

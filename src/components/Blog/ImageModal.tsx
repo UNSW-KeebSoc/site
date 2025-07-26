@@ -51,7 +51,7 @@ export const ImageModal = ({
                 {title && (
                     <figcaption
                         style={{
-                            color: "#666",
+                            color: "#aaa",
                             fontSize: "0.9em",
                             fontStyle: "italic",
                             textAlign: "center",

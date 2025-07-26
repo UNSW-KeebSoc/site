@@ -68,3 +68,17 @@
         transform: translateX(var(--scroll-width));
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    .banner {
+        background: var(--orange-400);
+        color: var(--orange-200);
+        border-top: 3px solid var(--orange-300);
+    }
+    .banner h3 {
+        color: var(--orange-200);
+    }
+    .sentence {
+        color: var(--orange-100);
+    }
+}

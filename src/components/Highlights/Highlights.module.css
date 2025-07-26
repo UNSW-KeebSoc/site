@@ -19,7 +19,11 @@
     margin: 0;
     letter-spacing: 0.5px;
 }
-
+@media (prefers-color-scheme: dark) {
+    .title {
+        color: var(--orange-100);
+    }
+}
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

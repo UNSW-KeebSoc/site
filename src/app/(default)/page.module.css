@@ -20,10 +20,9 @@
     margin: 0 24px;
 }
 
-.mainObject > p {
-    color: var(--orange-300);
+.mainObject > h1 {
+    color: var(--heading);
     font-size: 4rem;
-    /* Bold */
     font-weight: bold;
     max-width: 520px;
     min-width: 380px;
