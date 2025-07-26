@@ -28,12 +28,12 @@
     min-width: 380px;
 }
 
-.mainObject p:nth-child(3) {
+.mainObject h1:nth-child(3) {
     text-align: right !important;
 }
 
 @media (max-width: 1400px) {
-    .mainObject p:nth-child(3) {
+    .mainObject h1:nth-child(3) {
         display: none;
     }
 }
@@ -53,7 +53,7 @@
         flex-direction: column-reverse;
     }
 
-    .mainObject p {
+    .mainObject h1 {
         text-align: center;
     }
     .mainObject img {
