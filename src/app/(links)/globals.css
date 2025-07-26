@@ -19,7 +19,7 @@
         Courier, monospace;
 
     /* Spacing and borders */
-    --default-border: 3px solid var(--orange-300);
+    --default-border: var(--default-border);
     --space-xs: 0.5rem;
     --space-sm: 0.8rem;
     --space-md: 1rem;
@@ -43,10 +43,10 @@ body {
 main {
     display: flex;
     flex-direction: column;
-    border-left: 3px solid var(--orange-300);
-    border-right: 3px solid var(--orange-300);
-    border-top: 3px solid var(--orange-300);
-    border-bottom: 3px solid var(--orange-300);
+    border-left: var(--default-border);
+    border-right: var(--default-border);
+    border-top: var(--default-border);
+    border-bottom: var(--default-border);
     flex: 1;
     overflow-y: auto; /* Enable scrolling for main content */
     overflow-x: hidden;

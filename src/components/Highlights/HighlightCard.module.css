@@ -1,0 +1,142 @@
+.card {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease,
+        mask 0.3s ease, all 0.3s;
+}
+
+.cardLink {
+    border-bottom: none !important;
+}
+
+.card:hover {
+    /* transform: translateY(-4px); */
+    box-shadow: 0 0 0 3px var(--orange-300);
+    /* border: var(--default-border); */
+}
+
+.blurOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    transition: transform 0.3s ease;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        backdrop-filter: blur(9px);
+        background: linear-gradient(
+            to bottom,
+            transparent 0%,
+            #0512671a 50%,
+            #25255266 80%
+        );
+        mask: linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(0, 0, 0, 0.7) 60%,
+            rgba(0, 0, 0, 1) 100%
+        );
+    }
+}
+
+.contentContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 18px;
+    color: white;
+    z-index: 10;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: auto;
+}
+
+.tag {
+    background-color: #ff6b35;
+    color: white;
+    padding: 4px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.date {
+    background-color: rgba(102, 102, 102, 0.213);
+    backdrop-filter: blur(10px);
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.content {
+    margin-top: auto;
+}
+
+.content h3 {
+    color: white !important;
+    font-size: 1.5rem;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+    opacity: 0.9;
+    line-height: 1.3;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .card {
+        /* width: 280px; */
+        height: 180px;
+    }
+
+    .title {
+        font-size: 16px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .card:hover {
+        box-shadow: 0 0 0 3px var(--orange-200);
+    }
+}

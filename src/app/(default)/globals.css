@@ -1,12 +1,12 @@
 :root {
-    /* Original orange palette */
+    /* Orange Color Palette */
     --orange-000: #fff0d5;
     --orange-100: #feaa00;
     --orange-200: #ff9000;
     --orange-300: #fe7600;
     --orange-400: #ff4f00;
 
-    /* Additional colors for better contrast and readability */
+    /* Gray Color Palette */
     --gray-100: #f5f5f5;
     --gray-200: #e5e5e5;
     --gray-300: #d4d4d4;
@@ -14,23 +14,82 @@
     --gray-800: #1d283e;
     --gray-900: #1a1a1a;
 
+    /* Base Colors */
+    --foreground: black;
+    --background: white;
+
+    /* Semantic Colors */
+    --heading: var(--orange-300);
+    --heading-alt: var(--orange-400);
+    --navbar-background: var(--orange-300);
+    --navbar-links: white;
+    --card-background: var(--background);
+
     /* Typography */
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, sans-serif;
     --font-mono: "SF Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo,
         Courier, monospace;
 
-    /* Spacing and borders */
-    --default-border: 3px solid var(--orange-300);
+    /* Spacing */
     --space-xs: 0.5rem;
     --space-sm: 0.8rem;
     --space-md: 1rem;
     --space-lg: 1.5rem;
     --space-xl: 2rem;
 
-    /* Colors */
-    --foreground: black;
-    --background: white;
+    /* Borders */
+    --default-border: 3px solid var(--orange-300);
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark Mode Orange Palette */
+        --orange-000: #ffffff;
+        --orange-100: #ffc999;
+        --orange-200: #f97d29;
+        --orange-300: #7f3900;
+        --orange-400: #2b1307;
+
+        /* Dark Mode Base Colors */
+        --foreground: var(--orange-100);
+        --background: black;
+
+        /* Dark Mode Semantic Colors */
+        --heading: var(--orange-200);
+        --heading-alt: var(--orange-100);
+        --navbar-background: var(--orange-400);
+        --navbar-links: var(--orange-100);
+    }
+
+    body::before {
+        mix-blend-mode: plus-darker;
+        opacity: 1;
+        filter: invert(1);
+    }
+
+    body {
+        color: var(--foreground);
+        background: var(--background);
+    }
+
+    code {
+        background: var(--gray-800);
+    }
+
+    blockquote {
+        background: var(--gray-800);
+    }
+
+    td {
+        padding: var(--space-sm);
+        border-right: 1px solid var(--gray-800);
+    }
+
+    tr:nth-child(even) {
+        background: var(--gray-800);
+    }
 }
 
 html,
@@ -43,16 +102,31 @@ body {
     position: relative; /* For positioning children */
 }
 main {
+    position: relative;
     display: flex;
     flex-direction: column;
-    border-left: 3px solid var(--orange-300);
-    border-right: 3px solid var(--orange-300);
+    border-left: var(--default-border);
+    border-right: var(--default-border);
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
     align-items: center;
     width: 100%;
     scrollbar-width: none;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/asfalt-dark.png");
+    background-position: center;
+    background-size: tile;
+    opacity: 0.7;
+    z-index: -1;
 }
 
 main::-webkit-scrollbar {
@@ -104,13 +178,13 @@ h5,
 h6 {
     margin-top: var(--space-xl);
     margin-bottom: var(--space-md);
-    color: var(--orange-400);
+    color: var(--heading);
     font-weight: 600;
 }
 
 h1 {
     font-size: 2.5rem;
-    color: var(--orange-300);
+    /* color: var(--orange-300); */
     padding-bottom: var(--space-sm);
 }
 
@@ -130,12 +204,7 @@ p {
 a {
     color: var(--orange-300);
     text-decoration: none;
-    border-bottom: 2px solid transparent;
     transition: border-color 0.2s ease;
-}
-
-a:hover {
-    border-bottom-color: var(--orange-300);
 }
 
 /* Code blocks */
@@ -226,32 +295,4 @@ hr {
     border: none;
     border-top: 2px solid var(--gray-200);
     margin: var(--space-xl) 0;
-}
-
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --foreground: white;
-        --background: rgb(19, 22, 41);
-    }
-
-    body {
-        color: var(--foreground);
-        background: var(--background);
-    }
-
-    code {
-        background: var(--gray-800);
-    }
-
-    blockquote {
-        background: var(--gray-800);
-    }
-    td {
-        padding: var(--space-sm);
-        border-right: 1px solid var(--gray-800);
-    }
-    tr:nth-child(even) {
-        background: var(--gray-800);
-    }
 }

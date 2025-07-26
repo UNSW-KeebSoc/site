@@ -5,22 +5,10 @@ import styles from "../page.module.css";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { ComponentProps } from "react";
+import { ImageModal } from "@/components/Blog/ImageModal";
 
 const CustomImage = (props: ComponentProps<"img">) => {
-    const { src, alt } = props;
-    if (!src) return null;
-    return (
-        <a href={src} target="_blank" rel="noopener noreferrer" className={styles.imgContainer}>
-            <Image
-                src={src}
-                alt={alt || ""}
-                width={500}
-                height={360}
-                className="w-full h-auto"
-                style={{ objectFit: "contain" }}
-            />
-        </a>
-    );
+    return <ImageModal {...props} containerClassName={styles.imgContainer} />;
 };
 
 const CustomAudio = (props: ComponentProps<"audio">) => {
@@ -38,11 +26,7 @@ const CustomAudio = (props: ComponentProps<"audio">) => {
 
 const CustomLink = (props: ComponentProps<"a">) => {
     return (
-        <a
-            {...props}
-            target="_blank"
-            rel="noopener noreferrer"
-        >
+        <a {...props} target="_blank" rel="noopener noreferrer">
             {props.children}
         </a>
     );
@@ -70,7 +54,10 @@ export default async function Blog({ params }: { params: { slug: string } }) {
         return (
             <article className={styles.prose}>
                 <h1>{post.fm.title}</h1>
-                <p className={styles.postAuthor}>{post.fm?.author}</p>
+                <div className={styles.postMetaInline}>
+                    <p className={styles.postAuthor}>{post.fm?.author}</p>
+                    <p className={styles.postDate}>{post.fm?.date}</p>
+                </div>
                 <MDXRemote
                     source={post.content}
                     options={options}
