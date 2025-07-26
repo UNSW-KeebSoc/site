@@ -40,7 +40,7 @@
 
 .activeYear {
     background-color: var(--orange-300) !important;
-    color: var(--orange-100) !important;
+    color: var(--orange-000) !important;
     font-weight: 600;
 }
 
@@ -99,7 +99,7 @@
 .executiveAvatar {
     width: 48px;
     height: 48px;
-    background-color: var(--orange-100);
+    background-color: var(--orange-000);
     border-radius: 24px;
     margin-right: 24px;
     flex-shrink: 0;
