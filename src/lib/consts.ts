@@ -1,4 +1,5 @@
-export const pages = ["gallery", "events", "blog", "about"];
+// export const pages = ["gallery", "events", "blog", "about"];
+export const pages = ["events", "blog", "about"];
 
 export const socials = [
     {
@@ -33,18 +34,6 @@ export const links = [
         name: "Join us on Discord",
         link: "https://discord.gg/n66dXGeAMA",
     },
-    {
-        name: "Join us on Discord",
-        link: "https://discord.gg/n66dXGeAMA",
-    },
-    {
-        name: "Join us on Discord",
-        link: "https://discord.gg/n66dXGeAMA",
-    },
-    {
-        name: "Join us on Discord",
-        link: "https://discord.gg/n66dXGeAMA",
-    },
 ];
 
 type Execs = {
@@ -58,10 +47,8 @@ export const executives: Execs = {
     "2025": {
         executives: [
             { position: "President", name: "Catherine Wong" },
-            {
-                position: "Vice President + Treasurer",
-                name: "Jake Takada Wong",
-            },
+            { position: "Vice President", name: "Jake Takada Wong" },
+            { position: "Treasurer", name: "Kyra Seeto Lee" },
             { position: "Secretary", name: "Daiva Addia" },
             { position: "Arc Delegate", name: "Winston Kwan" },
             { position: "Returning Officer", name: "Jake Huang" },
@@ -79,13 +66,14 @@ export const executives: Execs = {
         executives: [
             { position: "President", name: "Xuan Li" },
             { position: "Vice President", name: "Anson Qiu" },
-            { position: "Treasurer", name: "firstname lastname" },
-            { position: "Secretary", name: "firstname lastname" },
-            { position: "Arc Delegate", name: "firstname lastname" },
+            { position: "Treasurer", name: "Jake Takada Wong" },
+            { position: "Secretary", name: "Jake Huang" },
+            { position: "Arc Delegate", name: "Richie Yu" },
         ],
         directors: [
-            { position: "Marketing Director", name: "firstname lastname" },
-            { position: "Creative Director", name: "firstname lastname" },
+            { position: "Events Director", name: "Catherine Wong" },
+            { position: "Marketing Director", name: "Morgan Zhong" },
+            { position: "Creative Director", name: "Xuan Li" },
         ],
     },
     "2023": {
@@ -97,8 +85,9 @@ export const executives: Execs = {
             { position: "EDI Officer", name: "Willow Heller" },
         ],
         directors: [
-            { position: "Marketing Director", name: "firstname lastname" },
-            { position: "Creative Director", name: "firstname lastname" },
+            { position: "Events Director", name: "Jack Walsh" },
+            { position: "Marketing Director", name: "Morgan Zhong" },
+            { position: "Creative Director", name: "Xuan Li" },
         ],
     },
     "2022": {

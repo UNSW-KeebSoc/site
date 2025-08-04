@@ -4,9 +4,10 @@
     width: 100%;
     overflow: hidden;
     padding: 1rem;
-    background: var(--orange-300);
+    background: var(--orange-100);
     gap: 1rem;
     color: white;
+    align-items: center;
 }
 
 .banner > div {
@@ -18,7 +19,6 @@
     font-size: 1.2rem;
     padding: 0;
     margin: 0;
-    color: var(--gray-200);
 }
 
 .container {
@@ -52,11 +52,13 @@
 .sentence {
     margin: 0 2rem;
     font-size: 1.1rem;
-    color: var(--gray-100)
+    color: var(--orange-000);
 }
 
 .sentence:hover {
-    color: rgb(250, 195, 120);
+    color: white;
+    transform: translateY(-1px);
+    border-bottom-color: white;
 }
 
 @keyframes scroll {
@@ -65,5 +67,28 @@
     }
     to {
         transform: translateX(var(--scroll-width));
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .banner {
+        background: var(--orange-400);
+        color: var(--orange-200);
+        border-top: 3px solid var(--orange-300);
+    }
+    .banner h3 {
+        color: var(--orange-200);
+    }
+    .sentence {
+        color: var(--orange-100);
+    }
+}
+
+@media (max-width: 768px) {
+    .banner {
+        padding: 2rem;
+        position: sticky;
+        bottom: 0;
+        z-index: 100;
     }
 }

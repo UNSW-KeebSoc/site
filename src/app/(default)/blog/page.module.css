@@ -5,11 +5,15 @@
     padding: 2rem;
 }
 
+.blogPage p {
+    color: var(--foreground);
+}
+
 .blogPage h2 {
     font-family: "RedHatMono", monospace;
     margin: 0;
     margin: 1.5rem 0;
-    color: var(--orange-400);
+    color: var(--header-alt);
 }
 
 .blogGrid {
@@ -39,12 +43,50 @@
     margin: 0;
 }
 
+/* Alternative: Inline author and date */
+.postMetaInline {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.postMetaInline .postAuthor {
+    margin-bottom: 0;
+}
+
+.postMetaInline .postDate {
+    margin-bottom: 0;
+}
+
+.postMetaInline .postAuthor::after {
+    content: "•";
+    margin-left: 0.5rem;
+    color: var(--gray-300);
+}
+
+.postAuthor {
+    font-weight: 600;
+    color: var(--gray-400);
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+}
+
 .postDate {
-    display: block;
-    font-family: "RedHatMono", monospace;
-    font-size: 0.9em;
-    color: var(--cyan);
-    margin: 0.5rem 0;
+    color: var(--gray-400);
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+@media (prefers-color-scheme: dark) {
+    .postAuthor {
+        color: var(--gray-300);
+    }
+    .postMetaInline .postAuthor::after {
+        color: var(--gray-400);
+    }
 }
 
 .postDescription {
@@ -73,10 +115,26 @@
     font-weight: bold;
 }
 
+@media (prefers-color-scheme: dark) {
+    .tag {
+        background-color: var(--orange-300);
+        color: var(--orange-100);
+    }
+}
+
 .prose {
     padding: 2rem;
     max-width: 90ch;
     margin: 48px auto;
     line-height: 1.75;
     width: 100%;
+}
+
+.imgContainer {
+    display: block;
+    width: 100%;
+}
+.imgContainer img {
+    width: 100% !important;
+    height: auto !important;
 }

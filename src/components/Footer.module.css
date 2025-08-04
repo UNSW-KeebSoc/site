@@ -3,10 +3,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border: 3px solid var(--orange-300);
+    border: var(--default-border);
     color: var(--orange-300);
-
-    border: 3px solid var(--orange-300);
+    background-color: var(--background);
     padding: 0.5rem 1rem;
 }
 
@@ -52,4 +51,13 @@
 .facebook {
     -webkit-mask: url("/icons/facebook.svg") no-repeat center / contain;
     mask: url("/icons/facebook.svg") no-repeat center / contain;
+}
+
+@media (prefers-color-scheme: dark) {
+    .footer {
+        color: var(--orange-200);
+    }
+    .link > * {
+        background-color: var(--orange-200);
+    }
 }
