@@ -15,6 +15,17 @@ const nextConfig = {
             },
         ],
     },
+
+    // Redirects
+    async redirects() {
+        return [
+            {
+                source: "/discord",
+                destination: "https://discord.gg/AGBb8tNMZ8",
+                permanent: true, // 308 redirect
+            },
+        ];
+    },
 };
 
 const withMDX = createMDX({
