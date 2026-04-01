@@ -17,7 +17,7 @@ const CustomAudio = (props: ComponentProps<"audio">) => {
     return (
         <div>
             <audio controls {...rest}>
-                <source src={src} />
+                <source src={src as string} />
                 Your browser does not support the audio element.
             </audio>
         </div>

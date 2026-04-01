@@ -41,9 +41,9 @@ function sanitizeUrl(input: string | undefined): string {
 const EVENTS_PATH = join(process.cwd(), "content", "events");
 
 interface EventPageProps {
-    params: {
+    params: Promise<{
         slug: string;
-    };
+    }>;
 }
 
 async function getEventBySlug(slug: string) {
@@ -150,7 +150,7 @@ function parseRubricDate(formatteddate: string | undefined): string {
 }
 
 export default async function EventPage({ params }: EventPageProps) {
-    const { slug } = params;
+    const { slug } = await params;
 
     // Handle Rubric events
     if (slug.startsWith("rubric-")) {

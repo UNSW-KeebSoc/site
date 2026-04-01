@@ -18,6 +18,7 @@ export const ImageModal = ({
     const [isOpen, setIsOpen] = useState(false);
 
     if (!src) return null;
+    const srcStr = src as string;
 
     return (
         <>
@@ -35,7 +36,7 @@ export const ImageModal = ({
                     }}
                 >
                     <Image
-                        src={src}
+                        src={srcStr}
                         alt={alt || ""}
                         width={0}
                         height={0}
@@ -130,7 +131,7 @@ export const ImageModal = ({
                             }}
                         >
                             <Image
-                                src={src}
+                                src={srcStr}
                                 alt={alt || ""}
                                 width={0}
                                 height={0}
