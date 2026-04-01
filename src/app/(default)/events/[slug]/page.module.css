@@ -86,6 +86,16 @@
     transform: translateY(-2px);
 }
 
+.registerButtonRubric {
+    composes: registerButton;
+    background-color: #e51e5d;
+    border-color: #c4194f;
+}
+
+.registerButtonRubric:hover {
+    background-color: #c4194f;
+}
+
 .tagList {
     display: flex;
     flex-wrap: wrap;

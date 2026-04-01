@@ -26,13 +26,6 @@ const sponsors = [
     },
 ];
 
-// TODO: make this smarter
-const highlightedEventSlugs = [
-    "25t1-jeopardy",
-    "25t1-artisan-workshop",
-    "25t1-intro-workshop",
-    "24t3-pretty-pad",
-];
 
 export default function Home() {
     return (
@@ -43,7 +36,7 @@ export default function Home() {
                 <img src="/glowbird.png" />
                 <h1>Take a look around :)</h1>
             </div>
-            <Highlights eventSlugs={highlightedEventSlugs} />
+            <Highlights count={6} />
             <SponsorScroller sentences={sponsors} />
         </div>
     );

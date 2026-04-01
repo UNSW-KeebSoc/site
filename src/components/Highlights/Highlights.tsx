@@ -6,12 +6,12 @@ import { Event } from "@/app/(default)/events/page";
 import styles from "./Highlights.module.css";
 
 export interface HighlightsProps {
-    eventSlugs: string[]; // Array of event slugs to highlight
+    count?: number; // Number of most recent events to show
     className?: string;
 }
 
 export default function Highlights({
-    eventSlugs,
+    count = 4,
     className = "",
 }: HighlightsProps) {
     const [events, setEvents] = useState<Event[]>([]);
@@ -21,22 +21,12 @@ export default function Highlights({
     useEffect(() => {
         async function fetchEvents() {
             try {
-                const response = await fetch("/api/events");
+                const response = await fetch(`/api/events?limit=${count}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch events");
                 }
-                const allEvents: Event[] = await response.json();
-                console.log(allEvents);
-
-                // Filter events based on provided slugs and maintain order
-
-                const filteredEvents = eventSlugs
-                    .map((slug) =>
-                        allEvents.find((event) => event.slug === slug)
-                    )
-                    .filter((event): event is Event => event !== undefined);
-
-                setEvents(filteredEvents);
+                const events: Event[] = await response.json();
+                setEvents(events);
             } catch (err) {
                 setError("Could not load events. Please try again later.");
                 console.error(err);
@@ -46,13 +36,14 @@ export default function Highlights({
         }
 
         fetchEvents();
-    }, [eventSlugs]);
+    }, [count]);
 
     // Create skeleton events for loading state
+    const skeletonCount = count;
     const displayEvents =
         loading || events.length === 0
-            ? eventSlugs.map((slug, index) => ({
-                  slug,
+            ? Array.from({ length: skeletonCount }, (_, index) => ({
+                  slug: `loading-${index}`,
                   title: "",
                   description: "",
                   date: "",

@@ -17,9 +17,9 @@ export default function HighlightCard({
     isLoading = false,
 }: HighlightCardProps) {
     const linkHref =
-        event.source === "local"
-            ? `/events/${event.slug}`
-            : `https://facebook.com/events/${event.id}`;
+        event.source === "facebook"
+            ? `https://facebook.com/events/${event.id}`
+            : `/events/${event.slug}`;
 
     const linkTarget = event.source === "facebook" ? "_blank" : undefined;
     const linkRel =

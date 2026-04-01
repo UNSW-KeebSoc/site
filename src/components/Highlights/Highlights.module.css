@@ -19,11 +19,13 @@
     margin: 0;
     letter-spacing: 0.5px;
 }
+
 @media (prefers-color-scheme: dark) {
     .title {
         color: var(--orange-100);
     }
 }
+
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -52,8 +54,19 @@
     }
 }
 
+/* 2 columns: show 4 (2x2), hide 5th and 6th */
+@media (min-width: 769px) and (max-width: 1093px) {
+    .grid > :nth-child(n+5) {
+        display: none;
+    }
+}
+
 @media (min-width: 1400px) {
     .grid {
         grid-template-columns: repeat(4, 1fr);
+    }
+
+    .grid > :nth-child(n+5) {
+        display: none;
     }
 }

@@ -1,5 +1,5 @@
 // export const pages = ["gallery", "events", "blog", "about"];
-export const pages = ["events", "blog", "about"];
+export const pages = ["events", "shop", "blog", "about"];
 
 export const socials = [
     {

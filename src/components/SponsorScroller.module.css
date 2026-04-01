@@ -8,6 +8,9 @@
     gap: 1rem;
     color: white;
     align-items: center;
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
 }
 
 .banner > div {
@@ -87,8 +90,5 @@
 @media (max-width: 768px) {
     .banner {
         padding: 2rem;
-        position: sticky;
-        bottom: 0;
-        z-index: 100;
     }
 }

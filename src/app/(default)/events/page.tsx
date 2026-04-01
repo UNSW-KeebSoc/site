@@ -14,9 +14,10 @@ export interface Event {
     date: string;
     endDate?: string;
     location: string;
-    source: "facebook" | "local";
+    source: "facebook" | "local" | "rubric";
     tags?: string[];
     image?: string;
+    destination?: string;
 }
 
 export default function EventsPage() {
@@ -126,9 +127,9 @@ function EventList({ events }: EventListProps) {
                     {events.map((event) => (
                         <Link
                             href={
-                                event.source === "local"
-                                    ? `/events/${event.slug}`
-                                    : `https://facebook.com/events/${event.id}`
+                                event.source === "facebook"
+                                    ? `https://facebook.com/events/${event.id}`
+                                    : `/events/${event.slug}`
                             }
                             key={event.id || event.slug}
                             className={styles.eventLink}

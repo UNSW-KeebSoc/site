@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import { join } from "path";
 import matter from "gray-matter";
+import { getRubricLandingPage, getRubricSection, sanitizeText, sanitizeUrl } from "@/lib/rubric";
 
 const EVENTS_PATH = join(process.cwd(), "content", "events");
 
@@ -24,8 +25,33 @@ interface LocalEvent {
     tags: string[];
 }
 
+interface RubricEvent {
+    eventid: string;
+    title: string;
+    subtitle: string;
+    formatteddate: string;
+    image: string;
+    destination: string;
+    info: string;
+    upcoming: boolean;
+}
+
 async function getFBEvents(): Promise<FBEvent[]> {
     return [];
+}
+
+function parseRubricDate(formatteddate: string | undefined): string {
+    if (!formatteddate) return new Date(0).toISOString();
+    // "Sun, 19 Apr 2026, 9.00 AM" -> "Sun, 19 Apr 2026, 9:00 AM"
+    const cleaned = formatteddate.replace(/(\d+)\.(\d+)\s*(AM|PM)/i, "$1:$2 $3");
+    const parsed = new Date(cleaned);
+    if (isNaN(parsed.getTime())) return formatteddate;
+    return parsed.toISOString();
+}
+
+async function getRubricEvents(): Promise<RubricEvent[]> {
+    const { sections } = await getRubricLandingPage();
+    return getRubricSection(sections, "Events") as unknown as RubricEvent[];
 }
 
 async function getLocalEvents(): Promise<LocalEvent[]> {
@@ -53,14 +79,17 @@ async function getLocalEvents(): Promise<LocalEvent[]> {
     }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
     try {
-        const [FBEvents, localEvents] = await Promise.all([
+        console.log("[Events API] Fetching from all sources...");
+        const [FBEvents, localEvents, rubricEvents] = await Promise.all([
             getFBEvents(),
             getLocalEvents(),
+            getRubricEvents(),
         ]);
+        console.log("[Events API] Results - FB:", FBEvents.length, "Local:", localEvents.length, "Rubric:", rubricEvents.length);
 
-        // Combine events from both sources
+        // Combine events from all sources
         const combinedEvents = [
             ...FBEvents.map((event) => ({
                 // id: event.id,
@@ -80,6 +109,17 @@ export async function GET() {
                 slug: event.slug,
                 tags: event.tags,
             })),
+            ...rubricEvents.map((event) => ({
+                id: sanitizeText(event.eventid),
+                title: sanitizeText(event.title),
+                date: parseRubricDate(event.formatteddate),
+                location: sanitizeText(event.subtitle),
+                description: sanitizeText(event.info),
+                source: "rubric",
+                image: sanitizeUrl(event.image),
+                destination: sanitizeUrl(event.destination),
+                slug: `rubric-${sanitizeText(event.eventid)}`,
+            })),
         ];
 
         // Sort events by date
@@ -87,7 +127,12 @@ export async function GET() {
             (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
 
-        return Response.json(sortedEvents);
+        // Support ?limit=N to return only the most recent N events
+        const { searchParams } = new URL(request.url);
+        const limit = parseInt(searchParams.get("limit") || "0", 10);
+        const result = limit > 0 ? sortedEvents.slice(0, limit) : sortedEvents;
+
+        return Response.json(result);
     } catch (error) {
         console.error("Error in fetching events:", error);
         return NextResponse.json(

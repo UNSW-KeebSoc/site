@@ -1,0 +1,100 @@
+.shopPage {
+    width: 100%;
+    max-width: 1600px;
+    margin: 2rem 0;
+    padding: 2rem;
+}
+
+.shopPage h1 {
+    font-family: "RedHatMono", monospace;
+    font-size: 1.8em;
+    margin: 1.5rem 0;
+    color: var(--orange-400);
+}
+
+.productsGrid {
+    display: grid;
+    gap: 1.5rem;
+    grid-auto-flow: dense;
+}
+
+.tallImage img {
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+}
+
+.productLink {
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+}
+
+.productLink:hover {
+    transform: translateY(-2px);
+}
+
+.productCard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.productTitle {
+    font-family: "RedHatMono", monospace;
+    font-size: 1.2em;
+    margin: 0;
+    color: var(--heading);
+}
+
+.productPrice {
+    display: block;
+    font-family: "RedHatMono", monospace;
+    font-size: 1em;
+    margin: 0.5rem 0;
+    color: var(--orange-400);
+    font-weight: bold;
+}
+
+.productDescription {
+    font-family: "RedHatDisplay", sans-serif;
+    font-size: 0.95em;
+    color: #ab4100;
+    margin: 0.5rem 0;
+    line-height: 1.4;
+    flex-grow: 1;
+}
+
+.message {
+    text-align: center;
+    padding: 2rem;
+    color: var(--gray-800);
+    font-family: "RedHatMono", monospace;
+}
+
+.errorMessage {
+    text-align: center;
+    padding: 2rem;
+    color: #a83232;
+    font-family: "RedHatMono", monospace;
+    border: 3px solid #a83232;
+}
+
+@media (min-width: 768px) {
+    .productsGrid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .message {
+        color: var(--gray-300);
+    }
+
+    .productPrice {
+        color: white;
+    }
+
+    .productDescription {
+        color: var(--orange-100);
+    }
+}
