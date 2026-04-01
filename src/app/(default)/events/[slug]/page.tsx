@@ -204,7 +204,7 @@ export default async function EventPage({ params }: EventPageProps) {
                             <div className={styles.metaBlock}>
                                 <div className={styles.metaLabel}>TIME</div>
                                 <div className={styles.metaValue}>
-                                    {formatTime(startDate, multiDay ? null : endDate)}
+                                    {formatTime(startDate, multiDay ? undefined : endDate)}
                                     {multiDay && (
                                         <div>until {formatTime(endDate)}</div>
                                     )}
