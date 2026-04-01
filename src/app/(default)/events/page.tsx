@@ -72,8 +72,8 @@ export default function EventsPage() {
     const filterEvents = (events: Event[]): Event[] =>
         selectedTags.length
             ? events.filter((event) =>
-                  event.tags?.some((tag) => selectedTags.includes(tag))
-              )
+                event.tags?.some((tag) => selectedTags.includes(tag))
+            )
             : events;
 
     return (
@@ -83,9 +83,8 @@ export default function EventsPage() {
                 {allTags.map((tag) => (
                     <button
                         key={tag}
-                        className={`${styles.tag} ${
-                            selectedTags.includes(tag) ? styles.active : ""
-                        }`}
+                        className={`${styles.tag} ${selectedTags.includes(tag) ? styles.active : ""
+                            }`}
                         onClick={() => toggleTag(tag)}
                     >
                         {tag}
@@ -155,14 +154,19 @@ function EventList({ events }: EventListProps) {
                                     <div className={styles.eventLocation}>
                                         {event.location}
                                     </div>
-                                    <p className={styles.eventDescription}>
-                                        {event.description.length > 150
-                                            ? `${event.description.substring(
-                                                  0,
-                                                  150
-                                              )}...`
-                                            : event.description}
-                                    </p>
+                                    {
+                                        event.description && (
+                                            <p className={styles.eventDescription}>
+                                                {event.description.length > 150
+                                                    ? `${event.description.substring(
+                                                        0,
+                                                        150
+                                                    )}...`
+                                                    : event.description}
+                                            </p>
+                                        )
+                                    }
+
                                     {event.tags && event.tags.length > 0 && (
                                         <div className={styles.tagList}>
                                             {event.tags.map((tag) => (

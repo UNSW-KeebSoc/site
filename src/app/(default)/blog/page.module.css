@@ -1,8 +1,8 @@
 .blogPage {
     width: 100%;
     max-width: 900px;
-    margin: 2rem 0;
-    padding: 2rem;
+    margin: var(--space-xl) 0;
+    padding: var(--space-xl);
 }
 
 .blogPage p {
@@ -11,9 +11,8 @@
 
 .blogPage h2 {
     font-family: "RedHatMono", monospace;
-    margin: 0;
-    margin: 1.5rem 0;
-    color: var(--header-alt);
+    margin: var(--space-lg) 0;
+    color: var(--heading-alt);
 }
 
 .blogGrid {
@@ -92,25 +91,25 @@
 .postDescription {
     font-family: "RedHatDisplay", sans-serif;
     font-size: 0.95em;
-    color: #ab4100;
-    margin: 0.5rem 0;
+    color: var(--color-description);
+    margin: var(--space-xs) 0;
     line-height: 1.4;
 }
 
 .tagList {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.75rem;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
 }
 
 .tag {
     font-family: "RedHatMono", monospace;
     font-size: 0.8em;
-    padding: 0.2rem 0.5rem;
+    padding: var(--space-2xs) var(--space-xs);
     background-color: var(--orange-400);
-    border: 1px solid var(--cyan);
-    border-radius: 4px;
+    border: 1px solid var(--orange-300);
+    border-radius: var(--radius-sm);
     color: white;
     font-weight: bold;
 }
@@ -123,9 +122,9 @@
 }
 
 .prose {
-    padding: 2rem;
+    padding: var(--space-xl);
     max-width: 90ch;
-    margin: 48px auto;
+    margin: var(--space-3xl) auto;
     line-height: 1.75;
     width: 100%;
 }

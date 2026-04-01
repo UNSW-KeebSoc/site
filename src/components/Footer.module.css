@@ -2,11 +2,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: var(--space-xs) var(--space-md);
     border: var(--default-border);
     color: var(--orange-300);
     background-color: var(--background);
-    padding: 0.5rem 1rem;
 }
 
 .copyright {

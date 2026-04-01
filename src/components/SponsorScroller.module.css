@@ -3,9 +3,9 @@
     display: flex;
     width: 100%;
     overflow: hidden;
-    padding: 1rem;
+    padding: var(--space-md);
     background: var(--orange-100);
-    gap: 1rem;
+    gap: var(--space-md);
     color: white;
     align-items: center;
     position: sticky;
@@ -89,6 +89,6 @@
 
 @media (max-width: 768px) {
     .banner {
-        padding: 2rem;
+        padding: var(--space-xl);
     }
 }

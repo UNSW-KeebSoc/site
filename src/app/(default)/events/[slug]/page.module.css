@@ -5,7 +5,7 @@
 }
 
 .eventPage article {
-    padding: 4rem 2rem;
+    padding: var(--space-3xl) var(--space-xl);
     margin: 0 auto;
 }
 
@@ -27,9 +27,9 @@
 }
 
 .eventHeader {
-    margin-bottom: 2rem;
+    margin-bottom: var(--space-xl);
     border-bottom: var(--default-border);
-    padding-bottom: 1rem;
+    padding-bottom: var(--space-md);
 }
 
 .eventHeader h1 {
@@ -71,7 +71,7 @@
 
 .registerButton {
     display: inline-block;
-    padding: 0.5rem 1rem;
+    padding: var(--space-xs) var(--space-md);
     background-color: var(--orange-300);
     color: white;
     font-family: "RedHatMono", monospace;
@@ -88,28 +88,28 @@
 
 .registerButtonRubric {
     composes: registerButton;
-    background-color: #e51e5d;
-    border-color: #c4194f;
+    background-color: var(--color-rubric);
+    border-color: var(--color-rubric-dark);
 }
 
 .registerButtonRubric:hover {
-    background-color: #c4194f;
+    background-color: var(--color-rubric-dark);
 }
 
 .tagList {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
 }
 
 .tag {
     font-family: "RedHatMono", monospace;
     font-size: 0.8em;
-    padding: 0.2rem 0.5rem;
+    padding: var(--space-2xs) var(--space-xs);
     background-color: var(--orange-400);
-    border: 1px solid var(--cyan);
-    border-radius: 4px;
+    border: 1px solid var(--orange-300);
+    border-radius: var(--radius-sm);
     color: white;
     font-weight: bold;
 }
@@ -121,18 +121,17 @@
 
 .eventContent h2 {
     font-family: "RedHatMono", monospace;
-    /* color: var(--orange-300); */
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-md);
 }
 
 .eventContent ul,
 .eventContent ol {
-    margin-left: 1.5rem;
+    margin-left: var(--space-lg);
 }
 
 .eventContent p {
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
 }
 
 .eventContent em {
@@ -146,7 +145,7 @@
     }
 
     .metaBlock {
-        margin-right: 2rem;
+        margin-right: var(--space-xl);
     }
 
     .registerBlock {

@@ -2,7 +2,12 @@ import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import { join } from "path";
 import matter from "gray-matter";
-import { getRubricLandingPage, getRubricSection, sanitizeText, sanitizeUrl } from "@/lib/rubric";
+import {
+    getRubricLandingPage,
+    getRubricSection,
+    sanitizeText,
+    sanitizeUrl,
+} from "@/lib/rubric";
 
 const EVENTS_PATH = join(process.cwd(), "content", "events");
 
@@ -43,10 +48,48 @@ async function getFBEvents(): Promise<FBEvent[]> {
 function parseRubricDate(formatteddate: string | undefined): string {
     if (!formatteddate) return new Date(0).toISOString();
     // "Sun, 19 Apr 2026, 9.00 AM" -> "Sun, 19 Apr 2026, 9:00 AM"
-    const cleaned = formatteddate.replace(/(\d+)\.(\d+)\s*(AM|PM)/i, "$1:$2 $3");
+    const cleaned = formatteddate.replace(
+        /(\d+)\.(\d+)\s*(AM|PM)/i,
+        "$1:$2 $3",
+    );
     const parsed = new Date(cleaned);
     if (isNaN(parsed.getTime())) return formatteddate;
     return parsed.toISOString();
+}
+
+function inferTags(title: string, subtitle: string): string[] {
+    const text = `${title} ${subtitle}`.toLowerCase();
+    const tags: string[] = [];
+
+    // Format: [keywords to match, tag to apply]
+    const rules: [string[], string][] = [
+        [["workshop", "build your own", "macropad", "solder"], "workshop"],
+        [["comp", "hackathon", "competition"], "comp"],
+        [["movie", "screening", "film"], "movie"],
+        [["oweek", "o-week", "orientation"], "oweek"],
+        [["hiring", "career", "recruit"], "hiring"],
+        [["virtual", "online", "remote"], "virtual"],
+        [["creative", "art", "artisan", "design", "keycap"], "creative"],
+        [["meetup", "bbq", "social", "games night"], "meetup"],
+    ];
+
+    for (const [keywords, tag] of rules) {
+        if (keywords.some((kw) => text.includes(kw))) {
+            tags.push(tag);
+        }
+    }
+
+    // Collab: multiple societies (X / x between names)
+    if (/\bx\b/i.test(title)) {
+        tags.push("collab");
+    }
+
+    // Default to "in person" unless tagged virtual
+    if (!tags.includes("virtual")) {
+        tags.push("in person");
+    }
+
+    return tags;
 }
 
 async function getRubricEvents(): Promise<RubricEvent[]> {
@@ -69,7 +112,7 @@ async function getLocalEvents(): Promise<LocalEvent[]> {
                     ...data,
                     slug: filename.replace(".mdx", ""),
                 } as LocalEvent;
-            })
+            }),
         );
 
         return events;
@@ -87,7 +130,14 @@ export async function GET(request: Request) {
             getLocalEvents(),
             getRubricEvents(),
         ]);
-        console.log("[Events API] Results - FB:", FBEvents.length, "Local:", localEvents.length, "Rubric:", rubricEvents.length);
+        console.log(
+            "[Events API] Results - FB:",
+            FBEvents.length,
+            "Local:",
+            localEvents.length,
+            "Rubric:",
+            rubricEvents.length,
+        );
 
         // Combine events from all sources
         const combinedEvents = [
@@ -114,17 +164,20 @@ export async function GET(request: Request) {
                 title: sanitizeText(event.title),
                 date: parseRubricDate(event.formatteddate),
                 location: sanitizeText(event.subtitle),
-                description: sanitizeText(event.info),
+                description:
+                    sanitizeText(event.info) == "Free"
+                        ? null
+                        : sanitizeText(event.info),
                 source: "rubric",
                 image: sanitizeUrl(event.image),
                 destination: sanitizeUrl(event.destination),
                 slug: `rubric-${sanitizeText(event.eventid)}`,
-            })),
+                tags: inferTags(sanitizeText(event.title), sanitizeText(event.subtitle))            })),
         ];
 
         // Sort events by date
         const sortedEvents = combinedEvents.sort(
-            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
         );
 
         // Support ?limit=N to return only the most recent N events
@@ -137,7 +190,7 @@ export async function GET(request: Request) {
         console.error("Error in fetching events:", error);
         return NextResponse.json(
             { message: "Error fetching events" },
-            { status: 500 }
+            { status: 500 },
         );
     }
 }

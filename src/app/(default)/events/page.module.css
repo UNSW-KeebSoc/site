@@ -1,9 +1,8 @@
 .eventsPage {
     width: 100%;
     max-width: 1600px;
-    /* max-width: 65ch; */
-    margin: 2rem 0;
-    padding: 2rem;
+    margin: var(--space-xl) 0;
+    padding: var(--space-xl);
 }
 
 .eventsPage h1 {
@@ -60,8 +59,8 @@
 .eventDescription {
     font-family: "RedHatDisplay", sans-serif;
     font-size: 0.95em;
-    color: #ab4100;
-    margin: 0.5rem 0;
+    color: var(--color-description);
+    margin: var(--space-xs) 0;
     line-height: 1.4;
     flex-grow: 1;
 }
@@ -69,20 +68,19 @@
 .tagList {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.75rem;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
     position: relative;
-    /* From bottom */
     bottom: 0;
 }
 
 .tag {
     font-family: "RedHatMono", monospace;
     font-size: 0.8em;
-    padding: 0.2rem 0.5rem;
+    padding: var(--space-2xs) var(--space-xs);
     background-color: var(--orange-300);
-    border: 1px solid var(--cyan);
-    border-radius: 4px;
+    border: 1px solid var(--orange-200);
+    border-radius: var(--radius-sm);
     color: white;
     font-weight: bold;
     position: relative;
@@ -111,7 +109,7 @@
     background-color: var(--orange-200);
 }
 .tag:focus-visible {
-    outline: 2px dashed var(--cyan);
+    outline: 2px dashed var(--orange-200);
     outline-offset: 2px;
 }
 .tag:active:not(.active) {
@@ -119,7 +117,7 @@
 }
 .tag.active {
     background-color: var(--orange-400);
-    border-color: var(--cyan);
+    border-color: var(--orange-300);
     color: white;
     cursor: pointer;
 }
@@ -140,11 +138,11 @@
 .clearButton {
     font-family: "RedHatMono", monospace;
     font-size: 0.85em;
-    padding: 0.3rem 0.8rem;
-    margin-top: 0.75rem;
+    padding: var(--space-2xs) var(--space-sm);
+    margin-top: var(--space-sm);
     background-color: var(--orange-400);
-    border: 1px solid var(--cyan);
-    border-radius: 4px;
+    border: 1px solid var(--orange-300);
+    border-radius: var(--radius-sm);
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -161,17 +159,17 @@
 
 .message {
     text-align: center;
-    padding: 2rem;
+    padding: var(--space-xl);
     color: var(--gray-800);
     font-family: "RedHatMono", monospace;
 }
 
 .errorMessage {
     text-align: center;
-    padding: 2rem;
-    color: #a83232;
+    padding: var(--space-xl);
+    color: var(--color-error);
     font-family: "RedHatMono", monospace;
-    border: 3px solid #a83232;
+    border: 3px solid var(--color-error);
 }
 
 @media (min-width: 768px) {

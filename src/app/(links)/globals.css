@@ -19,12 +19,18 @@
         Courier, monospace;
 
     /* Spacing and borders */
-    --default-border: var(--default-border);
+    --default-border: 3px solid var(--orange-300);
+    --space-2xs: 0.25rem;
     --space-xs: 0.5rem;
-    --space-sm: 0.8rem;
+    --space-sm: 0.75rem;
     --space-md: 1rem;
     --space-lg: 1.5rem;
     --space-xl: 2rem;
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-full: 9999px;
 
     /* Colors */
     --foreground: black;
@@ -37,8 +43,7 @@ body {
     padding: 0;
     height: 100vh;
     width: 100vw;
-    /* overflow: hidden; */
-    position: relative; /* For positioning children */
+    position: relative;
 }
 main {
     display: flex;
@@ -126,7 +131,7 @@ pre {
     background: var(--gray-900);
     color: var(--gray-100);
     padding: var(--space-md);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     overflow-x: auto;
     border: var(--default-border);
     font-family: var(--font-mono);
@@ -137,7 +142,7 @@ code {
     font-size: 0.9em;
     padding: 0.2em 0.4em;
     background: var(--gray-200);
-    border-radius: 3px;
+    border-radius: var(--radius-sm);
 }
 
 /* Inline code */
@@ -207,30 +212,3 @@ hr {
     margin: var(--space-xl) 0;
 }
 
-/* Dark Mode */
-/* @media (prefers-color-scheme: dark) {
-    :root {
-        --foreground: white;
-        --background: rgb(19, 22, 41);
-    }
-
-    body {
-        color: var(--foreground);
-        background: var(--background);
-    }
-
-    code {
-        background: var(--gray-800);
-    }
-
-    blockquote {
-        background: var(--gray-800);
-    }
-    td {
-        padding: var(--space-sm);
-        border-right: 1px solid var(--gray-800);
-    }
-    tr:nth-child(even) {
-        background: var(--gray-800);
-    }
-} */

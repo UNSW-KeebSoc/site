@@ -1,20 +1,19 @@
 .container {
     width: 100%;
-    /* max-width: 1200px; */
     margin: 0 auto;
-    padding: 40px;
+    padding: var(--space-2xl);
 }
 
 .header {
-    margin-bottom: 24px;
+    margin-bottom: var(--space-lg);
 }
 
 .title {
     display: inline-block;
     background-color: var(--orange-300);
     color: white;
-    padding: 8px 16px;
-    font-size: 16px;
+    padding: var(--space-xs) var(--space-md);
+    font-size: 1rem;
     font-weight: 600;
     margin: 0;
     letter-spacing: 0.5px;
@@ -29,7 +28,7 @@
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
+    gap: var(--space-lg);
     justify-items: center;
 }
 
@@ -41,12 +40,12 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .container {
-        padding: 20px 16px;
+        padding: var(--space-lg) var(--space-md);
     }
 
     .grid {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: var(--space-md);
     }
 
     .card {
@@ -55,8 +54,8 @@
 }
 
 /* 2 columns: show 4 (2x2), hide 5th and 6th */
-@media (min-width: 769px) and (max-width: 1093px) {
-    .grid > :nth-child(n+5) {
+@media (min-width: 769px) and (max-width: 1109px) {
+    .grid> :nth-child(n+5) {
         display: none;
     }
 }
@@ -66,7 +65,7 @@
         grid-template-columns: repeat(4, 1fr);
     }
 
-    .grid > :nth-child(n+5) {
+    .grid> :nth-child(n+5) {
         display: none;
     }
 }

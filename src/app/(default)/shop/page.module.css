@@ -1,8 +1,8 @@
 .shopPage {
     width: 100%;
     max-width: 1600px;
-    margin: 2rem 0;
-    padding: 2rem;
+    margin: var(--space-xl) 0;
+    padding: var(--space-xl);
 }
 
 .shopPage h1 {
@@ -58,25 +58,25 @@
 .productDescription {
     font-family: "RedHatDisplay", sans-serif;
     font-size: 0.95em;
-    color: #ab4100;
-    margin: 0.5rem 0;
+    color: var(--color-description);
+    margin: var(--space-xs) 0;
     line-height: 1.4;
     flex-grow: 1;
 }
 
 .message {
     text-align: center;
-    padding: 2rem;
+    padding: var(--space-xl);
     color: var(--gray-800);
     font-family: "RedHatMono", monospace;
 }
 
 .errorMessage {
     text-align: center;
-    padding: 2rem;
-    color: #a83232;
+    padding: var(--space-xl);
+    color: var(--color-error);
     font-family: "RedHatMono", monospace;
-    border: 3px solid #a83232;
+    border: 3px solid var(--color-error);
 }
 
 @media (min-width: 768px) {
@@ -92,9 +92,5 @@
 
     .productPrice {
         color: white;
-    }
-
-    .productDescription {
-        color: var(--orange-100);
     }
 }

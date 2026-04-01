@@ -40,7 +40,7 @@
     padding-inline: 30px;
     text-align: center;
     font-weight: normal;
-    border-radius: 30px;
+    border-radius: var(--radius-full);
     padding: var(--space-lg);
 }
 
@@ -94,7 +94,7 @@
     text-align: center;
     border: 2px solid;
     padding: 0.5em 1em;
-    border-radius: 6px;
+    border-radius: var(--radius-md);
     font-weight: bold;
     transition: border-color 0.2s, color 0.2s;
 }

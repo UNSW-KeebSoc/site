@@ -18,9 +18,9 @@
     overflow-wrap: break-word;
     hyphens: auto;
     color: var(--foreground);
-    background-color: var(--box-bg);
+    background-color: var(--background);
     width: 100%;
-    padding: 2rem;
+    padding: var(--space-xl);
     box-sizing: border-box;
     flex: 1;
 }
