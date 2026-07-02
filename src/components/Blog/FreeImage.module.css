@@ -1,0 +1,26 @@
+/* Zero-height anchor: marks a spot in the flow without taking any space. */
+.anchor {
+    position: relative;
+    height: 0;
+}
+
+.image {
+    position: absolute;
+    top: var(--fi-y, 0px);
+    width: var(--fi-w, 320px);
+    max-width: none; /* override the global img max-width so it can bleed */
+    height: auto;
+    margin: 0;
+    transform: rotate(var(--fi-rotate, 0deg));
+    transform-origin: center;
+    z-index: var(--fi-z, 0);
+    pointer-events: none; /* decorative — never block text selection */
+}
+
+.anchor[data-side="left"] .image {
+    left: var(--fi-x, 0px);
+}
+
+.anchor[data-side="right"] .image {
+    right: var(--fi-x, 0px);
+}

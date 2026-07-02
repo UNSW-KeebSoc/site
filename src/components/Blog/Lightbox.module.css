@@ -1,0 +1,130 @@
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl);
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.figure {
+    position: relative;
+    margin: 0;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.full {
+    margin: 0;
+    max-width: 90vw;
+    max-height: 82vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--radius-md, 12px);
+}
+
+.caption {
+    margin-top: var(--space-sm);
+    color: #ddd;
+    font-size: 0.9rem;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.captionLink {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+}
+
+.caption .captionLink:hover {
+    color: #fff;
+}
+
+.close {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1001;
+    transition: background 0.2s ease;
+}
+
+.close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.lightboxNav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1001;
+    transition: background 0.2s ease;
+}
+
+.lightboxNav:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.lightboxNav.prev {
+    left: var(--space-lg);
+}
+
+.lightboxNav.next {
+    right: var(--space-lg);
+}
+
+.counter {
+    position: absolute;
+    bottom: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ddd;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    z-index: 1001;
+}
+
+@media (max-width: 700px) {
+    .lightboxNav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
+    .lightboxNav.prev {
+        left: var(--space-xs);
+    }
+
+    .lightboxNav.next {
+        right: var(--space-xs);
+    }
+}

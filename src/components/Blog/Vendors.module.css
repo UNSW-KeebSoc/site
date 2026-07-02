@@ -1,0 +1,57 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-md);
+    margin: var(--space-xl) 0;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--card-background);
+    border: 2px solid color-mix(in srgb, var(--foreground) 12%, transparent);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    border-color: var(--heading);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px -8px color-mix(in srgb, var(--heading) 55%, transparent);
+}
+
+.region {
+    font-family: "RedHatMono", monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--heading);
+}
+
+.name {
+    font-family: "RedHatDisplay", sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    color: var(--foreground);
+}
+
+/* External-link cue, pinned to the top-right and nudged on hover. */
+.arrow {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-lg);
+    font-size: 1rem;
+    color: color-mix(in srgb, var(--foreground) 40%, transparent);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover .arrow {
+    color: var(--heading);
+    transform: translate(2px, -2px);
+}

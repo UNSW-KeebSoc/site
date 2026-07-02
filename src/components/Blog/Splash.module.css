@@ -1,0 +1,133 @@
+.splash {
+    /* Full-bleed: break out of the centred prose column to the viewport edges. */
+    position: relative;
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+
+    /* Cancel the article's top spacing so the splash starts at the viewport top. */
+    margin-top: calc(-1 * (var(--space-3xl) + var(--space-xl)));
+    margin-bottom: var(--space-3xl);
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    display: flex;
+    padding: var(--space-3xl) var(--space-3xl);
+    box-sizing: border-box;
+
+    background-color: var(--gray-900);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: white;
+    overflow: hidden;
+}
+
+/* Optional legibility scrim over the background image. */
+.splash::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--splash-overlay, transparent);
+    pointer-events: none;
+}
+
+/* Top scrim — darkens the top of the splash so the floating glass chrome
+   (transparent navbar) stays legible. Mirrors the bottom overlay above. */
+.splash::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0) 45%);
+    pointer-events: none;
+}
+
+.splash[data-align="center"] {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.splash[data-align="left"] {
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.splash[data-align="bottom"] {
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    max-width: min(90ch, 100%);
+    color: white;
+}
+
+/* Pixel-font eyebrow, e.g. <Eyebrow>Q&A</Eyebrow>. Kept as a <div> (not a <p>)
+   so the subtitle paragraph styling below never touches it. */
+.eyebrow {
+    font-family: "BitcountSingle", monospace;
+    font-weight: 400;
+    font-size: clamp(2rem, 7vw, 3rem);
+    line-height: 1;
+    letter-spacing: 0.06em;
+}
+
+/* Title — a markdown `#` heading inside the splash. The extra `.splash` on the
+   selector out-specifies the global h1 and the .prose p rules. */
+.splash .content h1 {
+    font-family: "RedHatDisplay", sans-serif;
+    font-weight: 800;
+    font-size: clamp(4rem, 7vw, 5rem);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    color: white;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+/* Photo credit — pinned to the bottom-right, above both scrims. Kept outside
+   .content so it stays in the corner regardless of the content's alignment. */
+.splash .credit {
+    position: absolute;
+    z-index: 1;
+    right: var(--space-lg);
+    bottom: var(--space-md);
+    margin: 0;
+    max-width: 60%;
+    font-family: "RedHatMono", monospace;
+    font-size: 0.7rem;
+    line-height: 1.2;
+    text-align: right;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.splash .credit a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.splash .credit a:hover {
+    color: white;
+}
+
+/* Subtitle — any markdown paragraph inside the splash. */
+.splash .content p {
+    font-family: "RedHatDisplay", sans-serif;
+    font-weight: 500;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.3;
+    text-align: left;
+    margin: var(--space-sm) 0 0;
+    opacity: 0.92;
+}

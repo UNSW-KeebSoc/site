@@ -1,0 +1,23 @@
+.answer {
+    border-left: 3px solid var(--orange-300);
+    padding-left: var(--space-lg);
+    margin-top: calc(-1 * var(--space-xs));
+    margin-bottom: var(--space-lg);
+    margin-left: var(--space-md);
+    margin-right: var(--space-md);
+    text-align: justify;
+    color: color-mix(in srgb, var(--foreground) 85%, transparent);
+}
+
+.answer> :first-child {
+    margin-top: 0;
+}
+
+.answer> :last-child {
+    margin-bottom: 0;
+}
+
+/* Inherit the muted answer colour rather than the default body colour. */
+.answer :is(p, li) {
+    color: inherit;
+}

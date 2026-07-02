@@ -12,6 +12,19 @@ export interface BlogFrontMatter {
     tags?: string[];
 }
 
+/**
+ * Formats a frontmatter date string (e.g. "2026-06-22") as dd/mm/yyyy.
+ * Parsed in UTC so the day never shifts across the viewer's timezone.
+ */
+export function formatDate(date?: string): string {
+    if (!date) return "";
+    const d = new Date(date);
+    if (isNaN(d.getTime())) return date;
+    const dd = String(d.getUTCDate()).padStart(2, "0");
+    const mm = String(d.getUTCMonth() + 1).padStart(2, "0");
+    return `${dd}/${mm}/${d.getUTCFullYear()}`;
+}
+
 const BLOG_PATH = join(process.cwd(), "content", "blog");
 
 const slugToFileMap: Record<string, string> = {};

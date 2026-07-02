@@ -52,6 +52,11 @@
     background-color: var(--background);
 }
 
+/* Restore spacing between stacked prose paragraphs in a card */
+.sectionCard > p + p {
+    margin-top: var(--space-md);
+}
+
 .sectionCard h2 {
     font-size: 1.5rem;
     font-weight: bold;

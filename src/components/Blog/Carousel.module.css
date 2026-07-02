@@ -1,0 +1,129 @@
+.carousel {
+    margin: var(--space-2xl) 0;
+}
+
+.viewport {
+    position: relative;
+}
+
+.track {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 var(--space-md);
+    padding-bottom: var(--space-sm);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+    display: none;
+}
+
+.slide {
+    /* Capped height, natural width: the image keeps its own aspect ratio and
+       the slide shrink-wraps it, so nothing is cropped. max-width keeps a wide
+       image from spilling past the container on narrow screens — it shrinks
+       (height included) to fit instead. */
+    flex: 0 0 auto;
+    max-width: 100%;
+    scroll-snap-align: center;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-md, 12px);
+    overflow: hidden;
+    background: color-mix(in srgb, var(--foreground) 8%, transparent);
+    cursor: zoom-in;
+    line-height: 0;
+}
+
+.slide:focus-visible {
+    outline: 3px solid var(--orange-300);
+    outline-offset: 3px;
+}
+
+.image {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: var(--carousel-height, min(80vh, 520px));
+    margin: 0;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+}
+
+.slide:hover .image {
+    transform: scale(1.03);
+}
+
+/* Inline prev/next scroll buttons (mouse users; touch users just swipe). */
+.nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.2s ease;
+}
+
+.nav:hover {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.nav.prev {
+    left: var(--space-sm);
+}
+
+.nav.next {
+    right: var(--space-sm);
+}
+
+/* Hide the scroll buttons on touch-first / narrow screens where swiping is
+   the natural interaction. */
+@media (max-width: 700px),
+(hover: none) {
+    .nav {
+        display: none;
+    }
+
+    .image {
+        max-height: var(--carousel-height, min(60vh, 460px));
+    }
+}
+
+/* Single caption slot below the strip; its text tracks the centred image. */
+.inlineCaption {
+    margin: var(--space-md) auto 0;
+    max-width: min(100%, 40rem);
+    color: color-mix(in srgb, var(--foreground) 65%, transparent);
+    font-size: 0.9rem;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.captionLink {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+}
+
+.inlineCaption .captionLink:hover {
+    color: var(--foreground);
+}

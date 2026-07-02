@@ -5,7 +5,16 @@
     padding: var(--space-xs) var(--space-md);
     border: var(--default-border);
     color: var(--orange-300);
-    background-color: var(--background);
+    background-color: var(--footer-background);
+    position: var(--footer-position);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--chrome-z);
+    opacity: var(--footer-opacity);
+    transform: var(--footer-transform);
+    transition: background-color 0.3s ease, border-color 0.3s ease,
+        opacity 0.3s ease, transform 0.3s ease;
 }
 
 .copyright {
@@ -26,7 +35,7 @@
     aspect-ratio: 1/1;
 }
 
-.link > * {
+.link>* {
     height: 100%;
     width: 100%;
     background-color: var(--gray-400);
@@ -56,7 +65,8 @@
     .footer {
         color: var(--orange-200);
     }
-    .link > * {
+
+    .link>* {
         background-color: var(--orange-200);
     }
 }

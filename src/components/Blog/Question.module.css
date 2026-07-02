@@ -1,0 +1,60 @@
+.question {
+    --qa-image-size: 96px;
+    /* --qa-image-size: 144px; */
+
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    margin: var(--space-2xl) 0 var(--space-lg);
+}
+
+/* Text on the left, image on the right. */
+.question[data-align="left"] {
+    flex-direction: row-reverse;
+}
+
+/* Text on the right, image on the left. */
+.question[data-align="right"] {
+    flex-direction: row;
+}
+
+.image {
+    flex: 0 0 auto;
+    width: var(--qa-image-size);
+    height: auto;
+    margin: 0;
+    object-fit: contain;
+}
+
+.text {
+    flex: 1 1 auto;
+    min-width: 0;
+    /* font-family: "RedHatMono", monospace; */
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.25;
+    color: var(--foreground);
+}
+
+.question[data-align="left"] .text,
+.question[data-align="left"] .text :is(p, h1, h2, h3, h4, h5, h6) {
+    text-align: left !important;
+}
+
+.question[data-align="right"] .text,
+.question[data-align="right"] .text :is(p, h1, h2, h3, h4, h5, h6) {
+    text-align: right !important;
+}
+
+/* The question text may arrive wrapped in a markdown paragraph. */
+.text :is(p, h1, h2, h3, h4, h5, h6) {
+    margin: 0;
+    color: inherit;
+    font: inherit;
+}
+
+@media (max-width: 600px) {
+    .text {
+        font-size: 1.15rem;
+    }
+}

@@ -79,10 +79,12 @@
     margin-bottom: 1.5rem;
     font-style: italic;
 }
+
 @media (prefers-color-scheme: dark) {
     .postAuthor {
         color: var(--gray-300);
     }
+
     .postMetaInline .postAuthor::after {
         color: var(--gray-400);
     }
@@ -129,10 +131,27 @@
     width: 100%;
 }
 
+.prose p {
+    margin-bottom: var(--space-lg);
+    text-align: justify;
+}
+
+/* Answer: the paragraph immediately after a <Question> gets an accent bar and
+   slight indent so it reads as the response rather than plain body text. */
+.prose [data-question]+p {
+    border-left: 3px solid var(--orange-300);
+    padding-left: var(--space-lg);
+    margin-top: calc(-1 * var(--space-xs));
+    margin-left: var(--space-md);
+    margin-right: var(--space-md);
+    color: color-mix(in srgb, var(--foreground) 85%, transparent);
+}
+
 .imgContainer {
     display: block;
     width: 100%;
 }
+
 .imgContainer img {
     width: 100% !important;
     height: auto !important;

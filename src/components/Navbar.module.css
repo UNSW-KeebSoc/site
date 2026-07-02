@@ -4,7 +4,23 @@
     align-items: center;
     padding: var(--space-sm) var(--space-md);
     border: var(--default-border);
+    border-bottom: var(--chrome-border);
     background-color: var(--navbar-background);
+    position: var(--navbar-position);
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--chrome-z);
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* Frosted glass while scrolling over the splash (see ChromeScrollWatcher).
+   Once past the splash the blur is dropped so the navbar reads as solid.
+   NB: do NOT add -webkit-backdrop-filter here — its presence kills the blur in
+   this project's CSS pipeline (same as HighlightCard, which omits it too). */
+:global(html[data-scrolled][data-over-splash]) .navbar {
+    backdrop-filter: blur(9px);
 }
 
 .navbar h2 {

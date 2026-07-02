@@ -1,3 +1,28 @@
+/* Variable Fonts */
+@font-face {
+    font-family: "RedHatDisplay";
+    src: url("/fonts/RedHatDisplay-VariableFont_wght.woff2") format("woff2-variations");
+    font-weight: 300 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "RedHatMono";
+    src: url("/fonts/RedHatMono-VariableFont_wght.woff2") format("woff2-variations");
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "BitcountSingle";
+    src: url("/fonts/BitcountSingle-VariableFont.ttf") format("truetype-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     /* Orange Color Palette */
     --orange-000: #fff0d5;
@@ -21,9 +46,13 @@
     /* Semantic Colors */
     --heading: var(--orange-300);
     --heading-alt: var(--orange-400);
-    --navbar-background: var(--orange-300);
+    /* The navbar's resting colour. Kept as its own token so themes (e.g. the
+       glass blog chrome) can restore it exactly after going transparent. */
+    --navbar-background-solid: var(--orange-300);
+    --navbar-background: var(--navbar-background-solid);
     --navbar-links: white;
     --card-background: var(--background);
+    --body-links: #fe7600;
 
     /* Typography */
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -48,6 +77,15 @@
 
     /* Borders */
     --default-border: 3px solid var(--orange-300);
+
+    /* Chrome (navbar/footer) theming — overridable per blog post */
+    --footer-background: var(--background);
+    --chrome-border: var(--default-border);
+    --navbar-position: static;
+    --footer-position: static;
+    --chrome-z: auto;
+    --footer-opacity: 1;
+    --footer-transform: none;
 
     /* Semantic Colors */
     --color-description: #ab4100;
@@ -74,7 +112,8 @@
         /* Dark Mode Semantic Colors */
         --heading: var(--orange-200);
         --heading-alt: var(--orange-100);
-        --navbar-background: var(--orange-400);
+        --navbar-background-solid: var(--orange-400);
+        --navbar-background: var(--navbar-background-solid);
         --navbar-links: var(--orange-100);
 
         --color-description: var(--orange-100);
@@ -119,6 +158,7 @@ body {
     width: 100vw;
     position: relative;
 }
+
 main {
     position: relative;
     display: flex;
@@ -172,10 +212,12 @@ article {
 
 p {
     margin: 0;
+    font-size: 1rem;
 }
 
 .mobileHide {
     display: block;
+
     @media (max-width: 600px) {
         display: none;
     }
@@ -209,7 +251,7 @@ h3 {
 
 /* Links */
 a {
-    color: var(--orange-300);
+    color: var(--body-links);
     text-decoration: none;
     transition: border-color 0.2s ease;
 }
@@ -280,6 +322,7 @@ th:last-child,
 td:last-child {
     border-right: 1px solid var(--orange-300);
 }
+
 th {
     background: var(--orange-300);
     color: white;
