@@ -155,8 +155,17 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    width: 100vw;
+    /* 100% (not 100vw): on desktop Chromium 100vw counts the vertical scrollbar
+       gutter, so if anything ever gives the document a vertical scrollbar the
+       body becomes wider than the content area and a spurious horizontal
+       scrollbar appears. 100% tracks the real content width. */
+    width: 100%;
     position: relative;
+    /* <main> is the only intended scroller (see below). Clip the root so an
+       off-screen absolute child — e.g. the glass-theme footer, which hides
+       itself with translateY(100%) below the viewport — can't add a stray
+       document scrollbar. */
+    overflow: hidden;
 }
 
 main {
