@@ -1,0 +1,63 @@
+.callout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-lg);
+    align-items: stretch;
+    margin: var(--space-lg) 0 var(--space-2xl);
+    padding: var(--space-md) var(--space-lg);
+    border-left: 4px solid var(--orange-300);
+    background: var(--orange-000);
+    font-family: "RedHatMono", monospace;
+}
+
+/* Left column: label sits in its own vertical band, divided from the
+   message and centered against the message's full height. */
+.label {
+    display: flex;
+    align-items: center;
+    padding-right: var(--space-sm);
+    color: var(--orange-400);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.message {
+    margin: 0;
+    align-self: center;
+    line-height: 1.6;
+    font-size: 0.95em;
+    color: var(--gray-800);
+}
+
+.message code {
+    font-family: "RedHatMono", monospace;
+    font-size: 0.9em;
+}
+
+.message a {
+    color: var(--body-links);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.message a:hover {
+    border-bottom-color: var(--body-links);
+}
+
+@media (prefers-color-scheme: dark) {
+    .callout {
+        background: rgba(249, 125, 41, 0.1);
+        border-left-color: var(--orange-200);
+    }
+
+    .label {
+        color: var(--orange-200);
+    }
+
+    .message {
+        color: var(--orange-100);
+    }
+}

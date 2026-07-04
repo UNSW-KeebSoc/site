@@ -58,6 +58,9 @@ export default function ShopPage() {
     return (
         <div className={styles.shopPage}>
             <h1>Shop</h1>
+            <Callout label="NOTE">
+                PICKUP ONLY. Payment via Cash or Bank Transfer preferred. Please DM a KeebSoc executive via Discord or email <a href="mailto:unswkeebsoc@gmail.com"><code>unswkeebsoc@gmail.com</code></a> to arrange pickup and payment ~
+            </Callout>
             {products.length === 0 ? (
                 <p className={styles.message}>
                     No merchandise available right now. Check back soon!
