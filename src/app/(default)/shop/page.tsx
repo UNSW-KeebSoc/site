@@ -59,7 +59,7 @@ export default function ShopPage() {
         <div className={styles.shopPage}>
             <h1>Shop</h1>
             <Callout label="NOTE">
-                PICKUP ONLY. Payment via Cash or Bank Transfer preferred. Please DM a KeebSoc executive via Discord or email <a href="mailto:unswkeebsoc@gmail.com"><code>unswkeebsoc@gmail.com</code></a> to arrange pickup and payment ~
+                PICKUP ONLY. Payment via Cash or Bank Transfer preferred. Please DM a KeebSoc executive via <a href="https://discord.gg/AGBb8tNMZ8" target="_blank" rel="noopener noreferrer" >Discord</a> or email <a href="mailto:unswkeebsoc@gmail.com" target="_blank" rel="noopener noreferrer"><code>unswkeebsoc@gmail.com</code></a> to arrange pickup and payment ~
             </Callout>
             {products.length === 0 ? (
                 <p className={styles.message}>

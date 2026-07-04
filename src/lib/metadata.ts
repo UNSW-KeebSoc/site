@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const SITE_URL = "https://keebsoc.com";
 export const SITE_NAME = "UNSW KeebSoc";
 export const DEFAULT_DESCRIPTION =
-    "UNSW KeebSoc — the mechanical keyboard society at UNSW. Events, workshops, group buys, and a home for keyboard enthusiasts.";
+    "UNSW KeebSoc — the mechanical keyboard society at UNSW.";
 /** Fallback share image when a page/post/event has none of its own. */
 export const DEFAULT_OG_IMAGE = "/placeholder.jpg";
 
