@@ -2,6 +2,15 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import Card from "@/components/Card";
 import { getAllPosts } from "@/lib/blog";
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata({
+    title: "Blog",
+    description:
+        "Interviews, build guides, and stories from the UNSW KeebSoc community.",
+    path: "/blog",
+});
+
 // Return all posts
 export default function Blog() {
     const posts = getAllPosts();

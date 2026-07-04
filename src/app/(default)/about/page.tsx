@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 import { executives } from "@/lib/consts";
 
 export default function EventsPage() {
-    const [selectedYear, setSelectedYear] = useState("2025");
+    const [selectedYear, setSelectedYear] = useState("2026");
 
     return (
         <div className={styles.aboutPage}>
@@ -35,9 +35,8 @@ export default function EventsPage() {
                 {Object.keys(executives).map((year) => (
                     <button
                         key={year}
-                        className={`${styles.yearButton} ${
-                            selectedYear === year ? styles.activeYear : ""
-                        }`}
+                        className={`${styles.yearButton} ${selectedYear === year ? styles.activeYear : ""
+                            }`}
                         onClick={() => setSelectedYear(year)}
                     >
                         {year}

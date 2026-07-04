@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Card from "@/components/Card";
+import Callout from "@/components/Callout";
 import styles from "./page.module.css";
 
 interface Product {

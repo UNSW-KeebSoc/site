@@ -44,6 +44,22 @@ type Execs = {
 };
 
 export const executives: Execs = {
+    "2026": {
+        executives: [
+            { position: "President", name: "Catherine Wong" },
+            { position: "Vice President", name: "Jake Takada Wong" },
+            { position: "Treasurer", name: "Kyra Seeto Lee" },
+            { position: "Secretary", name: "Daiva Addia" },
+            { position: "Arc Delegate", name: "Winston Kwan" },
+            { position: "Returning Officer", name: "Jake Huang" },
+        ],
+        directors: [
+            { position: "Events Director", name: "Amal Perera" },
+            { position: "Events Director", name: "Graham Kong" },
+            { position: "Marketing Director", name: "Jarret Phong" },
+            { position: "Dev Director", name: "Xuan Li" },
+        ],
+    },
     "2025": {
         executives: [
             { position: "President", name: "Catherine Wong" },
@@ -56,10 +72,7 @@ export const executives: Execs = {
         directors: [
             { position: "Events Director", name: "Ben George" },
             { position: "Marketing Director", name: "Jarret Phong" },
-            {
-                position: "Dev Director",
-                name: "Xuan Li",
-            },
+            { position: "Dev Director", name: "Xuan Li" },
         ],
     },
     "2024": {

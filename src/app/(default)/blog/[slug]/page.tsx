@@ -1,4 +1,6 @@
 import { getPostBySlug, formatDate } from "@/lib/blog";
+import { pageMetadata } from "@/lib/metadata";
+import type { Metadata } from "next";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import styles from "../page.module.css";
@@ -11,6 +13,9 @@ import { Answer } from "@/components/Blog/Answer";
 import { FreeImage } from "@/components/Blog/FreeImage";
 import { Carousel, CarouselImage } from "@/components/Blog/Carousel";
 import { Vendors, Vendor } from "@/components/Blog/Vendors";
+import { Macropad } from "@/components/Blog/Macropad";
+import { Keycap } from "@/components/Blog/Keycap";
+import { Keycaps } from "@/components/Blog/Keycaps";
 import { ChromeScrollWatcher } from "@/components/Blog/ChromeScrollWatcher";
 
 const CustomImage = (props: ComponentProps<"img">) => {
@@ -51,6 +56,9 @@ const components = {
     CarouselImage,
     Vendors,
     Vendor,
+    Macropad,
+    Keycap,
+    Keycaps,
 };
 
 interface BlogTheme {
@@ -139,6 +147,26 @@ const options: MDXRemoteProps["options"] = {
         rehypePlugins: [],
     },
 };
+
+export async function generateMetadata({
+    params,
+}: {
+    params: { slug: string };
+}): Promise<Metadata> {
+    const { slug } = await params;
+    try {
+        const post = getPostBySlug(slug);
+        return pageMetadata({
+            title: post.fm.title,
+            description: post.fm.description,
+            image: post.fm.image,
+            path: `/blog/${slug}`,
+            type: "article",
+        });
+    } catch {
+        return {};
+    }
+}
 
 export default async function Blog({ params }: { params: { slug: string } }) {
     const { slug } = await params;

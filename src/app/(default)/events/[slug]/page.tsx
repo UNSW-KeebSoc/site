@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { promises as fs } from "fs";
 import { join } from "path";
 import matter from "gray-matter";
@@ -147,6 +149,42 @@ function parseRubricDate(formatteddate: string | undefined): string {
     const parsed = new Date(cleaned);
     if (isNaN(parsed.getTime())) return formatteddate;
     return parsed.toISOString();
+}
+
+export async function generateMetadata({
+    params,
+}: EventPageProps): Promise<Metadata> {
+    const { slug } = await params;
+
+    // Rubric-hosted events: pull title/description/banner from the cached API.
+    if (slug.startsWith("rubric-")) {
+        const eventId = slug.replace("rubric-", "");
+        const rubricEvent = await getRubricEventDetail(eventId);
+        if (!rubricEvent) return {};
+        // eventDescription is HTML — strip tags for a clean meta description.
+        const description = sanitizeText(rubricEvent.eventDescription);
+        return pageMetadata({
+            title: sanitizeText(rubricEvent.eventName),
+            description: description || undefined,
+            image: sanitizeUrl(rubricEvent.bannerImageURL) || undefined,
+            path: `/events/${slug}`,
+            type: "article",
+        });
+    }
+
+    // Local MDX events.
+    try {
+        const { frontmatter } = await getEventBySlug(slug);
+        return pageMetadata({
+            title: frontmatter.title,
+            description: frontmatter.description,
+            image: frontmatter.image,
+            path: `/events/${slug}`,
+            type: "article",
+        });
+    } catch {
+        return {};
+    }
 }
 
 export default async function EventPage({ params }: EventPageProps) {
