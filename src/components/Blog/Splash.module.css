@@ -131,3 +131,9 @@
     margin: var(--space-sm) 0 0;
     opacity: 0.92;
 }
+
+@media (max-width: 768px) {
+    .splash {
+        padding: var(--space-3xl) var(--space-xl);
+    }
+}
