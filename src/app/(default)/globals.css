@@ -155,6 +155,12 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
+    /* dvh tracks the *visible* viewport as Chrome mobile's address bar shows/
+       hides. Plain 100vh resolves to the large viewport (behind the toolbar),
+       so combined with `overflow: hidden` below it clips the bottom of <main>
+       behind the address bar with no way to scroll to it. vh stays as the
+       fallback for the rare engine without dvh support. */
+    height: 100dvh;
     /* 100% (not 100vw): on desktop Chromium 100vw counts the vertical scrollbar
        gutter, so if anything ever gives the document a vertical scrollbar the
        body becomes wider than the content area and a spurious horizontal
