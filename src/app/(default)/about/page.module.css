@@ -53,14 +53,42 @@
 }
 
 /* Restore spacing between stacked prose paragraphs in a card */
-.sectionCard > p + p {
+.sectionCard>p+p {
     margin-top: var(--space-md);
+}
+
+.sectionCard>p {
+    text-align: justify;
 }
 
 .sectionCard h2 {
     font-size: 1.5rem;
     font-weight: bold;
     color: var(--orange-300);
+}
+
+/* Executive Team header row */
+.teamHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    padding: var(--space-md) 0 0;
+}
+
+.teamHeader h2 {
+    margin: 0;
+}
+
+/* Keep the heading + subtitle tight as one block */
+.teamHeader>div>p {
+    margin: var(--space-xs) 0 0;
+}
+
+.teamButton {
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 /* Executive Grid */
@@ -76,6 +104,40 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* Small screens */
+@media (max-width: 768px) {
+    .sectionCard {
+        padding: var(--space-xl);
+        padding-top: var(--space-md);
+    }
+
+    .teamHeader {
+        gap: var(--space-md);
+        padding-top: var(--space-sm);
+    }
+
+    .sectionCard h2 {
+        margin-top: var(--space-sm);
+    }
+}
+
+@media (max-width: 650px) {
+    .teamHeader {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-md);
+    }
+
+    .teamHeader h2 {
+        margin-top: 0;
+    }
+
+    .teamButton {
+        text-align: center;
+    }
+}
+
 
 .executiveItem {
     display: flex;
@@ -101,20 +163,25 @@
     .sectionCard h2 {
         color: var(--orange-200);
     }
+
     .executiveItem h4 {
         color: var(--orange-200);
     }
+
     .executiveAvatar {
         background-color: var(--orange-300);
     }
+
     .yearButton {
         color: var(--orange-200);
     }
+
     .yearButton:hover {
         color: white;
         background-color: var(--orange-300);
         cursor: pointer;
     }
+
     .sectionCard {
         background-color: var(--orange-400);
     }

@@ -38,6 +38,7 @@ export const links = [
 
 type Execs = {
     [year: string]: {
+        postSlug?: string;
         executives: { position: string; name: string }[];
         directors: { position: string; name: string }[];
     };
@@ -45,6 +46,7 @@ type Execs = {
 
 export const executives: Execs = {
     "2026": {
+        postSlug: "meet-the-team-26",
         executives: [
             { position: "President", name: "Catherine Wong" },
             { position: "Vice President", name: "Jake Takada Wong" },

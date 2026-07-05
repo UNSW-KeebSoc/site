@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styles from "./page.module.css";
 import { executives } from "@/lib/consts";
+import Button from "@/components/Button";
 
 export default function EventsPage() {
     const [selectedYear, setSelectedYear] = useState("2026");
@@ -53,8 +54,20 @@ export default function EventsPage() {
                         className={styles.teamImage}
                     />
                 </div> */}
-                <h2>{selectedYear} Executive Team</h2>
-                <p>Our leadership team for the {selectedYear} academic year.</p>
+                <div className={styles.teamHeader}>
+                    <div>
+                        <h2>{selectedYear} Executive Team</h2>
+                        <p>Our leadership team for the {selectedYear} academic year.</p>
+                    </div>
+                    {executives[selectedYear].postSlug && (
+                        <Button
+                            className={styles.teamButton}
+                            linkURL={`/blog/${executives[selectedYear].postSlug}`}
+                        >
+                            Meet the team
+                        </Button>
+                    )}
+                </div>
 
                 {/* Executives Grid */}
                 <div className={styles.executiveGrid}>

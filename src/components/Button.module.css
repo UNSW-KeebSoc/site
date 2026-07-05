@@ -1,5 +1,5 @@
 .button {
-    padding: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
     border: var(--default-border);
     background-color: var(--background);
     color: var(--orange-300);
