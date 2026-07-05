@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata({
     title: "Blog",
     description:
-        "Interviews, build guides, and stories from the UNSW KeebSoc community.",
+        "UNSW KeebSoc's Blog",
     path: "/blog",
 });
 

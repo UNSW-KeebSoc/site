@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata({
     title: "About",
     description:
-        "Who we are: the story of UNSW KeebSoc and the committee behind it.",
+        "About the UNSW KeebSoc team :D",
     path: "/about",
 });
 
