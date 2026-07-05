@@ -9,12 +9,6 @@
     color: var(--foreground);
 }
 
-.blogPage h2 {
-    font-family: "RedHatMono", monospace;
-    margin: var(--space-lg) 0;
-    color: var(--heading-alt);
-}
-
 .blogGrid {
     display: grid;
     gap: 1.5rem;

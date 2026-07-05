@@ -78,6 +78,7 @@ export default function EventsPage() {
 
     return (
         <div className={styles.eventsPage}>
+            <h1>Events</h1>
             <h3>Filter by Tags</h3>
             <div className={styles.tagList}>
                 {allTags.map((tag) => (

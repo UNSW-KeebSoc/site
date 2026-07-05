@@ -16,7 +16,7 @@ export default function Blog() {
     const posts = getAllPosts();
     return (
         <div className={styles.blogPage}>
-            <h2>Blog Posts</h2>
+            <h1>Blog Posts</h1>
             <div className={styles.blogGrid}>
                 {posts.map((post) => (
                     <Link

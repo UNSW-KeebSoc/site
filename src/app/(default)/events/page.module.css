@@ -5,11 +5,8 @@
     padding: var(--space-xl);
 }
 
-.eventsPage h1 {
-    font-family: "RedHatMono", monospace;
-    font-size: 1.8em;
-    margin: 1.5rem 0;
-    color: var(--orange-400);
+.eventsPage h3 {
+    margin-top: 0;
 }
 
 .eventsGrid {
