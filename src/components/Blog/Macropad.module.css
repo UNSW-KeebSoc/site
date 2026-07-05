@@ -1,0 +1,69 @@
+/* The board: a responsive grid of keycaps. Two-up on a roomy column, one-up
+   when it gets tight. */
+.macropad {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-md);
+    margin: var(--space-2xl) 0;
+
+    padding: 28px;
+    background: var(--background);
+    border: 2px solid black;
+    border-radius: 18px;
+    /* margin: 20px; */
+}
+
+/* Wide mode ------------------------------------------------------------------
+
+   The outer element carries the breakout + the container context; the visible
+   bordered board and the grid live inside so the container query measures a
+   clean width (no padding/border to reason about). See Macropad.tsx for the
+   GAP/PAD constants these must stay in sync with. */
+.wideMacropad {
+    /* Break out of the centered prose column, symmetric about the page. Capped
+       at 92vw (never 100vw — that includes the scrollbar and re-introduces the
+       Chromium horizontal-overflow bug). --mp-cap is the single-row width. */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(var(--mp-cap, 1200px), 92vw);
+
+    /* Query container for the grid inside. No padding/border here, so its
+       content box == this width == what the @container min-widths compare to. */
+    container-type: inline-size;
+    container-name: mp;
+
+    margin: var(--space-2xl) auto;
+
+    /* Let keycaps shrink to their (balanced, equal) column instead of holding
+       their default 420px floor, which would overflow a multi-column row. */
+    --key-min: 0;
+}
+
+.wideBoard {
+    box-sizing: border-box;
+    /* Hug the keycaps (which cap at 500px each) rather than filling the full
+       measuring frame — otherwise the extra width shows as empty space inside
+       the border. max-width keeps it within the frame when tracks are shrinking
+       to fit; margin centres it once it's narrower than the frame. */
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    padding: 28px;
+    background: var(--background);
+    border: 2px solid black;
+    border-radius: 18px;
+}
+
+.wideGrid {
+    display: grid;
+    gap: 16px; /* == GAP in Macropad.tsx */
+    /* grid-template-columns is set by the injected .mpw-{n} container queries. */
+}
+
+/* Filler keycaps (<Macropad fill>) start hidden; the injected container queries
+   reveal exactly as many as the active column count needs to complete the last
+   row. Appearance lives in Keycap.module.css (.empty). */
+.wideGrid :global(.mp-ph) {
+    display: none;
+}

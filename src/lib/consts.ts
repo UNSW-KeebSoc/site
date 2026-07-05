@@ -51,7 +51,7 @@ export const executives: Execs = {
             { position: "Treasurer", name: "Kyra Seeto Lee" },
             { position: "Secretary", name: "Daiva Addia" },
             { position: "Arc Delegate", name: "Winston Kwan" },
-            { position: "Returning Officer", name: "Jake Huang" },
+            { position: "Returning Officer", name: "Ben George" },
         ],
         directors: [
             { position: "Events Director", name: "Amal Perera" },

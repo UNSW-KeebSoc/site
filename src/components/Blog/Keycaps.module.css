@@ -1,0 +1,31 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: var(--space-md) 0 var(--space-lg);
+}
+
+/* Size + playful tilt of each mini keycap (the moulded body/top come from
+   KeycapFrame's .legendCap). Decorative, so no hover lift. */
+.cap {
+    width: clamp(2.8rem, 9vw, 3.6rem);
+    pointer-events: none;
+    transform: rotate(var(--tilt, 0deg));
+}
+
+/* A little playful stagger, like caps knocked slightly out of line. */
+.cap:nth-child(2n) {
+    --tilt: -4deg;
+}
+.cap:nth-child(3n) {
+    --tilt: 3deg;
+}
+
+/* The legend letter printed on the cap's top surface. */
+.glyph {
+    font-family: "RedHatDisplay", sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.4rem, 4.5vw, 1.8rem);
+    line-height: 1;
+    color: #2f2b26;
+}

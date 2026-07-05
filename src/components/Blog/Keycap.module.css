@@ -1,0 +1,408 @@
+/* One executive rendered as a top-view keycap.
+
+   The keycap is fixed cream + ink regardless of the site's light/dark theme:
+   it's a physical object sitting on the page (as in the printed spread), so it
+   reads the same in both modes and always has legible contrast for the legend.
+   The per-key `--accent` colours only the moulded side walls. */
+
+.key {
+    /* The keycap body / side walls. The vertical gradient + asymmetric padding
+       (a thicker bottom wall) fake the slight top-down viewing angle. */
+    --ink: #2f2b26;
+    --ink-muted: rgba(47, 43, 38, 0.62);
+    --surface: #f5efe1;
+
+    position: relative;
+    padding: 16px 40px 48px;
+    border-radius: 6px;
+    /* background: var(--accent, #8a8a8a); */
+    /* background: linear-gradient(176deg,
+            color-mix(in srgb, var(--accent, #8a8a8a) 85%, white) 0%,
+            var(--accent, #8a8a8a) 42%,
+            color-mix(in srgb, var(--accent, #8a8a8a) 82%, black) 100%); */
+
+    /* background: conic-gradient(color-mix(in srgb, var(--accent, #8a8a8a) 85%, white) 45deg,
+            var(--accent, #8a8a8a) 42%,
+            color-mix(in srgb, var(--accent, #8a8a8a) 82%, black) 60%,
+            var(--accent, #8a8a8a) 100%); */
+
+    --c-mid: var(--accent, #8a8a8a);
+    --c-light: oklch(from var(--c-mid) calc(l + 0.15) c h);
+    --c-dark: oklch(from var(--c-mid) calc(l - 0.15) c h);
+    background: conic-gradient(from 45deg,
+            var(--c-mid) 0%, var(--c-mid) 24.5%,
+            var(--c-dark) 26.5%, var(--c-dark) 48.5%,
+            var(--c-mid) 50.5%, var(--c-mid) 75.5%,
+            var(--c-light) 76.5%, var(--c-light) 98.5%,
+            var(--c-mid) 100%);
+
+
+
+
+    box-shadow:
+        0 14px 24px -16px color-mix(in srgb, var(--accent, #8a8a8a) 80%, transparent),
+    ;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+
+    /* A wide <Macropad> sets --key-min: 0 so keys can shrink to their balanced
+       column; standalone use keeps the 420px floor. */
+    min-width: var(--key-min, 420px);
+}
+
+/* Blank filler key (<Macropad fill>): a real keycap with no printed content.
+   It behaves identically to a populated key (hover lift, shadows, sizing) — the
+   only difference is an empty top and aria-hidden. */
+.empty {
+    /* intentionally no overrides — a blank key is just a key */
+}
+
+.key:hover {
+    transform: translateY(3px);
+    box-shadow:
+        0 20px 30px -16px color-mix(in srgb, var(--accent, #8a8a8a) 85%, transparent);
+}
+
+/* The printed top surface of the cap. */
+.top {
+    position: relative;
+    height: 100%;
+    padding: var(--space-lg);
+    border-radius: 18px;
+    /* background: var(--surface); */
+    background: oklch(from var(--c-mid) calc(l + 0.35) c h);
+
+    color: var(--ink);
+    --c-lighter: oklch(from var(--accent) calc(l + 0.25) c h);
+
+    box-shadow: 2px -2px 8px color-mix(in srgb, var(--c-lighter) 100%, transparent);
+
+}
+
+/* Compact "legend" variant — a mini keycap showing a single big letter, used
+   in the <Keycaps> row. Thinner moulded walls and a small, square cream top.
+   Sizing/tilt of the whole cap lives in Keycaps.module.css. */
+.legendCap {
+    min-width: 0;
+    padding: 7px 9px 13px;
+    border-radius: 10px;
+}
+
+.legendCap .top {
+    height: auto;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    padding: 0.2em 0.35em;
+    border-radius: 7px;
+    box-shadow: none;
+}
+
+/* The whole printed surface is one two-column layout: the legend + fun fact and
+   its doodle on the left, the pinned polaroid + aside + torn spec sheet on the
+   right. Both columns stretch to the same height so the doodle and spec sheet
+   can each sit on the card's floor. */
+.grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 40%);
+    align-items: stretch;
+    height: 100%;
+}
+
+.colMain {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-sm);
+}
+
+/* Role, with its first letter enlarged as the keycap legend. */
+.top .role {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.05em;
+    margin: 0;
+    font-family: "RedHatDisplay", sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+}
+
+.legend {
+    flex: 0 0 auto;
+    font-weight: 800;
+    font-size: clamp(2.6rem, 8vw, 5rem);
+    line-height: 0.78;
+    letter-spacing: -0.02em;
+}
+
+/* The rest of the role, kept as one block to the right of the big legend so a
+   two-word role wraps under itself (e.g. "A rc / Delegate") instead of the
+   second word dropping back under the enlarged letter. */
+.roleText {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.top .nick {
+    margin: var(--space-sm) 0 0;
+    font-family: "RedHatMono", monospace;
+    font-weight: 700;
+    font-size: 1.02rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-align: left;
+}
+
+.top .name {
+    margin: var(--space-2xs) 0 0;
+    font-family: "RedHatDisplay", sans-serif;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--ink-muted);
+}
+
+.top .study {
+    margin: var(--space-2xs) 0 0;
+    font-family: "RedHatMono", monospace;
+    font-size: 0.74rem;
+    line-height: 1.3;
+    text-align: left;
+    color: var(--ink-muted);
+}
+
+/* Headshot as a tilted polaroid, pinned with a paperclip — printed onto the
+   keycap the way the build-guide spread does it. */
+.polaroid {
+    position: relative;
+    z-index: 2;
+    width: 120%;
+    max-width: 172px;
+    /* Poke up past the top edge of the cap (the side column already shifts it
+       out over the right wall). */
+    margin-top: calc(var(--space-lg) * -1 - 6px);
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-right: -40px;
+    padding: 8px 8px 26px;
+    background: #fdfcf8;
+    border-radius: 3px;
+    rotate: 4deg;
+    box-shadow:
+        0 8px 16px -8px rgba(52, 40, 24, 0.4),
+        0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+.photo {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--accent, #8a8a8a) 26%, var(--surface));
+    font-family: "RedHatDisplay", sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--ink);
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+    display: block;
+}
+
+.top .photoCap {
+    margin: 8px 0 -14px;
+    text-align: center;
+    font-family: "RedHatDisplay", sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    line-height: 1.15;
+    color: #3a352d;
+}
+
+/* The paperclip holding the polaroid on. */
+.clip {
+    position: absolute;
+    top: -11px;
+    right: 16px;
+    width: 15px;
+    height: 30px;
+    border: 2.5px solid #b7bac2;
+    border-radius: 8px;
+    background: linear-gradient(90deg,
+            transparent 40%,
+            #d6d9df 40% 60%,
+            transparent 60%);
+    rotate: -8deg;
+}
+
+.top .blurb {
+    margin: var(--space-md) 0 0;
+    text-align: left;
+    font-size: 0.97rem;
+    line-height: 1.5;
+    color: var(--ink);
+}
+
+.top .note {
+    margin: 0;
+    margin-top: 0.7rem;
+    max-width: 170px;
+    text-align: center;
+    font-size: 0.84rem;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--ink-muted);
+}
+
+/* .top .note::before {
+    content: "✦";
+    margin-right: 0.4em;
+    font-style: normal;
+    color: var(--accent, #8a8a8a);
+} */
+
+/* The hand-drawn keyboard creature (a transparent PNG). `margin-top:auto` drops
+   it to the floor of the left column; the negative margins break it out over the
+   cap's left wall and let its little legs run past the bottom edge, like the
+   printed spread. */
+.doodle {
+    margin-top: auto;
+    padding-top: var(--space-md);
+    /* Break out over the cap's left wall and let its legs run past the floor. */
+    margin-left: calc(var(--space-lg) * -2);
+    margin-bottom: calc(var(--space-lg) * -1);
+    /* Center image */
+
+
+}
+
+.doodle img {
+    display: block;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    max-height: 240px;
+    max-width: 240px;
+    filter: drop-shadow(0 6px 6px rgba(52, 40, 24, 0.16));
+}
+
+/* Spec sheet torn off onto a scrap of notebook paper, with a perforated edge.
+   `margin-top:auto` drops it to the floor of the right column, level with the
+   doodle; `align-self:stretch` lets it fill the column width. */
+.specs {
+    position: relative;
+    align-self: stretch;
+    margin-top: auto;
+    margin-right: calc(var(--space-lg) * -1.8);
+    padding: var(--space-sm) 18px var(--space-sm) var(--space-sm);
+    background: #fbf6e8;
+    border-radius: 2px 9px 9px 2px;
+    /* rotate: -1.2deg; */
+    box-shadow: 0 5px 12px -7px rgba(52, 40, 24, 0.5);
+}
+
+/* Punched holes down the torn edge. */
+.specs::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    right: 7px;
+    width: 6px;
+    background: radial-gradient(circle at center,
+            transparent 2px,
+            color-mix(in srgb, var(--accent, #8a8a8a) 24%, #c9bfa6) 2.5px 3px,
+            transparent 3.5px) 0 0 / 6px 17px repeat-y;
+    opacity: 0.7;
+}
+
+.top .specsTitle {
+    margin: 0 0 var(--space-xs);
+    font-family: "RedHatMono", monospace;
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--accent, #8a8a8a) 62%, #4a4234);
+}
+
+.specsList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+}
+
+.specsList li {
+    position: relative;
+    padding-left: 1.25em;
+    font-size: 0.82rem;
+    line-height: 1.3;
+    color: #3a352d;
+}
+
+/* A small square "keycap" bullet. */
+.specsList li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 2px;
+    background: var(--accent, #8a8a8a);
+}
+
+/* On a narrow card the two columns collapse into one stack and the breakouts
+   pull in so nothing runs off a phone screen. */
+@media (max-width: 460px) {
+    .top {
+        padding: var(--space-md);
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .side {
+        align-items: stretch;
+    }
+
+    .polaroid {
+        align-self: center;
+        width: 100%;
+        max-width: 150px;
+        margin: var(--space-xs) 0 0;
+    }
+
+    .top .note {
+        max-width: none;
+        text-align: center;
+    }
+
+    .doodle {
+        align-self: center;
+        width: 74%;
+        margin: var(--space-xs) 0 var(--space-2xs);
+        padding-top: 0;
+    }
+
+    .specs {
+        margin-top: var(--space-sm);
+    }
+}

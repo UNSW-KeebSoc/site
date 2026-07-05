@@ -238,6 +238,10 @@ p {
     }
 }
 
+.textCenter {
+    text-align: center !important;
+}
+
 /* Typography */
 h1,
 h2,
