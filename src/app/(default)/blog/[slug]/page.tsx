@@ -1,4 +1,5 @@
-import { getPostBySlug, formatDate } from "@/lib/blog";
+import { getPostBySlug } from "@/lib/blog";
+import { formatDate } from "@/lib/time";
 import { pageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
@@ -195,7 +196,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                                 {post.fm?.author}
                             </p>
                             <p className={styles.postDate}>
-                                {formatDate(post.fm?.date)}
+                                {post.fm?.date && formatDate(post.fm.date)}
                             </p>
                         </div>
                     </>
@@ -208,7 +209,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                         // Renders the post's frontmatter date (dd/mm/yyyy) so a
                         // splash can show it without hardcoding — e.g.
                         // `Industry Spotlight • <PostDate />`.
-                        PostDate: () => <>{formatDate(post.fm?.date)}</>,
+                        PostDate: () => <>{post.fm?.date && formatDate(post.fm.date)}</>,
                     }}
                 />
             </article>

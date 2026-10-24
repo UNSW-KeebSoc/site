@@ -47,7 +47,7 @@ export default function HighlightCard({
                             isLoading ? styles.skeleton : ""
                         }`}
                     >
-                        {isLoading ? "" : formatDate(event.date, event.endDate)}
+                        {isLoading ? "" : formatDate(event.date)}
                     </span>
                 </div>
                 <div className={styles.content}>

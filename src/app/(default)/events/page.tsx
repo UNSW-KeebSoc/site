@@ -150,7 +150,7 @@ function EventList({ events }: EventListProps) {
                                         {event.title}
                                     </h3>
                                     <time className={styles.eventDate}>
-                                        {formatDate(event.date, event.endDate)}
+                                        {formatDate(event.date)}
                                     </time>
                                     <div className={styles.eventLocation}>
                                         {event.location}
