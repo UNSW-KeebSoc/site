@@ -164,10 +164,10 @@ export async function GET(request: Request) {
                 title: sanitizeText(event.title),
                 date: parseRubricDate(event.formatteddate),
                 location: sanitizeText(event.subtitle),
-                description:
-                    sanitizeText(event.info) == "Free"
-                        ? null
-                        : sanitizeText(event.info),
+                // Rubric's "info" is the ticket price ("Free", "$0.00 - $13.00"),
+                // not a description.
+                description: null,
+                price: sanitizeText(event.info) || undefined,
                 source: "rubric",
                 image: sanitizeUrl(event.image),
                 destination: sanitizeUrl(event.destination),
