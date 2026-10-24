@@ -1,0 +1,88 @@
+/* Shared column width — in rem, not ch, so the masthead and body line up
+   despite their different font sizes. */
+.masthead,
+.letter {
+    --letter-width: 46rem;
+}
+
+/* ---------- Masthead ---------- */
+
+/* Sits on the same column as the letter body, like the top of a page. */
+.masthead {
+    max-width: var(--letter-width);
+    margin: var(--space-md) auto var(--space-2xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.eyebrow {
+    font-family: "RedHatMono", monospace;
+    font-size: 0.85rem;
+    color: var(--gray-400);
+}
+
+.masthead h1 {
+    margin: var(--space-xs) 0 0;
+    padding: 0;
+    font-size: clamp(2.25rem, 5vw, 2.75rem);
+    font-weight: 600;
+    line-height: 1.15;
+}
+
+/* Subtitle: first paragraph after the title. */
+.masthead h1 + p {
+    margin: var(--space-xs) 0 0;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    text-align: left;
+    color: color-mix(in srgb, var(--foreground) 70%, transparent);
+}
+
+/* Byline: last paragraph. */
+.masthead p:last-child:not(h1 + p) {
+    margin: var(--space-md) 0 0;
+    font-size: 0.9rem;
+    text-align: left;
+    color: var(--gray-400);
+}
+
+/* ---------- Letter body ---------- */
+
+.letter {
+    max-width: var(--letter-width);
+    margin: 0 auto;
+    font-size: 1.075rem;
+    line-height: 1.85;
+}
+
+/* Opening line as a lead. */
+.letter > p:first-child {
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--heading);
+    margin-bottom: var(--space-xl);
+}
+
+/* ---------- Sign-off ---------- */
+
+.signOff {
+    margin-top: var(--space-2xl);
+}
+
+.signOff p {
+    margin-bottom: var(--space-md);
+}
+
+/* Roles block: quieter, monospace. */
+.signOff p:last-child {
+    font-family: "RedHatMono", monospace;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--gray-400);
+}
+
+/* P.S. — anything after the sign-off. */
+.signOff ~ p {
+    margin-top: var(--space-xl);
+}

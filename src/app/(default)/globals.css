@@ -242,6 +242,10 @@ p {
     text-align: center !important;
 }
 
+.textLavender {
+    color: #a98fce;
+}
+
 /* Typography */
 h1,
 h2,

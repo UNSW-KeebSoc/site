@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import { ComponentProps } from "react";
 import { ImageModal } from "@/components/Blog/ImageModal";
 import { Splash, Eyebrow } from "@/components/Blog/Splash";
+import { Masthead, Letter, SignOff } from "@/components/Blog/Letter";
 import { Question } from "@/components/Blog/Question";
 import { Answer } from "@/components/Blog/Answer";
 import { FreeImage } from "@/components/Blog/FreeImage";
@@ -49,6 +50,9 @@ const components = {
     a: CustomLink,
     Splash,
     Eyebrow,
+    Masthead,
+    Letter,
+    SignOff,
     Question,
     Answer,
     FreeImage,
