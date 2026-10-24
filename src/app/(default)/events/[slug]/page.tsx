@@ -9,6 +9,7 @@ import remarkGfm from "remark-gfm";
 import { unstable_cache } from "next/cache";
 import DOMPurify from "isomorphic-dompurify";
 import styles from "./page.module.css";
+import MdxLink from "@/components/MdxLink";
 import { formatDate, formatTime, isMultiDayEvent } from "@/lib/time";
 
 /** Strip all HTML tags — for plain text fields */
@@ -20,10 +21,15 @@ function sanitizeText(input: string | undefined): string {
 /** Sanitize HTML — allow safe subset of tags for rich content */
 function sanitizeHtml(input: string | undefined): string {
     if (!input) return "";
-    return DOMPurify.sanitize(input, {
+    const clean = DOMPurify.sanitize(input, {
         ALLOWED_TAGS: ["p", "br", "strong", "em", "b", "i", "u", "ul", "ol", "li", "a", "h2", "h3", "h4", "span"],
         ALLOWED_ATTR: ["href", "target", "rel"],
     });
+    // Rubric descriptions only link off-site: open every link in a new tab.
+    return clean.replace(
+        /<a (?![^>]*\btarget=)/g,
+        '<a target="_blank" rel="noopener noreferrer" ',
+    );
 }
 
 /** Sanitize a URL — only allow http/https */
@@ -378,6 +384,7 @@ export default async function EventPage({ params }: EventPageProps) {
                     <div className={styles.eventContent}>
                         <MDXRemote
                             source={content}
+                            components={{ a: MdxLink }}
                             options={{
                                 mdxOptions: {
                                     remarkPlugins: [remarkGfm],

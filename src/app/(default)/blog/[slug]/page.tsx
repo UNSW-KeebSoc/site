@@ -8,6 +8,7 @@ import styles from "../page.module.css";
 import { notFound } from "next/navigation";
 import { ComponentProps } from "react";
 import { ImageModal } from "@/components/Blog/ImageModal";
+import MdxLink from "@/components/MdxLink";
 import { Splash, Eyebrow } from "@/components/Blog/Splash";
 import { Masthead, Letter, SignOff } from "@/components/Blog/Letter";
 import { Question } from "@/components/Blog/Question";
@@ -37,18 +38,10 @@ const CustomAudio = (props: ComponentProps<"audio">) => {
     );
 };
 
-const CustomLink = (props: ComponentProps<"a">) => {
-    return (
-        <a {...props} target="_blank" rel="noopener noreferrer">
-            {props.children}
-        </a>
-    );
-};
-
 const components = {
     img: CustomImage,
     audio: CustomAudio,
-    a: CustomLink,
+    a: MdxLink,
     Splash,
     Eyebrow,
     Masthead,
