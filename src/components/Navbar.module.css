@@ -2,7 +2,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--space-md);
     padding: var(--space-sm) var(--space-md);
+    /* Chrome stays compact under the site-wide 1.6 body line-height */
+    line-height: var(--leading-tight);
     border: var(--default-border);
     border-bottom: var(--chrome-border);
     background-color: var(--navbar-background);
@@ -11,8 +14,8 @@
     left: 0;
     right: 0;
     z-index: var(--chrome-z);
-    transition: background-color 0.3s ease, backdrop-filter 0.3s ease,
-        border-color 0.3s ease;
+    transition: background-color var(--duration-slow) ease, backdrop-filter var(--duration-slow) ease,
+        border-color var(--duration-slow) ease;
 }
 
 /* Frosted glass while scrolling over the splash (see ChromeScrollWatcher).
@@ -25,21 +28,21 @@
 
 .navbar h2 {
     color: white !important;
-    font-size: 1.5rem;
+    font-size: var(--text-xl);
     margin: 0;
     padding: 0;
 }
 
 .navbar div {
     display: flex;
-    gap: 1rem;
+    gap: var(--space-md);
 }
 
 .navbar div a {
     color: var(--navbar-links) !important;
     text-decoration: none;
     position: relative;
-    transition: color 0.3s ease;
+    transition: color var(--duration-slow) ease;
 }
 
 .navbar div a::after {
@@ -50,7 +53,7 @@
     width: 0;
     height: 2px;
     background-color: var(--orange-100);
-    transition: width 0.3s ease;
+    transition: width var(--duration-slow) ease;
 }
 
 .navbar div a:hover::after {
@@ -65,4 +68,20 @@
 .home img {
     height: 24px;
     margin: 0;
+}
+
+/* Phones: logo, wordmark and four links need ~390px at desktop spacing */
+@media (max-width: 419px) {
+    .navbar {
+        gap: var(--space-sm);
+        padding: var(--space-sm);
+    }
+
+    .navbar div {
+        gap: var(--space-sm);
+    }
+
+    .navbar h2 {
+        font-size: var(--text-lg);
+    }
 }
