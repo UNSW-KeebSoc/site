@@ -4,6 +4,7 @@
 import { useState, ComponentProps } from "react";
 import Image from "next/image";
 import { Lightbox } from "./Lightbox";
+import shared from "@/styles/shared.module.css";
 
 interface ImageModalProps extends ComponentProps<"img"> {
     containerClassName?: string;
@@ -20,9 +21,15 @@ export const ImageModal = ({
     if (!src) return null;
     const srcStr = src as string;
 
+    // Markdown wraps a lone image in <p>, so this renders block-level <span>s
+    // (role="figure") instead of <figure>/<figcaption>, which can't sit in a <p>.
     return (
         <>
-            <figure style={{ margin: 0, width: "100%" }}>
+            <span
+                role="figure"
+                aria-label={title || alt || undefined}
+                style={{ display: "block", margin: 0, width: "100%" }}
+            >
                 <button
                     onClick={() => setIsOpen(true)}
                     className={containerClassName}
@@ -50,20 +57,18 @@ export const ImageModal = ({
                     />
                 </button>
                 {title && (
-                    <figcaption
+                    <span
+                        className={shared.caption}
                         style={{
+                            display: "block",
                             color: "#aaa",
-                            fontSize: "0.9em",
-                            fontStyle: "italic",
-                            textAlign: "center",
                             marginTop: "8px",
-                            lineHeight: "1.4",
                         }}
                     >
                         {title}
-                    </figcaption>
+                    </span>
                 )}
-            </figure>
+            </span>
 
             {/* Shared full-screen viewer — a single-image list here. */}
             <Lightbox

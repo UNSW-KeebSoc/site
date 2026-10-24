@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useCallback, useEffect } from "react";
+import { createPortal } from "react-dom";
 import styles from "./Lightbox.module.css";
 
 export interface LightboxImage {
@@ -105,7 +106,9 @@ export function Lightbox({
 
     const captionText = active.caption || active.alt;
 
-    return (
+    // Portal to <body>: callers can sit inside a <p> (markdown images), where a
+    // <div> is invalid, and the overlay belongs at the top level anyway.
+    return createPortal(
         <div
             className={styles.lightbox}
             role="dialog"
@@ -172,6 +175,7 @@ export function Lightbox({
                     </div>
                 </>
             )}
-        </div>
+        </div>,
+        document.body,
     );
 }
