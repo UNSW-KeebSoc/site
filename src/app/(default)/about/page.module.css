@@ -157,6 +157,15 @@
     border-radius: var(--radius-full);
     margin-right: var(--space-lg);
     flex-shrink: 0;
+    overflow: hidden;
+}
+
+.executiveAvatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    margin: 0;
 }
 
 @media (prefers-color-scheme: dark) {

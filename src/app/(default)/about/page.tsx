@@ -73,7 +73,14 @@ export default function EventsPage() {
                 <div className={styles.executiveGrid}>
                     {executives[selectedYear].executives.map((exec, index) => (
                         <div key={index} className={styles.executiveItem}>
-                            <div className={styles.executiveAvatar}></div>
+                            <div className={styles.executiveAvatar}>
+                                {exec.image && (
+                                    <img
+                                        src={`/images/blog/${exec.image}.jpg`}
+                                        alt={exec.name}
+                                    />
+                                )}
+                            </div>
                             <div>
                                 <h4>{exec.position}</h4>
                                 <p>{exec.name}</p>
@@ -87,7 +94,14 @@ export default function EventsPage() {
                 <div className={styles.executiveGrid}>
                     {executives[selectedYear].directors.map((exec, index) => (
                         <div key={index} className={styles.executiveItem}>
-                            <div className={styles.executiveAvatar}></div>
+                            <div className={styles.executiveAvatar}>
+                                {exec.image && (
+                                    <img
+                                        src={`/images/blog/${exec.image}.jpg`}
+                                        alt={exec.name}
+                                    />
+                                )}
+                            </div>
                             <div>
                                 <h4>{exec.position}</h4>
                                 <p>{exec.name}</p>
