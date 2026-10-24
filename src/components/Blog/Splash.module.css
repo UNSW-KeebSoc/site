@@ -71,6 +71,11 @@
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.35);
 }
 
+/* Back link above the eyebrow, recoloured for the dark scrim */
+.splash .back a {
+    color: white;
+}
+
 /* Pixel-font eyebrow, e.g. <Eyebrow>Q&A</Eyebrow>. Kept as a <div> (not a <p>)
    so the subtitle paragraph styling below never touches it. */
 .eyebrow {

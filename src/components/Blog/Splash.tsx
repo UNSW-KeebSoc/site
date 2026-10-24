@@ -12,6 +12,8 @@ interface SplashProps extends ComponentProps<"section"> {
     credit?: ReactNode;
     /** Optional URL; when set, the credit text becomes a link to it. */
     creditHref?: string;
+    /** Rendered above the content, e.g. the post page's "All posts" link. */
+    back?: ReactNode;
 }
 
 /**
@@ -26,6 +28,7 @@ export function Splash({
     align = "center",
     credit,
     creditHref,
+    back,
     children,
     style,
     ...rest
@@ -44,7 +47,12 @@ export function Splash({
             }
             {...rest}
         >
-            {children != null && <div className={styles.content}>{children}</div>}
+            {children != null && (
+                <div className={styles.content}>
+                    {back != null && <div className={styles.back}>{back}</div>}
+                    {children}
+                </div>
+            )}
             {credit != null && (
                 <p className={styles.credit}>
                     {creditHref ? (

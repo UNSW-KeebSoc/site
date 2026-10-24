@@ -1,49 +1,51 @@
-/* Alternative: Inline author and date */
-.postMetaInline {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--gray-200);
+/* Default post header: same pattern as the event page header (mono title),
+   with an optional eyebrow and subtitle from the frontmatter. */
+.postHeader {
+    margin-bottom: var(--space-xl);
 }
 
-.postMetaInline .postAuthor {
-    margin-bottom: 0;
+.postHeader h1 {
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-2xl);
+    margin: 0 0 var(--space-sm);
 }
 
-.postMetaInline .postDate {
-    margin-bottom: 0;
+.postEyebrow {
+    composes: label from "@/styles/shared.module.css";
+    margin: 0 0 var(--space-xs);
 }
 
-.postMetaInline .postAuthor::after {
-    content: "•";
-    margin-left: 0.5rem;
-    color: var(--gray-300);
+.postSubtitle {
+    font-size: var(--text-lg);
+    line-height: var(--leading-snug);
+    color: color-mix(in srgb, var(--foreground) 70%, transparent);
+    margin: 0 0 var(--space-sm);
+    text-align: left;
 }
 
-.postAuthor {
-    font-weight: 600;
+.postByline {
+    font-size: var(--text-sm);
     color: var(--gray-400);
-    margin-bottom: 0.25rem;
-    font-size: 0.875rem;
+    margin: 0;
+    text-align: left;
 }
 
-.postDate {
-    color: var(--gray-400);
-    font-size: 0.875rem;
-    margin-bottom: 1.5rem;
-    font-style: italic;
+/* "← All posts" link at the top of a post (inside the splash on splash posts) */
+.backLink {
+    composes: label from "@/styles/shared.module.css";
+    display: inline-block;
+    margin-bottom: var(--space-lg);
+    text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-    .postAuthor {
-        color: var(--gray-300);
-    }
+.backLink span {
+    display: inline-block;
+    transition: transform var(--duration-normal) var(--ease-out);
+}
 
-    .postMetaInline .postAuthor::after {
-        color: var(--gray-400);
-    }
+.backLink:hover span,
+.backLink:focus-visible span {
+    transform: translateX(-4px);
 }
 
 /* Post article layout only; reading typography comes from prose.module.css.

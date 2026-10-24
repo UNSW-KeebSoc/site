@@ -165,6 +165,16 @@ p {
     color: #a98fce;
 }
 
+/* Quiet mono block for MDX, e.g. the roles under a sign-off */
+/* `p` too: MDX wraps the content in a <p>, which sets its own font-size */
+.textMono,
+.textMono p {
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-sm);
+    line-height: 1.8;
+    color: var(--gray-400);
+}
+
 /* Typography */
 h1,
 h2,

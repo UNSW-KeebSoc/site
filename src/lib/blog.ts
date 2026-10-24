@@ -4,6 +4,10 @@ import matter from "gray-matter";
 
 export interface BlogFrontMatter {
     title: string;
+    /** Small mono label above the title, e.g. "President's Address". */
+    eyebrow?: string;
+    /** Line under the title. */
+    subtitle?: string;
     image?: string;
     author?: string;
     date: string;
