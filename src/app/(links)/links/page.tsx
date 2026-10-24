@@ -19,6 +19,8 @@ export default function Links() {
                     <Button
                         key={idx}
                         linkURL={link.link}
+                        // The link-in-bio page deliberately keeps visitors in the same tab
+                        newTab={false}
                         className={`${colorClasses[idx % colorClasses.length]} ${styles.button}`}
                     >
                         {link.name}

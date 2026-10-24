@@ -36,12 +36,17 @@
     border-color: #bd57cf;
 }
 
+/* Pills on top of the shared button: own font, size and shape, and the press
+   shadow takes each pill's colour */
 .linklist .button {
     padding-inline: 30px;
     text-align: center;
+    font-family: var(--font-brand);
+    font-size: var(--text-base);
     font-weight: normal;
     border-radius: var(--radius-full);
     padding: var(--space-lg);
+    --press-colour: currentColor;
 }
 
 .main {
@@ -68,7 +73,7 @@
     background-position: center;
     filter: blur(4px) brightness(0.95);
 
-    z-index: -1;
+    z-index: var(--z-below);
 }
 
 .main h1 {
@@ -96,7 +101,7 @@
     padding: 0.5em 1em;
     border-radius: var(--radius-md);
     font-weight: bold;
-    transition: border-color 0.2s, color 0.2s;
+    transition: border-color var(--duration-fast), color var(--duration-fast);
 }
 
 /* Icons */
@@ -165,7 +170,7 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 599px) {
     .page {
         padding: 32px;
         padding-bottom: 80px;
