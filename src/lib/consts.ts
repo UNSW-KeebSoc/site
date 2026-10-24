@@ -36,11 +36,26 @@ export const links = [
     },
 ];
 
-type Exec = { position: string; name: string; image?: string };
+type Exec = { position: string; name: string };
+
+/** Profile photo per person (filename in /images/blog, no extension). Keyed
+    by name so someone's photo shows on every year they served. */
+export const execPhotos: Record<string, string> = {
+    "Catherine Wong": "mtt26-catherine",
+    "Jake Takada Wong": "mtt26-jake",
+    "Kyra Seeto Lee": "mtt26-kyra",
+    "Daiva Addia": "mtt26-daiva",
+    "Winston Kwan": "mtt26-winston",
+    "Amal Perera": "mtt26-amal",
+    "Graham Kong": "mtt26-graham",
+    "Jarret Phong": "mtt26-jarret",
+};
 
 type Execs = {
     [year: string]: {
-        postSlug?: string;
+        /** "Meet the team" target: an internal path ("/blog/...") or a full
+            URL (e.g. a YouTube video), which opens in a new tab. */
+        teamLink?: string;
         executives: Exec[];
         directors: Exec[];
     };
@@ -48,23 +63,24 @@ type Execs = {
 
 export const executives: Execs = {
     "2026": {
-        postSlug: "meet-the-team-26",
+        teamLink: "/blog/meet-the-team-26",
         executives: [
-            { position: "President", name: "Catherine Wong", image: "mtt26-catherine" },
-            { position: "Vice President", name: "Jake Takada Wong", image: "mtt26-jake" },
-            { position: "Treasurer", name: "Kyra Seeto Lee", image: "mtt26-kyra" },
-            { position: "Secretary", name: "Daiva Addia", image: "mtt26-daiva" },
-            { position: "Arc Delegate", name: "Winston Kwan", image: "mtt26-winston" },
+            { position: "President", name: "Catherine Wong" },
+            { position: "Vice President", name: "Jake Takada Wong" },
+            { position: "Treasurer", name: "Kyra Seeto Lee" },
+            { position: "Secretary", name: "Daiva Addia" },
+            { position: "Arc Delegate", name: "Winston Kwan" },
             { position: "Returning Officer", name: "Ben George" },
         ],
         directors: [
-            { position: "Events Director", name: "Amal Perera", image: "mtt26-amal" },
-            { position: "Events Director", name: "Graham Kong", image: "mtt26-graham" },
-            { position: "Marketing Director", name: "Jarret Phong", image: "mtt26-jarret" },
+            { position: "Events Director", name: "Amal Perera" },
+            { position: "Events Director", name: "Graham Kong" },
+            { position: "Marketing Director", name: "Jarret Phong" },
             { position: "Dev Director", name: "Xuan Li" },
         ],
     },
     "2025": {
+        teamLink: "https://www.youtube.com/watch?v=w5lBtYdMhFc",
         executives: [
             { position: "President", name: "Catherine Wong" },
             { position: "Vice President", name: "Jake Takada Wong" },
@@ -80,6 +96,7 @@ export const executives: Execs = {
         ],
     },
     "2024": {
+        teamLink: "https://www.youtube.com/watch?v=w5lBtYdMhFc",
         executives: [
             { position: "President", name: "Xuan Li" },
             { position: "Vice President", name: "Anson Qiu" },
@@ -94,6 +111,7 @@ export const executives: Execs = {
         ],
     },
     "2023": {
+        teamLink: "https://www.youtube.com/watch?v=0QHzt0dGrP0",
         executives: [
             { position: "President", name: "Xuan Li" },
             { position: "Secretary", name: "Andrew Lu" },
