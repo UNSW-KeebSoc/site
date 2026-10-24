@@ -33,7 +33,7 @@
     margin: 0;
     padding: 0;
     border: none;
-    border-radius: var(--radius-md, 12px);
+    border-radius: var(--radius-md);
     overflow: hidden;
     background: color-mix(in srgb, var(--foreground) 8%, transparent);
     cursor: zoom-in;
@@ -67,27 +67,12 @@
 
 /* Inline prev/next scroll buttons (mouse users; touch users just swipe). */
 .nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.55);
-    color: #fff;
-    font-size: 1.75rem;
-    line-height: 1;
-    cursor: pointer;
-    z-index: 2;
-    transition: background 0.2s ease;
-}
-
-.nav:hover {
-    background: rgba(0, 0, 0, 0.75);
+    composes: roundButton arrow from "./Lightbox.module.css";
+    z-index: var(--z-controls);
+    --round-size: 44px;
+    --round-font: 1.75rem;
+    --round-bg: var(--scrim-soft);
+    --round-bg-hover: var(--scrim-soft-hover);
 }
 
 .nav.prev {
@@ -100,7 +85,7 @@
 
 /* Hide the scroll buttons on touch-first / narrow screens where swiping is
    the natural interaction. */
-@media (max-width: 700px),
+@media (max-width: 767px),
 (hover: none) {
     .nav {
         display: none;
@@ -113,20 +98,14 @@
 
 /* Single caption slot below the strip; its text tracks the centred image. */
 .inlineCaption {
+    composes: caption from "../../styles/shared.module.css";
     margin: var(--space-md) auto 0;
     max-width: min(100%, 40rem);
     color: color-mix(in srgb, var(--foreground) 65%, transparent);
-    font-size: 0.9rem;
-    font-style: italic;
-    text-align: center;
-    line-height: 1.4;
 }
 
 .captionLink {
-    color: inherit;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    transition: color 0.2s ease;
+    composes: captionLink from "./Lightbox.module.css";
 }
 
 .inlineCaption .captionLink:hover {
