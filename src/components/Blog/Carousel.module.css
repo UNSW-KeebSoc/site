@@ -46,11 +46,16 @@
 }
 
 .image {
+    --h: var(--carousel-height, min(80vh, 520px));
     display: block;
-    width: auto;
+    /* Scale to the full cap height at the image's own ratio (--ratio is set
+       from JS on load) so small images aren't left at their natural size;
+       until it's known the declaration is invalid and width falls back to
+       auto. max-width still shrinks wide images on narrow screens. */
+    width: calc(var(--h) * var(--ratio));
     height: auto;
     max-width: 100%;
-    max-height: var(--carousel-height, min(80vh, 520px));
+    max-height: var(--h);
     margin: 0;
     object-fit: contain;
     transition: transform 0.4s ease;
@@ -102,7 +107,7 @@
     }
 
     .image {
-        max-height: var(--carousel-height, min(60vh, 460px));
+        --h: var(--carousel-height, min(60vh, 460px));
     }
 }
 

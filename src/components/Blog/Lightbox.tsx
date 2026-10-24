@@ -39,6 +39,17 @@ export function captionInner(
     );
 }
 
+/**
+ * Records an image's aspect ratio as `--ratio` on the element so CSS can scale
+ * it up to fill its size cap (`width: auto` alone leaves small images at their
+ * natural size). Use as both `ref` and `onLoad`: the ref catches images that
+ * finished loading before hydration, onLoad catches the rest.
+ */
+export function setImageRatio(img: HTMLImageElement | null) {
+    if (!img || !img.complete || !img.naturalWidth || !img.naturalHeight) return;
+    img.style.setProperty("--ratio", String(img.naturalWidth / img.naturalHeight));
+}
+
 interface LightboxProps {
     /** Images to page through. Captions should already be resolved. */
     images: LightboxImage[];
@@ -114,6 +125,9 @@ export function Lightbox({
             <figure className={styles.figure} onClick={(e) => e.stopPropagation()}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
+                    key={active.src}
+                    ref={setImageRatio}
+                    onLoad={(e) => setImageRatio(e.currentTarget)}
                     className={styles.full}
                     src={active.src}
                     alt={active.alt || ""}

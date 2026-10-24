@@ -23,7 +23,9 @@
     margin: 0;
     max-width: 90vw;
     max-height: 82vh;
-    width: auto;
+    /* Fill the 90vw x 82vh box at the image's own ratio (--ratio is set from
+       JS on load); until then the declaration is invalid and width is auto. */
+    width: min(90vw, calc(82vh * var(--ratio)));
     height: auto;
     object-fit: contain;
     border-radius: var(--radius-md, 12px);
