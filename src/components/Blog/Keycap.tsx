@@ -25,6 +25,9 @@ export interface KeycapProps {
     /** Hand-drawn keyboard-creature cutout (transparent PNG) printed bottom-left,
         the way the printed build-guide spread does. Optional. */
     doodle?: string;
+    /** Use the original lit, rendered keycap look instead of the flat one
+        (see KeycapFrame). */
+    realistic?: boolean;
 }
 
 /**
@@ -48,6 +51,9 @@ export interface KeycapFrameProps {
     /** "card" (default) is the full exec keycap; "legend" is the compact
         mini-cap used in the <Keycaps> row — thin walls, square cream top. */
     size?: "card" | "legend";
+    /** Draw the original lit, rendered keycap (shaded bevel walls, soft
+        glows) instead of the flat site style — e.g. for preview images. */
+    realistic?: boolean;
 }
 
 /**
@@ -62,10 +68,12 @@ export function KeycapFrame({
     className = "",
     empty = false,
     size = "card",
+    realistic = false,
 }: KeycapFrameProps) {
     const cls = [
         styles.key,
         size === "legend" ? styles.legendCap : "",
+        realistic ? styles.realistic : "",
         empty ? styles.empty : "",
         className,
     ]
@@ -116,8 +124,19 @@ function initials(name: string): string {
  * else on the same physical keycap.
  */
 export function KeycapCard(exec: KeycapProps) {
-    const { role, nick, name, study, blurb, note, specs, accent, photo, doodle } =
-        exec;
+    const {
+        role,
+        nick,
+        name,
+        study,
+        blurb,
+        note,
+        specs,
+        accent,
+        photo,
+        doodle,
+        realistic,
+    } = exec;
     const legend = role.charAt(0);
     const restOfRole = role.slice(1);
     const legendKern = LEGEND_KERN[legend.toUpperCase()];
@@ -127,7 +146,7 @@ export function KeycapCard(exec: KeycapProps) {
         .filter(Boolean);
 
     return (
-        <KeycapFrame accent={accent}>
+        <KeycapFrame accent={accent} realistic={realistic}>
             <div className={styles.grid}>
                 {/* Left column: the printed legend + fun fact, doodle anchored to
                     the floor. */}
