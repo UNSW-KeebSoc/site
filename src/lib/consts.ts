@@ -21,18 +21,16 @@ export const socials = [
     },
 ];
 
-export const links = [
+/** /links page. `kind` picks the icon, label and colour. */
+export const links: {
+    name: string;
+    link: string;
+    kind: "video" | "article" | "discord";
+}[] = [
     {
         name: "Watch the meet the team video!",
         link: "https://youtu.be/w5lBtYdMhFc",
-    },
-    {
-        name: "Read the AE Boards Satellite Review!",
-        link: "https://keebsoc.com/satellite",
-    },
-    {
-        name: "Join us on Discord",
-        link: "https://discord.gg/n66dXGeAMA",
+        kind: "video",
     },
 ];
 

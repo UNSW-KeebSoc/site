@@ -2,103 +2,50 @@
    src/styles/tokens.css and elements.css (imported first by the layout).
    This page stays light: it has no dark-mode block. */
 
+* {
+    box-sizing: border-box;
+}
+
 html,
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    width: 100vw;
-    position: relative;
-}
-main {
-    display: flex;
-    flex-direction: column;
-    border-left: var(--default-border);
-    border-right: var(--default-border);
-    border-top: var(--default-border);
-    border-bottom: var(--default-border);
-    flex: 1;
-    overflow-y: auto; /* Enable scrolling for main content */
-    overflow-x: hidden;
-    align-items: center;
+    height: 100%;
 }
 
 body {
-    color: var(--foreground);
-    background: var(--background);
-    font-family: "RedHatDisplay", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    position: relative;
     display: flex;
     flex-direction: column;
-    flex-shrink: 0;
+    color: var(--foreground);
+    background: var(--background);
+    font-family: var(--font-brand);
+    line-height: var(--leading-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-    box-sizing: border-box;
+/* Same paper texture as the main site */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/asfalt-dark.png");
+    opacity: 0.7;
+    z-index: var(--z-below);
+}
+
+/* Orange frame round the viewport; main scrolls inside it */
+main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border: var(--default-border);
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 a {
     color: inherit;
     text-decoration: none;
 }
-
-p {
-    padding: 0;
-    margin: 0;
-}
-
-/* Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin-top: var(--space-xl);
-    margin-bottom: var(--space-md);
-    color: var(--orange-400);
-    font-weight: 600;
-}
-
-h1 {
-    font-size: 2.5rem;
-    color: var(--orange-300);
-    padding-bottom: var(--space-sm);
-}
-
-h2 {
-    font-size: 2rem;
-}
-
-h3 {
-    font-size: 1.5rem;
-}
-
-p {
-    padding: 0.5rem;
-}
-
-/* Links */
-a {
-    color: var(--orange-300);
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    transition: border-color var(--duration-fast) ease;
-}
-
-a:hover {
-    border-bottom-color: var(--orange-300);
-}
-
-/* Lists */
-ul,
-ol {
-    padding-left: var(--space-xl);
-    margin: var(--space-md) 0;
-}
-
-li {
-    margin-bottom: var(--space-xs);
-}
-

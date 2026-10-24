@@ -5,7 +5,7 @@ This file covers how styling is set up and the rules agreed with the site owner.
 
 ## Design language
 
-- **Corners:** square by default. Don't add `border-radius` to cards, containers or buttons. Existing radii stay: avatars and round icon buttons (`--radius-full`), tags (`--radius-sm`, 4px), carousel/lightbox photos (`--radius-md`, 6px), code blocks, Vendors cards, the /links pills, and the Keycap/Macropad illustrations. This is a strong default, not an absolute ban: ask before adding a new one.
+- **Corners:** square by default. Don't add `border-radius` to cards, containers or buttons. Existing radii stay: avatars and round icon buttons (`--radius-full`), tags (`--radius-sm`, 4px), carousel/lightbox photos (`--radius-md`, 6px), code blocks, Vendors cards, and the Keycap/Macropad illustrations. This is a strong default, not an absolute ban: ask before adding a new one.
 - **Outlines:** 3px orange (`--default-border`) on cards and panels.
 - **Type:** Red Hat Mono (`--font-brand-mono`) for card, post and event titles, section headings, labels, tags and buttons; Red Hat Display (`--font-brand`) for page headings and body text.
 - **Hover:** clickable cards and buttons use the press hover (`shared.pressable`): lift up-left by `--press-lift` with a hard `--press-shadow` offset shadow that grows from `0 0 0`, over `--duration-normal` with `--ease-out`. Change its colour with `--press-colour`; don't rewrite the hover.
@@ -19,8 +19,8 @@ This file covers how styling is set up and the rules agreed with the site owner.
 
 ## Links
 
-- External `http(s)` links open in a new tab, everywhere except /links (which deliberately stays in the same tab).
-- `Button` does this automatically (`newTab` defaults to true for external URLs; /links passes `newTab={false}`).
+- External `http(s)` links open in a new tab, everywhere except the /links link cards (which deliberately stay in the same tab; its social icons still open a new tab).
+- `Button` does this automatically (`newTab` defaults to true for external URLs). /links renders its cards with plain `next/link`, so they stay in the same tab.
 - MDX content (blog posts, event write-ups) uses `MdxLink` (`src/components/MdxLink.tsx`): external links in a new tab, internal links via `next/link` in the same tab.
 - Rubric event descriptions are HTML: `sanitizeHtml` in `events/[slug]/page.tsx` adds `target="_blank"` to their links.
 - The site has two Discord invites on purpose (analytics): one in `socials` (`src/lib/consts.ts`) and one behind the `/discord` redirect in `next.config.mjs`. Don't merge or change them.
@@ -52,7 +52,7 @@ This file covers how styling is set up and the rules agreed with the site owner.
 ### Files and load order
 Both layouts import, in order: `src/styles/tokens.css` (fonts plus every design token, light values), `src/styles/elements.css` (element defaults shared by all layouts: pre, code, blockquote, table, img, hr), then their own `globals.css`.
 - `src/app/(default)/globals.css`: dark-mode token overrides, body/main setup, headings, links, lists, and a few MDX utility classes for the main site.
-- `src/app/(links)/globals.css`: the /links page's own headings, links and paragraphs. /links has no dark mode.
+- `src/app/(links)/globals.css`: the /links page's body, texture and framed `main`. /links has no dark mode. Its data (`links` in `src/lib/consts.ts`) has a `kind` (video / article / discord: picks icon and label) . The link cards and social buttons use brand colours on purpose: Discord `--purple-300`, YouTube `--red-300`, Instagram `--pink-300`, Facebook `--blue-300`, anything else orange. Page order: the next event (`getNextEvent` in `src/lib/events.ts`; a "Check out our events" card linking to /events when nothing is coming up), the link cards, the 3 newest blog posts, then 3 shop items linking to /shop (`getMerchandise` in `src/lib/rubric.ts`). The page revalidates hourly.
 - `src/styles/shared.module.css`: shared classes (below). `src/styles/prose.module.css`: long-form reading rhythm.
 - Page and component `*.module.css`: only what is unique to that page or component.
 
@@ -91,7 +91,7 @@ Both layouts import, in order: `src/styles/tokens.css` (fonts plus every design 
 - CSS Modules fail silently: `styles.typo` renders `class="undefined"`. After renaming or removing a class, search the TSX for every `styles.<name>` / `shared.<name>`.
 
 ### Button
-`<Button linkURL newTab? variant? className?>` renders a `next/link` with `shared.button` (or `shared.buttonPrimary` for `variant="primary"`). External `http(s)` URLs open in a new tab by default; /links passes `newTab={false}` on purpose and restyles its pills locally. Don't create new button CSS; compose or extend the shared classes.
+`<Button linkURL newTab? variant? className?>` renders a `next/link` with `shared.button` (or `shared.buttonPrimary` for `variant="primary"`). External `http(s)` URLs open in a new tab by default. Don't create new button CSS; compose or extend the shared classes.
 
 ### Shared components
 `TagList` (read-only tags), `Card`, `Button`, `CoverImage` (image with fallback), `MdxLink`. Round icon buttons (`.roundButton` / `.arrow` in `Blog/Lightbox.module.css`; size and colours via `--round-size` / `--round-font` / `--round-bg`) are shared by the Carousel and the Lightbox.

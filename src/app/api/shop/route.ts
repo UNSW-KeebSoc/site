@@ -1,18 +1,9 @@
 import { NextResponse } from "next/server";
-import { getRubricLandingPage, getRubricSection, sanitizeText, sanitizeUrl } from "@/lib/rubric";
+import { getMerchandise } from "@/lib/rubric";
 
 export async function GET() {
     try {
-        const { sections } = await getRubricLandingPage();
-        const merchandise = getRubricSection(sections, "Merchandise");
-
-        const products = merchandise.map((item) => ({
-            id: sanitizeText(item.productid as string),
-            title: sanitizeText(item.title as string),
-            price: sanitizeText(item.info as string),
-            image: sanitizeUrl(item.image as string),
-            destination: sanitizeUrl(item.destination as string),
-        }));
+        const products = await getMerchandise();
 
         return Response.json(products);
     } catch (error) {

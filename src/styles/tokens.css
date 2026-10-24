@@ -48,6 +48,12 @@
     --gray-800: #1d283e;
     --gray-900: #1a1a1a;
 
+    /* Brand accents for the /links cards and social buttons */
+    --pink-300: #f769b0; /* Instagram */
+    --red-300: #f0303f; /* YouTube */
+    --blue-300: #21b1f3; /* Facebook */
+    --purple-300: #bd57cf; /* Discord */
+
     /* Base Colors */
     --foreground: black;
     --background: white;
