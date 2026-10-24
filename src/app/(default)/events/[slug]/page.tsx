@@ -8,7 +8,9 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { unstable_cache } from "next/cache";
 import DOMPurify from "isomorphic-dompurify";
+import Link from "next/link";
 import styles from "./page.module.css";
+import TagList from "@/components/TagList";
 import MdxLink from "@/components/MdxLink";
 import { formatDate, formatTime, isMultiDayEvent } from "@/lib/time";
 
@@ -44,6 +46,24 @@ function sanitizeUrl(input: string | undefined): string {
     } catch {
         return "";
     }
+}
+
+/**
+ * Full-width banner that never crops the poster: the image sits whole in the
+ * middle, and each side is filled by stretching the poster's outermost pixel
+ * column (a background sized ~100000% wide, pinned to that edge), so the
+ * poster's own edge colours carry out to the screen edges.
+ */
+function EventSplash({ src, alt }: { src?: string; alt: string }) {
+    const image = src || "/images/events/placeholder.jpg";
+    const edge = { backgroundImage: `url("${image}")` };
+    return (
+        <div className={styles.eventSplash}>
+            <div className={styles.splashEdgeLeft} style={edge} aria-hidden />
+            <div className={styles.splashEdgeRight} style={edge} aria-hidden />
+            <img src={image} alt={alt} className={styles.splashImage} />
+        </div>
+    );
 }
 
 const EVENTS_PATH = join(process.cwd(), "content", "events");
@@ -218,17 +238,11 @@ export default async function EventPage({ params }: EventPageProps) {
 
         return (
             <div className={styles.eventPage}>
-                <div className={styles.eventSplash}>
-                    {image ? (
-                        <img src={image} alt={title} />
-                    ) : (
-                        <img
-                            src="/images/events/placeholder.jpg"
-                            alt={title}
-                        />
-                    )}
-                </div>
+                <EventSplash src={image} alt={title} />
                 <article>
+                    <Link href="/events" className={styles.backLink}>
+                        <span aria-hidden>&larr;</span> All events
+                    </Link>
                     <header className={styles.eventHeader}>
                         <h1>{title}</h1>
 
@@ -250,7 +264,9 @@ export default async function EventPage({ params }: EventPageProps) {
                                 <div className={styles.metaValue}>
                                     {formatTime(startDate, multiDay ? undefined : endDate)}
                                     {multiDay && (
-                                        <div>until {formatTime(endDate)}</div>
+                                        <div className={styles.multiDayIndicator}>
+                                            until {formatTime(endDate)}
+                                        </div>
                                     )}
                                 </div>
                             </div>
@@ -301,17 +317,14 @@ export default async function EventPage({ params }: EventPageProps) {
 
         return (
             <div className={styles.eventPage}>
-                <div className={styles.eventSplash}>
-                    {frontmatter.image ? (
-                        <img src={frontmatter.image} alt={frontmatter.title} />
-                    ) : (
-                        <img
-                            src={"/images/events/placeholder.jpg"}
-                            alt={frontmatter.title}
-                        />
-                    )}
-                </div>
+                <EventSplash
+                    src={frontmatter.image}
+                    alt={frontmatter.title}
+                />
                 <article>
+                    <Link href="/events" className={styles.backLink}>
+                        <span aria-hidden>&larr;</span> All events
+                    </Link>
                     <header className={styles.eventHeader}>
                         <h1>
                             {frontmatter.emoji} {frontmatter.title}
@@ -341,7 +354,9 @@ export default async function EventPage({ params }: EventPageProps) {
                                         multiDay ? null : frontmatter.endDate
                                     )}
                                     {multiDay && frontmatter.endDate && (
-                                        <div>
+                                        <div
+                                            className={styles.multiDayIndicator}
+                                        >
                                             until{" "}
                                             {formatTime(frontmatter.endDate)}
                                         </div>
@@ -370,15 +385,7 @@ export default async function EventPage({ params }: EventPageProps) {
                             )}
                         </div>
 
-                        {frontmatter.tags && (
-                            <div className={styles.tagList}>
-                                {frontmatter.tags.map((tag: string) => (
-                                    <span key={tag} className={styles.tag}>
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                        )}
+                        <TagList tags={frontmatter.tags} />
                     </header>
 
                     <div className={styles.eventContent}>
