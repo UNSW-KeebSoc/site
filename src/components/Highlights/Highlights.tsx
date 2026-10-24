@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import HighlightCard from "./HighlightCard";
 import { Event } from "@/app/(default)/events/page";
 import styles from "./Highlights.module.css";
+import shared from "@/styles/shared.module.css";
 
 export interface HighlightsProps {
     count?: number; // Number of most recent events to show
@@ -38,21 +39,19 @@ export default function Highlights({
         fetchEvents();
     }, [count]);
 
-    // Create skeleton events for loading state
-    const skeletonCount = count;
-    const displayEvents =
-        loading || events.length === 0
-            ? Array.from({ length: skeletonCount }, (_, index) => ({
-                  slug: `loading-${index}`,
-                  title: "",
-                  description: "",
-                  date: "",
-                  location: "",
-                  source: "local" as const,
-                  tags: [],
-                  image: "",
-              }))
-            : events;
+    // Placeholder cards while loading; they have no date, so only ever render them as skeletons
+    const displayEvents = loading
+        ? Array.from({ length: count }, (_, index) => ({
+              slug: `loading-${index}`,
+              title: "",
+              description: "",
+              date: "",
+              location: "",
+              source: "local" as const,
+              tags: [],
+              image: "",
+          }))
+        : events;
 
     return (
         <section className={`${styles.container} ${className}`}>
@@ -60,7 +59,11 @@ export default function Highlights({
                 <h2 className={styles.title}>Highlights</h2>
             </div>
             {error ? (
-                <div className={styles.error}>{error}</div>
+                <p className={shared.errorMessage}>{error}</p>
+            ) : displayEvents.length === 0 ? (
+                <p className={shared.message}>
+                    No events to show yet. Check back soon!
+                </p>
             ) : (
                 <div className={styles.grid}>
                     {displayEvents.map((event, index) => (

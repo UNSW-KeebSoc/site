@@ -56,21 +56,8 @@ export default function HighlightCard({
                             isLoading ? styles.skeleton : ""
                         }`}
                     >
-                        {isLoading ? "" : event.title} →
+                        {isLoading ? "" : `${event.title} →`}
                     </h3>
-                    {/* {(event.description || isLoading) && (
-                        <p
-                            className={`${styles.subtitle} ${
-                                isLoading ? styles.skeleton : ""
-                            }`}
-                        >
-                            {isLoading
-                                ? ""
-                                : event.description.length > 80
-                                ? `${event.description.substring(0, 80)}...`
-                                : event.description}
-                        </p>
-                    )} */}
                 </div>
             </div>
         </div>
@@ -78,7 +65,7 @@ export default function HighlightCard({
 
     if (isLoading || !event.slug) {
         return (
-            <div className={`${styles.cardWrapper} ${className}`}>
+            <div className={className}>
                 <CardContent />
             </div>
         );
