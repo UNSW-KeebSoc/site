@@ -1,99 +1,5 @@
-/* Variable Fonts */
-@font-face {
-    font-family: "RedHatDisplay";
-    src: url("/fonts/RedHatDisplay-VariableFont_wght.woff2") format("woff2-variations");
-    font-weight: 300 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "RedHatMono";
-    src: url("/fonts/RedHatMono-VariableFont_wght.woff2") format("woff2-variations");
-    font-weight: 300 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "BitcountSingle";
-    src: url("/fonts/BitcountSingle-VariableFont.ttf") format("truetype-variations");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-:root {
-    /* Orange Color Palette */
-    --orange-000: #fff0d5;
-    --orange-100: #feaa00;
-    --orange-200: #ff9000;
-    --orange-300: #fe7600;
-    --orange-400: #ff4f00;
-
-    /* Gray Color Palette */
-    --gray-100: #f5f5f5;
-    --gray-200: #e5e5e5;
-    --gray-300: #d4d4d4;
-    --gray-400: #777777;
-    --gray-800: #1d283e;
-    --gray-900: #1a1a1a;
-
-    /* Base Colors */
-    --foreground: black;
-    --background: white;
-
-    /* Semantic Colors */
-    --heading: var(--orange-300);
-    --heading-alt: var(--orange-400);
-    /* The navbar's resting colour. Kept as its own token so themes (e.g. the
-       glass blog chrome) can restore it exactly after going transparent. */
-    --navbar-background-solid: var(--orange-300);
-    --navbar-background: var(--navbar-background-solid);
-    --navbar-links: white;
-    --card-background: var(--background);
-    --body-links: #fe7600;
-
-    /* Typography */
-    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, sans-serif;
-    --font-mono: "SF Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo,
-        Courier, monospace;
-
-    /* Spacing */
-    --space-2xs: 0.25rem;
-    --space-xs: 0.5rem;
-    --space-sm: 0.75rem;
-    --space-md: 1rem;
-    --space-lg: 1.5rem;
-    --space-xl: 2rem;
-    --space-2xl: 3rem;
-    --space-3xl: 4rem;
-
-    /* Border Radius */
-    --radius-sm: 4px;
-    --radius-md: 6px;
-    --radius-full: 9999px;
-
-    /* Borders */
-    --default-border: 3px solid var(--orange-300);
-
-    /* Chrome (navbar/footer) theming — overridable per blog post */
-    --footer-background: var(--background);
-    --chrome-border: var(--default-border);
-    --navbar-position: static;
-    --footer-position: static;
-    --chrome-z: auto;
-    --footer-opacity: 1;
-    --footer-transform: none;
-
-    /* Semantic Colors */
-    --color-description: #ab4100;
-    --color-error: #a83232;
-    --color-highlight-tag: #ff6b35;
-    --color-rubric: #e51e5d;
-    --color-rubric-dark: #c4194f;
-}
+/* Main-site globals. Tokens and fonts live in src/styles/tokens.css (imported
+   first by the layout); this file adds dark mode and element defaults. */
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
@@ -111,10 +17,19 @@
 
         /* Dark Mode Semantic Colors */
         --heading: var(--orange-200);
-        --heading-alt: var(--orange-100);
         --navbar-background-solid: var(--orange-400);
         --navbar-background: var(--navbar-background-solid);
         --navbar-links: var(--orange-100);
+        --surface: var(--orange-400);
+        --tag-background: var(--orange-300);
+        --tag-text: var(--orange-100);
+        --card-meta: white;
+        --message-color: var(--gray-300);
+        --icon-muted: var(--orange-200);
+        --text-strong: #fff;
+        --accent-soft: var(--orange-300);
+        --on-accent-soft: #fff;
+        --accent-wash: color-mix(in srgb, var(--orange-200) 10%, transparent);
 
         --color-description: var(--orange-100);
         --color-error: #e05555;
@@ -199,7 +114,7 @@ body::before {
     background-position: center;
     background-size: auto;
     opacity: 0.7;
-    z-index: -1;
+    z-index: var(--z-below);
 }
 
 main::-webkit-scrollbar {
@@ -209,7 +124,8 @@ main::-webkit-scrollbar {
 body {
     color: var(--foreground);
     background: var(--background);
-    font-family: "RedHatDisplay", sans-serif;
+    font-family: var(--font-brand);
+    line-height: var(--leading-normal);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     display: flex;
@@ -227,13 +143,16 @@ article {
 
 p {
     margin: 0;
-    font-size: 1rem;
+    font-size: var(--text-base);
 }
 
+/* Global utility classes. MDX content can only use global class names, so
+   anything a post needs goes here. On a wrapper <div>, target the inner `p`
+   too: MDX wraps text in <p>, which sets its own font-size. */
 .mobileHide {
     display: block;
 
-    @media (max-width: 600px) {
+    @media (max-width: 599px) {
         display: none;
     }
 }
@@ -256,61 +175,32 @@ h6 {
     margin-top: var(--space-xl);
     margin-bottom: var(--space-md);
     color: var(--heading);
-    font-weight: 600;
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: var(--text-3xl);
     padding-bottom: var(--space-sm);
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: var(--text-2xl);
 }
 
 h3 {
-    font-size: 1.5rem;
+    font-size: var(--text-xl);
+}
+
+h4 {
+    font-size: var(--text-lg);
 }
 
 /* Links */
 a {
     color: var(--body-links);
     text-decoration: none;
-    transition: border-color 0.2s ease;
-}
-
-/* Code blocks */
-pre {
-    background: var(--gray-900);
-    color: var(--gray-100);
-    padding: var(--space-md);
-    border-radius: var(--radius-sm);
-    overflow-x: auto;
-    border: var(--default-border);
-    font-family: var(--font-mono);
-}
-
-code {
-    font-family: var(--font-mono);
-    font-size: 0.9em;
-    padding: 0.2em 0.4em;
-    background: var(--gray-200);
-    border-radius: var(--radius-sm);
-}
-
-/* Inline code */
-p code,
-li code {
-    color: var(--orange-400);
-}
-
-/* Blockquotes */
-blockquote {
-    margin: var(--space-lg) 0;
-    padding: var(--space-md) var(--space-lg);
-    border-left: var(--default-border);
-    background: var(--gray-100);
-    font-style: italic;
+    transition: border-color var(--duration-fast) ease;
 }
 
 /* Lists */
@@ -326,46 +216,4 @@ li {
 
 li p {
     padding: 0 0.5rem;
-}
-
-/* Tables */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: var(--space-lg) 0;
-    border: 1px solid var(--orange-300);
-}
-
-th,
-td {
-    padding: var(--space-sm);
-}
-
-th:last-child,
-td:last-child {
-    border-right: 1px solid var(--orange-300);
-}
-
-th {
-    background: var(--orange-300);
-    color: white;
-    font-weight: 600;
-}
-
-tr:nth-child(even) {
-    background: var(--gray-100);
-}
-
-/* Images */
-img {
-    max-width: 100%;
-    height: auto;
-    margin: var(--space-md) 0;
-}
-
-/* Horizontal rule */
-hr {
-    border: none;
-    border-top: 2px solid var(--gray-200);
-    margin: var(--space-xl) 0;
 }

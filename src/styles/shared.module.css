@@ -1,0 +1,161 @@
+/* Building blocks shared across pages. Use directly as `shared.x`, or
+   `composes: x from` this file when a page needs a variant. Compose every
+   class you need explicitly (e.g. `composes: pressable button buttonPrimary`)
+   rather than relying on a chain of composes. Light/dark colours come from
+   tokens, so nothing here needs its own dark-mode block. */
+
+/* Page container */
+.page {
+    width: 100%;
+    max-width: 1200px;
+    margin: var(--space-xl) 0;
+    padding: var(--space-xl);
+}
+
+/* Press hover: lifts up-left as a hard offset shadow appears. Change the
+   shadow colour with --press-colour; size comes from --press-lift/-shadow. */
+.pressable {
+    box-shadow: 0 0 0 var(--press-colour, var(--orange-300));
+    transition:
+        transform var(--duration-normal) var(--ease-out),
+        box-shadow var(--duration-normal) var(--ease-out),
+        background-color var(--duration-fast) ease;
+}
+
+.pressable:hover,
+.pressable:focus-visible {
+    transform: translate(calc(-1 * var(--press-lift)), calc(-1 * var(--press-lift)));
+    box-shadow: var(--press-shadow) var(--press-shadow) 0 var(--press-colour, var(--orange-300));
+    outline: none;
+}
+
+/* Buttons and link-buttons: outlined by default, filled with buttonPrimary */
+.button {
+    composes: pressable;
+    display: inline-block;
+    padding: var(--space-xs) var(--space-md);
+    border: var(--default-border);
+    background-color: var(--background);
+    color: var(--heading);
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-tight);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.buttonPrimary {
+    composes: pressable button;
+    background-color: var(--tag-background);
+    color: var(--tag-text);
+}
+
+/* Mono section heading with a rule running to the right edge */
+.sectionHeading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin: var(--space-2xl) 0 var(--space-lg);
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-lg);
+}
+
+.sectionHeading::after {
+    content: "";
+    flex: 1;
+    border-top: var(--default-border);
+}
+
+/* <Link>/<a> wrapping a <Card>: press hover, as a block */
+.cardLink {
+    composes: pressable;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Card contents */
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.cardTitle {
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-lg);
+    line-height: var(--leading-tight);
+    margin: 0;
+    color: var(--heading);
+}
+
+/* Date / price line under a card title */
+.cardMeta {
+    display: block;
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-sm);
+    margin: var(--space-xs) 0;
+    color: var(--card-meta);
+}
+
+.cardDescription {
+    font-size: var(--text-base);
+    color: var(--color-description);
+    margin: var(--space-xs) 0;
+    line-height: var(--leading-snug);
+    flex-grow: 1;
+}
+
+/* Tags */
+.tagList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+}
+
+.tag {
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-xs);
+    padding: var(--space-2xs) var(--space-xs);
+    background-color: var(--tag-background);
+    border: 1px solid var(--orange-300);
+    border-radius: var(--radius-sm);
+    color: var(--tag-text);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-tight);
+}
+
+/* Loading / empty / error states */
+.message {
+    text-align: center;
+    padding: var(--space-xl);
+    color: var(--message-color);
+    font-family: var(--font-brand-mono);
+}
+
+.errorMessage {
+    composes: message;
+    color: var(--color-error);
+    border: 3px solid var(--color-error);
+}
+
+/* Small uppercase label: event meta (DATE / TIME), vendor regions, section eyebrows */
+.label {
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    line-height: var(--leading-tight);
+    color: var(--heading);
+}
+
+/* Image caption under a picture; callers set colour and spacing */
+.caption {
+    font-size: var(--text-sm);
+    font-style: italic;
+    line-height: var(--leading-snug);
+    text-align: center;
+}

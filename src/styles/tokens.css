@@ -1,0 +1,172 @@
+/* Design tokens shared by every layout: the main site imports this before
+   (default)/globals.css, which adds the dark-mode overrides; the /links page
+   imports it before (links)/globals.css and stays light. */
+
+/* Variable Fonts */
+@font-face {
+    font-family: "RedHatDisplay";
+    src: url("/fonts/RedHatDisplay-VariableFont_wght.woff2") format("woff2-variations");
+    font-weight: 300 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "RedHatMono";
+    src: url("/fonts/RedHatMono-VariableFont_wght.woff2") format("woff2-variations");
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "BitcountSingle";
+    src: url("/fonts/BitcountSingle-VariableFont.ttf") format("truetype-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Breakpoints (media queries can't read custom properties, so these are a
+   reference): mobile-first `min-width` at 420 / 600 / 768 / 1024 / 1400px;
+   when a `max-width` is needed, use the breakpoint minus one (e.g. 767px) so
+   the two sides never overlap. */
+
+:root {
+    /* Orange Color Palette */
+    --orange-000: #fff0d5;
+    --orange-100: #feaa00;
+    --orange-200: #ff9000;
+    --orange-300: #fe7600;
+    --orange-400: #ff4f00;
+
+    /* Gray Color Palette */
+    --gray-100: #f5f5f5;
+    --gray-200: #e5e5e5;
+    --gray-300: #d4d4d4;
+    --gray-400: #777777;
+    --gray-800: #1d283e;
+    --gray-900: #1a1a1a;
+
+    /* Base Colors */
+    --foreground: black;
+    --background: white;
+
+    /* Semantic Colors */
+    --heading: var(--orange-300);
+    /* The navbar's resting colour. Kept as its own token so themes (e.g. the
+       glass blog chrome) can restore it exactly after going transparent. */
+    --navbar-background-solid: var(--orange-300);
+    --navbar-background: var(--navbar-background-solid);
+    --navbar-links: white;
+    --card-background: var(--background);
+    --body-links: #fe7600;
+    /* Bordered panels: <Card>, about page sections */
+    --surface: var(--background);
+    /* Tag chips, date/price lines on cards, loading/empty messages */
+    --tag-background: var(--orange-400);
+    --tag-text: white;
+    --card-meta: var(--orange-400);
+    --message-color: var(--gray-800);
+    --icon-muted: var(--gray-400); /* footer social icons */
+    --text-strong: var(--foreground); /* emphasised values, e.g. event meta */
+    --accent-soft: var(--orange-000); /* soft orange fill: avatars, year-button hover */
+    --on-accent-soft: var(--heading); /* text and marks on --accent-soft */
+    --accent-wash: var(--orange-000); /* faint orange panel: Callout */
+
+    /* Over photos and the lightbox backdrop: same in both themes */
+    --on-photo: #fff;
+    --on-photo-muted: #ddd;
+    --scrim: rgba(0, 0, 0, 0.85); /* lightbox backdrop */
+    --scrim-soft: rgba(0, 0, 0, 0.55); /* dark buttons over photos */
+    --scrim-soft-hover: rgba(0, 0, 0, 0.75);
+    --glass: rgba(255, 255, 255, 0.15); /* light buttons over the scrim */
+    --glass-hover: rgba(255, 255, 255, 0.3);
+
+    /* Typography */
+    --font-brand: "RedHatDisplay", sans-serif;
+    --font-brand-mono: "RedHatMono", monospace;
+    --font-pixel: "BitcountSingle", monospace; /* blog eyebrows */
+    --font-mono: "SF Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo,
+        Courier, monospace;
+
+    /* Type scale (16px base). Editorial blog pieces (Keycap, Keycaps, Splash,
+       Question) keep their own bespoke sizes. */
+    --text-xs: 0.75rem; /* tags, labels, fine print */
+    --text-sm: 0.875rem; /* meta lines, captions, small buttons */
+    --text-base: 1rem; /* body, card descriptions */
+    --text-md: 1.125rem; /* emphasised body, sponsor names */
+    --text-lg: 1.25rem; /* card titles, h4, section headings */
+    --text-xl: 1.5rem; /* h3, section headings in cards */
+    --text-2xl: 2rem; /* h2, event titles */
+    --text-3xl: 2.5rem; /* h1 page titles */
+    --text-display: 4rem; /* home hero */
+
+    --weight-medium: 500;
+    --weight-semibold: 600; /* headings */
+    --weight-bold: 700; /* labels, tags, buttons */
+
+    --leading-tight: 1.2; /* headings, titles, chips, buttons */
+    --leading-snug: 1.4; /* short blurbs, captions */
+    --leading-normal: 1.6; /* body text */
+    --leading-relaxed: 1.75; /* long-form reading (.prose) */
+
+    --tracking-label: 0.06em; /* uppercase labels */
+
+    /* Text column for long-form reading (~75 characters per line). In rem,
+       not ch, so columns in different fonts and sizes still line up. */
+    --reading-width: 46rem;
+
+    /* Spacing */
+    --space-2xs: 0.25rem;
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+
+    /* Border Radius: used sparingly; most of the site is square-cornered */
+    --radius-sm: 4px;
+    --radius-md: 6px; /* e.g. carousel and lightbox photos */
+    --radius-full: 9999px;
+
+    /* Borders */
+    --default-border: 3px solid var(--orange-300);
+
+    /* Motion */
+    --duration-fast: 0.2s; /* colour and opacity changes */
+    --duration-normal: 0.25s; /* movement: press hover, lifts */
+    --duration-slow: 0.3s; /* chrome fades, larger panels */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Press hover (shared .pressable): lifts up-left, hard offset shadow */
+    --press-lift: 2px;
+    --press-shadow: 4px;
+
+    /* Stacking order */
+    --z-below: -1; /* page texture */
+    --z-raised: 1; /* content layered over its own background */
+    --z-controls: 2; /* buttons over photos (carousel arrows) */
+    --z-overlay-content: 10; /* text over card photos */
+    --z-sticky: 100; /* sponsor banner */
+    --z-modal: 1000; /* lightbox */
+    --z-modal-controls: 1001; /* lightbox close / arrows / counter */
+
+    /* Chrome (navbar/footer) theming — overridable per blog post */
+    --footer-background: var(--background);
+    --chrome-border: var(--default-border);
+    --navbar-position: static;
+    --footer-position: static;
+    --chrome-z: auto;
+    --footer-opacity: 1;
+    --footer-transform: none;
+
+    /* Semantic Colors */
+    --color-description: #ab4100;
+    --color-error: #a83232;
+    --color-highlight-tag: #ff6b35;
+    --color-rubric: #e51e5d;
+    --color-rubric-dark: #c4194f;
+}
