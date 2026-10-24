@@ -1,7 +1,10 @@
 import styles from "./page.module.css";
+import shared from "@/styles/shared.module.css";
 import Link from "next/link";
 import Card from "@/components/Card";
-import { getAllPosts } from "@/lib/blog";
+import TagList from "@/components/TagList";
+import { getAllPosts, BlogFrontMatter } from "@/lib/blog";
+import { formatDate } from "@/lib/time";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
@@ -11,59 +14,78 @@ export const metadata = pageMetadata({
     path: "/blog",
 });
 
-// Return all posts
-export default function Blog() {
-    const posts = getAllPosts();
+function PostDate({ date }: { date: string }) {
     return (
-        <div className={styles.blogPage}>
-            <h1>Blog Posts</h1>
-            <div className={styles.blogGrid}>
-                {posts.map((post) => (
-                    <Link
-                        href={`/blog/${post.slug}`}
-                        key={post.slug}
-                        className={styles.postLink}
+        <time dateTime={date} className={styles.cardDate}>
+            {formatDate(date)}
+        </time>
+    );
+}
+
+function PostCard({
+    post,
+    featured = false,
+}: {
+    post: BlogFrontMatter;
+    featured?: boolean;
+}) {
+    const Heading = featured ? "h2" : "h3";
+    return (
+        <Link
+            href={`/blog/${post.slug}`}
+            className={featured ? styles.featuredLink : shared.cardLink}
+        >
+            <Card
+                image={post.image}
+                className={featured ? styles.featuredCard : undefined}
+            >
+                <article className={shared.cardBody}>
+                    {featured && (
+                        <span className={styles.latestLabel}>Latest post</span>
+                    )}
+                    <Heading
+                        className={
+                            featured ? styles.featuredTitle : styles.cardTitle
+                        }
                     >
-                        <Card image={post.image}>
-                            <article className={styles.postCard}>
-                                <h3 className={styles.postTitle}>
-                                    {post.title}
-                                </h3>
-                                <time
-                                    dateTime={post.date}
-                                    className={styles.postDate}
-                                >
-                                    {new Date(post.date).toLocaleDateString(
-                                        "en-US",
-                                        {
-                                            year: "numeric",
-                                            month: "long",
-                                            day: "numeric",
-                                        }
-                                    )}
-                                </time>
-                                {post.description && (
-                                    <p className={styles.postDescription}>
-                                        {post.description}
-                                    </p>
-                                )}
-                                {post.tags && post.tags.length > 0 && (
-                                    <div className={styles.tagList}>
-                                        {post.tags.map((tag) => (
-                                            <span
-                                                key={tag}
-                                                className={styles.tag}
-                                            >
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                )}
-                            </article>
-                        </Card>
-                    </Link>
-                ))}
-            </div>
+                        {post.title}
+                    </Heading>
+                    <PostDate date={post.date} />
+                    {post.description && (
+                        <p
+                            className={
+                                featured
+                                    ? shared.cardDescription
+                                    : styles.cardDescription
+                            }
+                        >
+                            {post.description}
+                        </p>
+                    )}
+                    <TagList tags={post.tags} />
+                </article>
+            </Card>
+        </Link>
+    );
+}
+
+// Newest post as a wide feature card, the rest in a grid below it
+export default function Blog() {
+    const [latest, ...rest] = getAllPosts(); // sorted newest-first
+    return (
+        <div className={shared.page}>
+            <h1>Blog Posts</h1>
+            {latest && <PostCard post={latest} featured />}
+            {rest.length > 0 && (
+                <>
+                    <h2 className={shared.sectionHeading}>Earlier posts</h2>
+                    <div className={styles.postGrid}>
+                        {rest.map((post) => (
+                            <PostCard post={post} key={post.slug} />
+                        ))}
+                    </div>
+                </>
+            )}
         </div>
     );
 }
