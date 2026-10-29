@@ -12,7 +12,7 @@
     overflow-wrap: break-word;
     hyphens: auto;
     color: var(--foreground);
-    background-color: var(--background);
+    background-color: var(--surface);
     width: 100%;
     padding: var(--space-xl);
     box-sizing: border-box;

@@ -35,7 +35,7 @@
     display: inline-block;
     padding: var(--space-xs) var(--space-md);
     border: var(--default-border);
-    background-color: var(--background);
+    background-color: var(--surface-raised);
     color: var(--heading);
     font-family: var(--font-brand-mono);
     font-size: var(--text-sm);

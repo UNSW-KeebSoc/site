@@ -3,35 +3,40 @@
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
+    /* Deep purple, layered: three purple levels (page < surface < raised)
+       with the light-mode orange bar and orange accents. Body text is
+       off-white with a lavender tint; orange is only for accents. */
     :root {
-        /* Dark Mode Orange Palette */
-        --orange-000: #ffffff;
-        --orange-100: #ffc999;
-        --orange-200: #f97d29;
-        --orange-300: #7f3900;
-        --orange-400: #2b1307;
+        /* Orange accents. --orange-400 is the dark panel colour in this
+           theme (some components use it as their dark background). */
+        --orange-000: #fff3e6;
+        --orange-100: #ffc38f;
+        --orange-200: #ff9a4d;
+        --orange-300: #ef7d2a;
+        --orange-400: #221a30;
 
-        /* Dark Mode Base Colors */
-        --foreground: var(--orange-100);
-        --background: black;
+        /* Layers */
+        --background: #16101f;
+        --surface: #221a30;
+        --surface-raised: #2f2442;
+        --footer-background: var(--surface);
 
-        /* Dark Mode Semantic Colors */
+        --foreground: #ece7f3;
         --heading: var(--orange-200);
-        --navbar-background-solid: var(--orange-400);
+        --navbar-background-solid: var(--orange-300);
         --navbar-background: var(--navbar-background-solid);
-        --navbar-links: var(--orange-100);
-        --surface: var(--orange-400);
+        --navbar-links: #fff;
         --tag-background: var(--orange-300);
-        --tag-text: var(--orange-100);
-        --card-meta: white;
-        --message-color: var(--gray-300);
-        --icon-muted: var(--orange-200);
+        --tag-text: var(--background);
+        --card-meta: #ffb070;
+        --message-color: #a99cbd;
+        --icon-muted: #a99cbd;
         --text-strong: #fff;
-        --accent-soft: var(--orange-300);
-        --on-accent-soft: #fff;
-        --accent-wash: color-mix(in srgb, var(--orange-200) 10%, transparent);
+        --accent-soft: #3a2a3f;
+        --on-accent-soft: #ffb070;
+        --accent-wash: color-mix(in srgb, var(--orange-300) 10%, transparent);
 
-        --color-description: var(--orange-100);
+        --color-description: #bdb1cf;
         --color-error: #e05555;
         --color-highlight-tag: var(--orange-200);
     }
@@ -48,20 +53,20 @@
     }
 
     code {
-        background: var(--gray-800);
+        background: var(--surface-raised);
     }
 
     blockquote {
-        background: var(--gray-800);
+        background: var(--surface);
     }
 
     td {
         padding: var(--space-sm);
-        border-right: 1px solid var(--gray-800);
+        border-right: 1px solid var(--surface-raised);
     }
 
     tr:nth-child(even) {
-        background: var(--gray-800);
+        background: var(--surface);
     }
 }
 

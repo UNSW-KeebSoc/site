@@ -65,10 +65,13 @@
     --navbar-background-solid: var(--orange-300);
     --navbar-background: var(--navbar-background-solid);
     --navbar-links: white;
-    --card-background: var(--background);
     --body-links: #fe7600;
-    /* Bordered panels: <Card>, about page sections */
+    /* Elevation: page (--background) < --surface (cards, panels, bands) <
+       --surface-raised (buttons, chips and stamps sitting on a surface).
+       All white in light mode; distinct layers in dark mode. */
     --surface: var(--background);
+    --surface-raised: var(--surface);
+    --card-background: var(--surface);
     /* Tag chips, date/price lines on cards, loading/empty messages */
     --tag-background: var(--orange-400);
     --tag-text: white;
