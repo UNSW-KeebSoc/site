@@ -21,32 +21,47 @@ export const socials = [
     },
 ];
 
-export const links = [
+/** /links page. `kind` picks the icon, label and colour. */
+export const links: {
+    name: string;
+    link: string;
+    kind: "video" | "article" | "discord";
+}[] = [
     {
         name: "Watch the meet the team video!",
         link: "https://youtu.be/w5lBtYdMhFc",
-    },
-    {
-        name: "Read the AE Boards Satellite Review!",
-        link: "https://keebsoc.com/satellite",
-    },
-    {
-        name: "Join us on Discord",
-        link: "https://discord.gg/n66dXGeAMA",
+        kind: "video",
     },
 ];
 
+type Exec = { position: string; name: string };
+
+/** Profile photo per person (filename in /images/blog, no extension). Keyed
+    by name so someone's photo shows on every year they served. */
+export const execPhotos: Record<string, string> = {
+    "Catherine Wong": "mtt26-catherine",
+    "Jake Takada Wong": "mtt26-jake",
+    "Kyra Seeto Lee": "mtt26-kyra",
+    "Daiva Addia": "mtt26-daiva",
+    "Winston Kwan": "mtt26-winston",
+    "Amal Perera": "mtt26-amal",
+    "Graham Kong": "mtt26-graham",
+    "Jarret Phong": "mtt26-jarret",
+};
+
 type Execs = {
     [year: string]: {
-        postSlug?: string;
-        executives: { position: string; name: string }[];
-        directors: { position: string; name: string }[];
+        /** "Meet the team" target: an internal path ("/blog/...") or a full
+            URL (e.g. a YouTube video), which opens in a new tab. */
+        teamLink?: string;
+        executives: Exec[];
+        directors: Exec[];
     };
 };
 
 export const executives: Execs = {
     "2026": {
-        postSlug: "meet-the-team-26",
+        teamLink: "/blog/meet-the-team-26",
         executives: [
             { position: "President", name: "Catherine Wong" },
             { position: "Vice President", name: "Jake Takada Wong" },
@@ -63,6 +78,7 @@ export const executives: Execs = {
         ],
     },
     "2025": {
+        teamLink: "https://www.youtube.com/watch?v=w5lBtYdMhFc",
         executives: [
             { position: "President", name: "Catherine Wong" },
             { position: "Vice President", name: "Jake Takada Wong" },
@@ -78,6 +94,7 @@ export const executives: Execs = {
         ],
     },
     "2024": {
+        teamLink: "https://www.youtube.com/watch?v=w5lBtYdMhFc",
         executives: [
             { position: "President", name: "Xuan Li" },
             { position: "Vice President", name: "Anson Qiu" },
@@ -92,6 +109,7 @@ export const executives: Execs = {
         ],
     },
     "2023": {
+        teamLink: "https://www.youtube.com/watch?v=0QHzt0dGrP0",
         executives: [
             { position: "President", name: "Xuan Li" },
             { position: "Secretary", name: "Andrew Lu" },

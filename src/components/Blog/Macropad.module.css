@@ -4,13 +4,70 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-md);
-    margin: var(--space-2xl) 0;
+}
 
+/* The plate the keys sit on (both modes): a warm orange tint inside the site's
+   standard border. */
+.macropad,
+.wideBoard {
     padding: 28px;
-    background: var(--background);
-    border: 2px solid black;
+    background: var(--orange-000);
+    border: var(--default-border);
     border-radius: 18px;
-    /* margin: 20px; */
+}
+
+/* --orange-000 turns white in dark mode, so tint with --orange-200 instead
+   (the same wash <Callout> uses). */
+@media (prefers-color-scheme: dark) {
+    .macropad,
+    .wideBoard {
+        background: color-mix(in srgb, var(--orange-200) 10%, transparent);
+    }
+}
+
+/* Optional section heading above the board (<Macropad eyebrow title note>),
+   in the same type as the <Splash>: pixel-font eyebrow over a heavy title. */
+.header {
+    margin-bottom: var(--space-lg);
+}
+
+.eyebrow {
+    font-family: var(--font-pixel);
+    font-size: clamp(1.15rem, 4.5vw, 1.7rem);
+    line-height: 1;
+    letter-spacing: var(--tracking-label);
+    color: var(--heading);
+}
+
+/* `.header` in the selectors out-specifies the global h2 and .prose p rules. */
+.header .title {
+    margin: var(--space-xs) 0 0;
+    padding: 0;
+    font-family: var(--font-brand);
+    font-weight: 800;
+    font-size: clamp(2.25rem, 5vw, 3.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    color: var(--foreground);
+}
+
+.header .note {
+    margin: var(--space-sm) 0 0;
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-xs);
+    line-height: var(--leading-snug);
+    text-align: left;
+    color: color-mix(in srgb, var(--foreground) 55%, transparent);
+}
+
+/* Non-key children, rendered after the board (e.g. a carousel). */
+.after {
+    margin-top: var(--space-2xl);
+}
+
+/* Standalone (non-wide) section */
+.section {
+    margin: var(--space-3xl) 0 var(--space-2xl);
 }
 
 /* Wide mode ------------------------------------------------------------------
@@ -33,26 +90,29 @@
     container-type: inline-size;
     container-name: mp;
 
-    margin: var(--space-2xl) auto;
+    margin: var(--space-3xl) auto var(--space-2xl);
 
     /* Let keycaps shrink to their (balanced, equal) column instead of holding
        their default 420px floor, which would overflow a multi-column row. */
     --key-min: 0;
 }
 
-.wideBoard {
-    box-sizing: border-box;
-    /* Hug the keycaps (which cap at 500px each) rather than filling the full
+/* Everything that lines up with the board: heading, board, trailing content. */
+.wideFrame {
+    /* Hug the keycaps (which cap at keyMax each) rather than filling the full
        measuring frame — otherwise the extra width shows as empty space inside
        the border. max-width keeps it within the frame when tracks are shrinking
        to fit; margin centres it once it's narrower than the frame. */
     width: fit-content;
     max-width: 100%;
     margin-inline: auto;
-    padding: 28px;
-    background: var(--background);
-    border: 2px solid black;
-    border-radius: 18px;
+}
+
+/* Only the board sets the frame's width: the heading and trailing content take
+   whatever it gives them instead of stretching it to their own content. */
+.wideFrame > .header,
+.wideFrame > .after {
+    contain: inline-size;
 }
 
 .wideGrid {
@@ -66,4 +126,38 @@
    row. Appearance lives in Keycap.module.css (.empty). */
 .wideGrid :global(.mp-ph) {
     display: none;
+}
+/* Doodle + caption printed on a filler keycap (<Macropad fillImage fillText>) */
+.filler {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    text-align: center;
+}
+
+.filler img {
+    width: min(70%, 260px);
+    margin: 0;
+    transform: rotate(-6deg);
+}
+
+.filler p {
+    margin: 0;
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--ink-muted);
+}
+
+/* Join button on the filler keycap, same lift + offset shadow as other buttons */
+.fillerLink {
+    composes: pressable button buttonPrimary from "../../styles/shared.module.css";
+    /* beats the .prose link colour */
+    color: var(--tag-text) !important;
 }

@@ -3,8 +3,9 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--space-xs) var(--space-md);
+    line-height: var(--leading-tight);
     border: var(--default-border);
-    color: var(--orange-300);
+    color: var(--heading);
     background-color: var(--footer-background);
     position: var(--footer-position);
     bottom: 0;
@@ -13,13 +14,14 @@
     z-index: var(--chrome-z);
     opacity: var(--footer-opacity);
     transform: var(--footer-transform);
-    transition: background-color 0.3s ease, border-color 0.3s ease,
-        opacity 0.3s ease, transform 0.3s ease;
+    transition: background-color var(--duration-slow) ease,
+        border-color var(--duration-slow) ease,
+        opacity var(--duration-slow) ease, transform var(--duration-slow) ease;
 }
 
 .copyright {
     display: flex;
-    gap: 1rem;
+    gap: var(--space-md);
     align-items: baseline;
 }
 
@@ -27,7 +29,7 @@
 
 .links {
     display: flex;
-    gap: 1rem;
+    gap: var(--space-md);
 }
 
 .link {
@@ -38,7 +40,7 @@
 .link>* {
     height: 100%;
     width: 100%;
-    background-color: var(--gray-400);
+    background-color: var(--icon-muted);
 }
 
 .discord {
@@ -61,12 +63,3 @@
     mask: url("/icons/facebook.svg") no-repeat center / contain;
 }
 
-@media (prefers-color-scheme: dark) {
-    .footer {
-        color: var(--orange-200);
-    }
-
-    .link>* {
-        background-color: var(--orange-200);
-    }
-}

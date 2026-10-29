@@ -10,7 +10,8 @@
 .cap {
     width: clamp(2.8rem, 9vw, 3.6rem);
     pointer-events: none;
-    transform: rotate(var(--tilt, 0deg));
+    /* `rotate`, not `transform`, so it stacks with the key's own lift. */
+    rotate: var(--tilt, 0deg);
 }
 
 /* A little playful stagger, like caps knocked slightly out of line. */
@@ -23,7 +24,7 @@
 
 /* The legend letter printed on the cap's top surface. */
 .glyph {
-    font-family: "RedHatDisplay", sans-serif;
+    font-family: var(--font-brand);
     font-weight: 800;
     font-size: clamp(1.4rem, 4.5vw, 1.8rem);
     line-height: 1;

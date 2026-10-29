@@ -1,12 +1,16 @@
-import { getPostBySlug, formatDate } from "@/lib/blog";
+import { getPostBySlug } from "@/lib/blog";
+import { formatDate } from "@/lib/time";
 import { pageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import styles from "../page.module.css";
+import prose from "@/styles/prose.module.css";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { ComponentProps } from "react";
 import { ImageModal } from "@/components/Blog/ImageModal";
+import MdxLink from "@/components/MdxLink";
 import { Splash, Eyebrow } from "@/components/Blog/Splash";
 import { Question } from "@/components/Blog/Question";
 import { Answer } from "@/components/Blog/Answer";
@@ -35,18 +39,10 @@ const CustomAudio = (props: ComponentProps<"audio">) => {
     );
 };
 
-const CustomLink = (props: ComponentProps<"a">) => {
-    return (
-        <a {...props} target="_blank" rel="noopener noreferrer">
-            {props.children}
-        </a>
-    );
-};
-
 const components = {
     img: CustomImage,
     audio: CustomAudio,
-    a: CustomLink,
+    a: MdxLink,
     Splash,
     Eyebrow,
     Question,
@@ -175,36 +171,58 @@ export default async function Blog({ params }: { params: { slug: string } }) {
     try {
         const post = getPostBySlug(slug);
         const themeCss = buildThemeCss(post.fm?.theme);
+        const backLink = (
+            <Link href="/blog" className={styles.backLink}>
+                <span aria-hidden>&larr;</span> All posts
+            </Link>
+        );
+        // A full-bleed <Splash> carries the back link itself; other posts get
+        // it above the default header.
+        const ownsHeader = /<Splash\b/.test(post.content);
         return (
-            <article className={styles.prose}>
+            <article className={`${styles.prose} ${prose.prose}`}>
                 {themeCss && (
                     <style dangerouslySetInnerHTML={{ __html: themeCss }} />
                 )}
                 {post.fm?.theme?.chrome === "glass" && <ChromeScrollWatcher />}
+                {!ownsHeader && backLink}
                 {/* Posts with a splash carry their own title, so the default
                     header can be suppressed with `hideHeader: true`. */}
                 {!post.fm?.hideHeader && (
-                    <>
+                    <header className={styles.postHeader}>
+                        {post.fm?.eyebrow && (
+                            <p className={styles.postEyebrow}>
+                                {post.fm.eyebrow}
+                            </p>
+                        )}
                         <h1>{post.fm.title}</h1>
-                        <div className={styles.postMetaInline}>
-                            <p className={styles.postAuthor}>
-                                {post.fm?.author}
+                        {post.fm?.subtitle && (
+                            <p className={styles.postSubtitle}>
+                                {post.fm.subtitle}
                             </p>
-                            <p className={styles.postDate}>
-                                {formatDate(post.fm?.date)}
-                            </p>
-                        </div>
-                    </>
+                        )}
+                        <p className={styles.postByline}>
+                            {post.fm?.author && <>By {post.fm.author} • </>}
+                            {post.fm?.date && (
+                                <time dateTime={post.fm.date}>
+                                    {formatDate(post.fm.date)}
+                                </time>
+                            )}
+                        </p>
+                    </header>
                 )}
                 <MDXRemote
                     source={post.content}
                     options={options}
                     components={{
                         ...components,
-                        // Renders the post's frontmatter date (dd/mm/yyyy) so a
+                        Splash: (props: ComponentProps<typeof Splash>) => (
+                            <Splash {...props} back={backLink} />
+                        ),
+                        // Renders the post's frontmatter date ("Fri, 18 Sept 26") so a
                         // splash can show it without hardcoding — e.g.
                         // `Industry Spotlight • <PostDate />`.
-                        PostDate: () => <>{formatDate(post.fm?.date)}</>,
+                        PostDate: () => <>{post.fm?.date && formatDate(post.fm.date)}</>,
                     }}
                 />
             </article>

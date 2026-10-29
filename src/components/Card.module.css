@@ -4,13 +4,7 @@
     display: flex;
     flex-direction: column;
     user-select: none;
-    background-color: var(--background);
-}
-
-@media (prefers-color-scheme: dark) {
-    .Card {
-        background-color: var(--orange-400);
-    }
+    background-color: var(--surface);
 }
 
 .Card > div {
@@ -18,7 +12,7 @@
     overflow-wrap: break-word;
     hyphens: auto;
     color: var(--foreground);
-    background-color: var(--background);
+    background-color: var(--surface);
     width: 100%;
     padding: var(--space-xl);
     box-sizing: border-box;
@@ -27,7 +21,7 @@
 
 .Card img {
     width: 100%;
-    height: 150px;
     object-fit: cover;
     margin: 0;
+    aspect-ratio: 2/1;
 }

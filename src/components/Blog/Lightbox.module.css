@@ -1,12 +1,12 @@
 .lightbox {
     position: fixed;
     inset: 0;
-    z-index: 1000;
+    z-index: var(--z-modal);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: var(--space-xl);
-    background: rgba(0, 0, 0, 0.85);
+    background: var(--scrim);
 }
 
 .figure {
@@ -23,75 +23,75 @@
     margin: 0;
     max-width: 90vw;
     max-height: 82vh;
-    width: auto;
+    /* Fill the 90vw x 82vh box at the image's own ratio (--ratio is set from
+       JS on load); until then the declaration is invalid and width is auto. */
+    width: min(90vw, calc(82vh * var(--ratio)));
     height: auto;
     object-fit: contain;
-    border-radius: var(--radius-md, 12px);
+    border-radius: var(--radius-md);
 }
 
 .caption {
+    composes: caption from "../../styles/shared.module.css";
     margin-top: var(--space-sm);
-    color: #ddd;
-    font-size: 0.9rem;
-    font-style: italic;
-    text-align: center;
-    line-height: 1.4;
+    color: var(--on-photo-muted);
 }
 
 .captionLink {
     color: inherit;
     text-decoration: underline;
     text-underline-offset: 2px;
-    transition: color 0.2s ease;
+    transition: color var(--duration-fast) ease;
 }
 
 .caption .captionLink:hover {
-    color: #fff;
+    color: var(--on-photo);
 }
 
-.close {
-    position: absolute;
-    top: var(--space-lg);
-    right: var(--space-lg);
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
-    font-size: 1.5rem;
-    line-height: 1;
-    cursor: pointer;
-    z-index: 1001;
-    transition: background 0.2s ease;
-}
-
-.close:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-.lightboxNav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+/* Round icon button shared by the lightbox close/arrows and the carousel arrows
+   (Carousel composes these). Size, glyph size and background are variables. */
+.roundButton {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 52px;
-    height: 52px;
+    width: var(--round-size, 44px);
+    height: var(--round-size, 44px);
     border: none;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
-    font-size: 2rem;
+    background: var(--round-bg, var(--glass));
+    color: var(--on-photo);
+    font-size: var(--round-font, 1.75rem);
     line-height: 1;
     cursor: pointer;
-    z-index: 1001;
-    transition: background 0.2s ease;
+    transition: background var(--duration-fast) ease;
 }
 
-.lightboxNav:hover {
-    background: rgba(255, 255, 255, 0.3);
+.roundButton:hover {
+    background: var(--round-bg-hover, var(--glass-hover));
+}
+
+/* Vertically centred prev/next arrow; callers set left/right */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.close {
+    composes: roundButton;
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    z-index: var(--z-modal-controls);
+    --round-size: 40px;
+    --round-font: 1.5rem;
+}
+
+.lightboxNav {
+    composes: roundButton arrow;
+    z-index: var(--z-modal-controls);
+    --round-size: 52px;
+    --round-font: 2rem;
 }
 
 .lightboxNav.prev {
@@ -107,17 +107,16 @@
     bottom: var(--space-lg);
     left: 50%;
     transform: translateX(-50%);
-    color: #ddd;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    z-index: 1001;
+    color: var(--on-photo-muted);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-label);
+    z-index: var(--z-modal-controls);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 767px) {
     .lightboxNav {
-        width: 40px;
-        height: 40px;
-        font-size: 1.5rem;
+        --round-size: 40px;
+        --round-font: 1.5rem;
     }
 
     .lightboxNav.prev {

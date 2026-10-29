@@ -6,12 +6,19 @@ import {
     ReactNode,
 } from "react";
 import styles from "./Macropad.module.css";
-import { KeycapCard, KeycapProps, KeycapFrame } from "./Keycap";
+import { Keycap, KeycapCard, KeycapProps, KeycapFrame } from "./Keycap";
 
 interface MacropadProps {
-    /** A list of <Keycap> children, in display order (order them so the
-        legends spell P·V·A·T·S). */
+    /** <Keycap> children, in display order (order them so the legends spell
+        P·V·A·T·S). Any other children (e.g. a <Carousel>) render after the
+        board, at the board's width. */
     children: ReactNode;
+    /** Small pixel-font label above the title, e.g. "Executive Kit · 5 keys". */
+    eyebrow?: string;
+    /** Section heading above the board, rendered as an h2. */
+    title?: string;
+    /** Fine print under the title. */
+    note?: string;
     /** Break out past the prose column and pack as many keycaps per row as the
         width allows, stepping through balanced row counts (e.g. 5 → 3+2 → 2+2+1
         → 1-up) as it narrows. */
@@ -32,14 +39,26 @@ interface MacropadProps {
     /** (fill only) Side-wall colour of the filler keycaps, any CSS colour.
         Defaults to a neutral grey. */
     fillColor?: string;
+    /** (fill only) Doodle printed on the filler keycaps. Defaults to the
+        banana mascot; pass fillImage="" for a blank key. */
+    fillImage?: string;
+    /** (fill only) Short line printed under the doodle. Defaults to
+        "This could be you!". */
+    fillText?: string;
+    /** (fill only) Optional button under the caption, e.g. a join link. */
+    fillLink?: string;
+    /** (fill only) Label for fillLink. */
+    fillLinkText?: string;
 }
 
 const DEFAULT_KEY_MIN = 420; // px
 const DEFAULT_KEY_MAX = 480; // px
+const DEFAULT_FILL_IMAGE = "/images/blog/mtt26-keeb-banana.png";
+const DEFAULT_FILL_TEXT = "This spot could be yours!";
 
 /* Fit-math constants that mirror Macropad.module.css — keep in sync. */
 const GAP = 16; // px: gap between keycaps (matches .wideGrid gap)
-const PAD = 60; // px: board padding (28*2) + border (2*2), outside the grid
+const PAD = 62; // px: board padding (28*2) + border (3*2), outside the grid
 
 /**
  * The distinct column counts for a "balanced" grid of `n` items — the number of
@@ -60,19 +79,28 @@ function balancedColumnCounts(n: number): number[] {
  */
 export function Macropad({
     children,
+    eyebrow,
+    title,
+    note,
     wide = false,
     keyMin = DEFAULT_KEY_MIN,
     keyMax = DEFAULT_KEY_MAX,
     maxCols,
     fill = false,
     fillColor,
+    fillImage = DEFAULT_FILL_IMAGE,
+    fillText = DEFAULT_FILL_TEXT,
+    fillLink,
+    fillLinkText = "Join us today",
 }: MacropadProps) {
-    const keys: KeycapProps[] = Children.toArray(children)
-        .filter((child): child is ReactElement<KeycapProps> =>
-            isValidElement(child),
-        )
+    const isKey = (child: ReactNode): child is ReactElement<KeycapProps> =>
+        isValidElement(child) && child.type === Keycap;
+    const all = Children.toArray(children);
+    const keys: KeycapProps[] = all
+        .filter(isKey)
         .map((child) => child.props)
-        .filter((p) => Boolean(p?.role && p?.name));
+        .filter((p) => Boolean(p.role && p.name));
+    const rest = all.filter((child) => !isKey(child));
 
     if (keys.length === 0) return null;
 
@@ -80,8 +108,25 @@ export function Macropad({
         <KeycapCard key={key.role + i} {...key} />
     ));
 
+    const header = (eyebrow || title || note) && (
+        <header className={styles.header}>
+            {eyebrow && <div className={styles.eyebrow}>{eyebrow}</div>}
+            {title && <h2 className={styles.title}>{title}</h2>}
+            {note && <p className={styles.note}>{note}</p>}
+        </header>
+    );
+    const after = rest.length > 0 && (
+        <div className={styles.after}>{rest}</div>
+    );
+
     if (!wide) {
-        return <div className={styles.macropad}>{cards}</div>;
+        return (
+            <section className={styles.section}>
+                {header}
+                <div className={styles.macropad}>{cards}</div>
+                {after}
+            </section>
+        );
     }
 
     const n = keys.length;
@@ -137,26 +182,55 @@ export function Macropad({
         .join("");
 
     return (
-        <div
+        <section
             className={styles.wideMacropad}
             // Cap the breakout at the single-row width so it never stretches
             // emptier than one row of n on an ultrawide screen.
             style={{ "--mp-cap": `${singleRow}px` } as CSSProperties}
         >
             <style dangerouslySetInnerHTML={{ __html: base + queries }} />
-            <div className={styles.wideBoard}>
-                <div className={`${styles.wideGrid} ${scope}`}>
-                    {cards}
-                    {Array.from({ length: placeholders }, (_, i) => (
-                        <KeycapFrame
-                            key={`ph-${i}`}
-                            className="mp-ph"
-                            empty
-                            accent={fillColor}
-                        />
-                    ))}
+            <div className={styles.wideFrame}>
+                {header}
+                <div className={styles.wideBoard}>
+                    <div className={`${styles.wideGrid} ${scope}`}>
+                        {cards}
+                        {Array.from({ length: placeholders }, (_, i) => (
+                            <KeycapFrame
+                                key={`ph-${i}`}
+                                className="mp-ph"
+                                empty={!fillImage && !fillText}
+                                accent={fillColor}
+                            >
+                                {(fillImage || fillText) && (
+                                    <div className={styles.filler}>
+                                        {fillImage && (
+                                            // eslint-disable-next-line @next/next/no-img-element
+                                            <img
+                                                src={fillImage}
+                                                alt=""
+                                                aria-hidden="true"
+                                            />
+                                        )}
+                                        {fillText && <p>{fillText}</p>}
+                                        {fillLink && (
+                                            <a
+                                                href={fillLink}
+                                                className={styles.fillerLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {fillLinkText}{" "}
+                                                <span aria-hidden>&rarr;</span>
+                                            </a>
+                                        )}
+                                    </div>
+                                )}
+                            </KeycapFrame>
+                        ))}
+                    </div>
                 </div>
+                {after}
             </div>
-        </div>
+        </section>
     );
 }

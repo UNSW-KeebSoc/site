@@ -11,7 +11,12 @@ import {
     useState,
 } from "react";
 import styles from "./Carousel.module.css";
-import { captionInner, Lightbox, LightboxImage } from "./Lightbox";
+import {
+    captionInner,
+    Lightbox,
+    LightboxImage,
+    setImageRatio,
+} from "./Lightbox";
 
 interface CarouselImageProps {
     /** Image URL. */
@@ -192,6 +197,8 @@ export function Carousel({ children, caption, captionHref }: CarouselProps) {
                         >
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
+                                ref={setImageRatio}
+                                onLoad={(e) => setImageRatio(e.currentTarget)}
                                 className={styles.image}
                                 src={img.src}
                                 alt={img.alt || ""}

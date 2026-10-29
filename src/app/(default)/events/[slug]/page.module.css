@@ -1,141 +1,137 @@
-/* app/events/[slug]/event.module.css */
+/* ---------- Event detail (/events/[slug]) ----------
+   Full-width banner straight under the navbar, then the write-up in a padded
+   article. Date / time / place sit as plain label + value pairs. */
 .eventPage {
     width: 100%;
     margin: 0 auto;
 }
 
 .eventPage article {
-    padding: var(--space-3xl) var(--space-xl);
+    max-width: calc(var(--reading-width) + 2 * var(--space-xl));
+    padding: var(--space-xl) var(--space-xl) var(--space-3xl);
     margin: 0 auto;
 }
 
+.backLink {
+    composes: label from "@/styles/shared.module.css";
+    display: inline-block;
+    margin-bottom: var(--space-lg);
+}
+
+.backLink span {
+    display: inline-block;
+    transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.backLink:hover span,
+.backLink:focus-visible span {
+    transform: translateX(-4px);
+}
+
+/* Uncropped poster with its edge pixels stretched out (see EventSplash). */
 .eventSplash {
     width: 100%;
-    height: 30vh;
-    min-height: 300px;
+    height: clamp(300px, 45vh, 520px);
     position: relative;
     overflow: hidden;
+    background-color: var(--orange-300);
 }
-.eventSplash img {
+
+.splashImage {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
-    object-position: center;
-    object-fit: cover;
-    transform-origin: center center;
+    border: none;
+    object-fit: contain;
+}
+
+/* Each half shows only the poster's outermost column, stretched to fill.
+   Height matches the contained poster, so rows line up with it. */
+.splashEdgeLeft,
+.splashEdgeRight {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background-repeat: no-repeat;
+    background-size: 100000% 100%;
+}
+
+.splashEdgeLeft {
+    left: 0;
+    background-position: left center;
+}
+
+.splashEdgeRight {
+    right: 0;
+    background-position: right center;
 }
 
 .eventHeader {
     margin-bottom: var(--space-xl);
-    border-bottom: var(--default-border);
-    padding-bottom: var(--space-md);
 }
 
 .eventHeader h1 {
-    font-family: "RedHatMono", monospace;
-    font-size: 2em;
-    color: var(--orange-400);
-    margin-bottom: 1rem;
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-2xl);
+    margin: 0 0 var(--space-md);
 }
 
 .eventMeta {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
 }
 
 .metaBlock {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: var(--space-2xs);
 }
 
 .metaLabel {
-    font-family: "RedHatMono", monospace;
-    font-size: 0.8em;
-    color: var(--orange-300);
-    font-weight: bold;
-    text-transform: uppercase;
+    composes: label from "@/styles/shared.module.css";
 }
 
 .metaValue {
-    font-family: "RedHatDisplay", sans-serif;
-    font-size: 1em;
+    line-height: var(--leading-snug);
+    color: var(--text-strong);
+}
+
+/* Second line of a multi-day date or time ("through …", "until …") */
+.multiDayIndicator {
+    margin-top: var(--space-2xs);
+    font-size: var(--text-sm);
+    opacity: 0.75;
 }
 
 .registerBlock {
-    margin-top: 0.5rem;
+    margin-top: var(--space-xs);
 }
 
+/* The page's main call to action: the filled shared button at body size */
 .registerButton {
-    display: inline-block;
-    padding: var(--space-xs) var(--space-md);
-    background-color: var(--orange-300);
-    color: white;
-    font-family: "RedHatMono", monospace;
-    font-weight: bold;
-    text-decoration: none;
-    border: 3px solid var(--orange-400);
-    transition: all 0.2s ease;
-}
-
-.registerButton:hover {
-    background-color: var(--orange-400);
-    transform: translateY(-2px);
+    composes: pressable button buttonPrimary from "@/styles/shared.module.css";
+    font-size: var(--text-base);
 }
 
 .registerButtonRubric {
-    composes: registerButton;
+    composes: pressable button buttonPrimary from "@/styles/shared.module.css";
+    font-size: var(--text-base);
     background-color: var(--color-rubric);
     border-color: var(--color-rubric-dark);
+    /* Rubric pink is the same in both themes, so the text stays white */
+    color: var(--on-photo);
+    --press-colour: var(--color-rubric-dark);
 }
 
-.registerButtonRubric:hover {
-    background-color: var(--color-rubric-dark);
-}
-
-.tagList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-    margin-top: var(--space-sm);
-}
-
-.tag {
-    font-family: "RedHatMono", monospace;
-    font-size: 0.8em;
-    padding: var(--space-2xs) var(--space-xs);
-    background-color: var(--orange-400);
-    border: 1px solid var(--orange-300);
-    border-radius: var(--radius-sm);
-    color: white;
-    font-weight: bold;
-}
-
+/* Event write-up: same long-form typography as blog posts */
 .eventContent {
-    font-family: "RedHatDisplay", sans-serif;
-    line-height: 1.6;
-}
-
-.eventContent h2 {
-    font-family: "RedHatMono", monospace;
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-md);
-}
-
-.eventContent ul,
-.eventContent ol {
-    margin-left: var(--space-lg);
-}
-
-.eventContent p {
-    margin-bottom: var(--space-md);
-}
-
-.eventContent em {
-    color: var(--orange-400);
+    composes: prose from "../../../../styles/prose.module.css";
 }
 
 @media (min-width: 768px) {
@@ -150,21 +146,5 @@
 
     .registerBlock {
         margin-left: auto;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    .eventHeader h1 {
-        color: var(--orange-200);
-    }
-    .metaLabel {
-        color: var(--orange-200);
-    }
-    .metaValue {
-        color: var(--orange-000);
-    }
-    .tag {
-        background-color: var(--orange-300);
-        color: var(--orange-100);
     }
 }

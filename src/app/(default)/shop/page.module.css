@@ -1,89 +1,264 @@
-.shopPage {
-    width: 100%;
-    max-width: 1600px;
-    margin: var(--space-xl) 0;
-    padding: var(--space-xl);
-}
+/* ---------- Shop (/shop) ----------
+   Product grid beside a sticky "How to buy" panel. Shares the /blog and
+   /events card language: 3px outlines, mono titles, lift + orange offset
+   shadow on hover. */
 
-.productsGrid {
-    display: grid;
-    gap: 1.5rem;
-    grid-auto-flow: dense;
-}
-
-.tallImage img {
-    height: auto !important;
-    aspect-ratio: 1 / 1;
-}
-
-.productLink {
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s ease;
-}
-
-.productLink:hover {
-    transform: translateY(-2px);
-}
-
-.productCard {
+.layout {
     display: flex;
     flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.products {
+    min-width: 0;
+}
+
+/* Mobile: pickup info first, it matters before you pick */
+.layout > aside {
+    order: -1;
+}
+
+@media (min-width: 1024px) {
+    .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 20rem;
+        align-items: start;
+        gap: var(--space-2xl);
+    }
+
+    .layout > aside {
+        order: 0;
+        position: sticky;
+        top: var(--space-lg);
+    }
+}
+
+/* Shared section heading; it opens the products column level with the
+   panel, so no top margin. */
+.sectionHeading {
+    composes: sectionHeading from "@/styles/shared.module.css";
+    margin-top: 0;
+}
+
+.count {
+    composes: label from "@/styles/shared.module.css";
+    color: var(--card-meta);
+}
+
+/* ---------- Product grid ---------- */
+.productGrid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 600px) {
+    .productGrid {
+        gap: var(--space-lg);
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
+
+.cardLink {
+    composes: cardLink from "@/styles/shared.module.css";
     height: 100%;
 }
 
-.productTitle {
-    font-family: "RedHatMono", monospace;
-    font-size: 1.2em;
+.card {
+    max-width: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: var(--default-border);
+    background-color: var(--surface);
+    color: var(--foreground);
+}
+
+.imageWrap {
+    position: relative;
+}
+
+.cardImage {
+    aspect-ratio: 1 / 1;
+}
+
+.imageFallback {
+    composes: label from "@/styles/shared.module.css";
+}
+
+/* Price tag pinned to the image's bottom-left corner */
+.price {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: var(--space-2xs) var(--space-sm);
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-md);
+    font-weight: var(--weight-bold);
+    background-color: var(--tag-background);
+    color: var(--tag-text);
+    border-top: var(--default-border);
+    border-right: var(--default-border);
+}
+
+.cardBody {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg) var(--space-lg);
+}
+
+.cardTitle {
+    composes: cardTitle from "@/styles/shared.module.css";
+    font-size: var(--text-md);
+}
+
+.cardCta {
+    margin-top: auto;
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--card-meta);
+}
+
+.cardCta span {
+    display: inline-block;
+    transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.cardLink:hover .cardCta span,
+.cardLink:focus-visible .cardCta span {
+    transform: translate(2px, -2px);
+}
+
+@media (max-width: 599px) {
+    .cardBody {
+        padding: var(--space-sm) var(--space-md) var(--space-md);
+    }
+
+    .cardTitle {
+        font-size: var(--text-base);
+    }
+
+    .price {
+        font-size: var(--text-sm);
+    }
+}
+
+/* ---------- How to buy panel ---------- */
+.panel {
+    border: var(--default-border);
+    background-color: var(--surface);
+}
+
+.panelBand {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-lg);
+    background-color: var(--heading);
+    color: var(--background);
+}
+
+.panelHeading {
     margin: 0;
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-lg);
+    color: inherit;
+}
+
+.panelStamp {
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    padding: var(--space-2xs) var(--space-xs);
+    border: 2px solid currentColor;
+    transform: rotate(-4deg);
+}
+
+.steps {
+    list-style: none;
+    margin: 0;
+    padding: var(--space-xs) var(--space-lg) var(--space-lg);
+}
+
+.step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-md);
+    padding-top: var(--space-md);
+}
+
+.stepNumber {
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    line-height: 1;
     color: var(--heading);
 }
 
-.productPrice {
-    display: block;
-    font-family: "RedHatMono", monospace;
-    font-size: 1em;
-    margin: 0.5rem 0;
-    color: var(--orange-400);
-    font-weight: bold;
+.stepTitle {
+    margin: 0;
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-base);
+    color: var(--heading);
 }
 
-.productDescription {
-    font-family: "RedHatDisplay", sans-serif;
-    font-size: 0.95em;
+.stepText {
+    margin-top: var(--space-2xs);
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
     color: var(--color-description);
-    margin: var(--space-xs) 0;
-    line-height: 1.4;
-    flex-grow: 1;
+    overflow-wrap: anywhere;
 }
 
-.message {
+.stepText a {
+    font-weight: var(--weight-bold);
+    color: var(--heading);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+}
+
+/* Mobile/tablet: steps run side by side once there's room */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-lg);
+    }
+}
+
+/* ---------- Empty shop ---------- */
+.empty {
+    padding: var(--space-2xl) var(--space-xl);
+    border: 3px dashed var(--orange-300);
+    background-color: var(--surface);
     text-align: center;
-    padding: var(--space-xl);
-    color: var(--gray-800);
-    font-family: "RedHatMono", monospace;
 }
 
-.errorMessage {
-    text-align: center;
-    padding: var(--space-xl);
-    color: var(--color-error);
-    font-family: "RedHatMono", monospace;
-    border: 3px solid var(--color-error);
+.emptyTitle {
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    color: var(--heading);
 }
 
-@media (min-width: 768px) {
-    .productsGrid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
+.emptyText {
+    margin-top: var(--space-xs);
+    color: var(--color-description);
 }
 
-@media (prefers-color-scheme: dark) {
-    .message {
-        color: var(--gray-300);
-    }
-
-    .productPrice {
-        color: white;
-    }
+/* Compact chips and buttons stay tight now that body line-height is 1.6. */
+.price,
+.panelStamp,
+.imageFallback {
+    line-height: var(--leading-tight);
 }

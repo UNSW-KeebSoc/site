@@ -1,144 +1,60 @@
-.blogPage {
-    width: 100%;
-    max-width: 900px;
-    margin: var(--space-xl) 0;
-    padding: var(--space-xl);
+/* Default post header: same pattern as the event page header (mono title),
+   with an optional eyebrow and subtitle from the frontmatter. */
+.postHeader {
+    margin-bottom: var(--space-xl);
 }
 
-.blogPage p {
-    color: var(--foreground);
+.postHeader h1 {
+    font-family: var(--font-brand-mono);
+    font-size: var(--text-2xl);
+    margin: 0 0 var(--space-sm);
 }
 
-.blogGrid {
-    display: grid;
-    gap: 1.5rem;
-    grid-auto-flow: dense;
+.postEyebrow {
+    composes: label from "@/styles/shared.module.css";
+    margin: 0 0 var(--space-xs);
 }
 
-.postLink {
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s ease;
+.postSubtitle {
+    font-size: var(--text-lg);
+    line-height: var(--leading-snug);
+    color: color-mix(in srgb, var(--foreground) 70%, transparent);
+    margin: 0 0 var(--space-sm);
+    text-align: left;
 }
 
-.postLink:hover {
-    transform: translateY(-2px);
-}
-
-.postCard {
-    padding: 0.5rem;
-    color: var(--foreground);
-}
-
-.postTitle {
-    font-family: "RedHatMono", monospace;
-    font-size: 1.2em;
+.postByline {
+    font-size: var(--text-sm);
+    color: var(--gray-400);
     margin: 0;
+    text-align: left;
 }
 
-/* Alternative: Inline author and date */
-.postMetaInline {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--gray-200);
+/* "← All posts" link at the top of a post (inside the splash on splash posts) */
+.backLink {
+    composes: label from "@/styles/shared.module.css";
+    display: inline-block;
+    margin-bottom: var(--space-lg);
+    text-decoration: none;
 }
 
-.postMetaInline .postAuthor {
-    margin-bottom: 0;
+.backLink span {
+    display: inline-block;
+    transition: transform var(--duration-normal) var(--ease-out);
 }
 
-.postMetaInline .postDate {
-    margin-bottom: 0;
+.backLink:hover span,
+.backLink:focus-visible span {
+    transform: translateX(-4px);
 }
 
-.postMetaInline .postAuthor::after {
-    content: "•";
-    margin-left: 0.5rem;
-    color: var(--gray-300);
-}
-
-.postAuthor {
-    font-weight: 600;
-    color: var(--gray-400);
-    margin-bottom: 0.25rem;
-    font-size: 0.875rem;
-}
-
-.postDate {
-    color: var(--gray-400);
-    font-size: 0.875rem;
-    margin-bottom: 1.5rem;
-    font-style: italic;
-}
-
-@media (prefers-color-scheme: dark) {
-    .postAuthor {
-        color: var(--gray-300);
-    }
-
-    .postMetaInline .postAuthor::after {
-        color: var(--gray-400);
-    }
-}
-
-.postDescription {
-    font-family: "RedHatDisplay", sans-serif;
-    font-size: 0.95em;
-    color: var(--color-description);
-    margin: var(--space-xs) 0;
-    line-height: 1.4;
-}
-
-.tagList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-    margin-top: var(--space-sm);
-}
-
-.tag {
-    font-family: "RedHatMono", monospace;
-    font-size: 0.8em;
-    padding: var(--space-2xs) var(--space-xs);
-    background-color: var(--orange-400);
-    border: 1px solid var(--orange-300);
-    border-radius: var(--radius-sm);
-    color: white;
-    font-weight: bold;
-}
-
-@media (prefers-color-scheme: dark) {
-    .tag {
-        background-color: var(--orange-300);
-        color: var(--orange-100);
-    }
-}
-
+/* Post article layout only; reading typography comes from prose.module.css.
+   Splash's negative top margin depends on this padding + margin. */
 .prose {
     padding: var(--space-xl);
-    max-width: 90ch;
+    max-width: calc(var(--reading-width) + 2 * var(--space-xl));
     margin: var(--space-3xl) auto;
-    line-height: 1.75;
     width: 100%;
-}
-
-.prose p {
-    margin-bottom: var(--space-lg);
-    text-align: justify;
-}
-
-/* Answer: the paragraph immediately after a <Question> gets an accent bar and
-   slight indent so it reads as the response rather than plain body text. */
-.prose [data-question]+p {
-    border-left: 3px solid var(--orange-300);
-    padding-left: var(--space-lg);
-    margin-top: calc(-1 * var(--space-xs));
-    margin-left: var(--space-md);
-    margin-right: var(--space-md);
-    color: color-mix(in srgb, var(--foreground) 85%, transparent);
 }
 
 .imgContainer {
@@ -149,4 +65,86 @@
 .imgContainer img {
     width: 100% !important;
     height: auto !important;
+}
+
+/* ---------- Blog index (/blog) ---------- */
+
+/* Post cards use shared.cardLink (press hover) directly; the featured card
+   gets its own class so the side-by-side layout below can target it. */
+.featuredLink {
+    composes: cardLink from "@/styles/shared.module.css";
+}
+
+.cardDate {
+    composes: cardMeta from "@/styles/shared.module.css";
+}
+
+.cardTitle {
+    composes: cardTitle from "@/styles/shared.module.css";
+}
+
+/* Older posts: clamp descriptions so grid rows stay tidy */
+.cardDescription {
+    composes: cardDescription from "@/styles/shared.module.css";
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    flex-grow: 0;
+    margin-bottom: auto;
+}
+
+/* Featured (newest) post */
+.latestLabel {
+    composes: label from "@/styles/shared.module.css";
+    margin-bottom: var(--space-xs);
+}
+
+.latestLabel::before {
+    content: "\2605  ";
+}
+
+.featuredTitle {
+    composes: cardTitle from "@/styles/shared.module.css";
+    font-size: 1.9em;
+    line-height: 1.15;
+}
+
+.featuredCard .featuredTitle + time {
+    margin-top: var(--space-sm);
+}
+
+/* Side by side from laptop width up; the banner keeps its full 2:1 frame.
+   Selectors are doubled up to outrank Card.module.css regardless of load order. */
+@media (min-width: 1024px) {
+    .featuredLink .featuredCard {
+        flex-direction: row;
+    }
+
+    .featuredLink .featuredCard img {
+        width: 58%;
+        flex-shrink: 0;
+        align-self: center;
+    }
+
+    .featuredLink .featuredCard > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .featuredLink .featuredCard article {
+        height: auto;
+    }
+}
+
+.postGrid {
+    display: grid;
+    gap: var(--space-xl);
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+}
+
+.postGrid .cardTitle {
+    font-size: 1.1em;
 }

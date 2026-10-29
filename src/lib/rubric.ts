@@ -98,3 +98,24 @@ export function getRubricSection(sections: RubricSection[], name: string): Recor
     }
     return [];
 }
+
+export interface Product {
+    id: string;
+    title: string;
+    price: string;
+    image: string;
+    destination: string;
+}
+
+/** Shop items from Rubric's "Merchandise" section, sanitised. Empty if Rubric
+    is unreachable. */
+export async function getMerchandise(): Promise<Product[]> {
+    const { sections } = await getRubricLandingPage();
+    return getRubricSection(sections, "Merchandise").map((item) => ({
+        id: sanitizeText(item.productid as string),
+        title: sanitizeText(item.title as string),
+        price: sanitizeText(item.info as string),
+        image: sanitizeUrl(item.image as string),
+        destination: sanitizeUrl(item.destination as string),
+    }));
+}

@@ -2,7 +2,6 @@
 // SponsorScroller.tsx
 import { useEffect, useRef, useState } from "react";
 import styles from "./SponsorScroller.module.css";
-// import Image from "next/image";
 
 interface Sponsor {
     name: string;
@@ -79,24 +78,17 @@ export default function SponsorScroller({
     return (
         <div className={styles.banner}>
             {label && (
-                <div className={styles.label}>
+                <div>
                     <h3>{label}</h3>
                 </div>
             )}
 
-            <div className={styles.scrollWrapper}>
+            <div>
                 <div ref={containerRef} className={styles.container}>
                     <div ref={contentRef} className={styles.content}>
                         {repeatedContent.map((sponsor, index) => (
                             <a key={index} className={styles.sentence} href={sponsor.link} target="_blank" rel="noopener noreferrer">
                                 {sponsor.name}
-                                {/* <Image
-                                    src={`/icons/${sentence.toLowerCase()}.png`}
-                                    alt={sentence}
-                                    width={24}
-                                    height={24}
-                                    className={styles.sponsor}
-                                /> */}
                             </a>
                         ))}
                     </div>

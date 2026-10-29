@@ -15,7 +15,8 @@
     border: 2px solid color-mix(in srgb, var(--foreground) 12%, transparent);
     border-radius: var(--radius-md);
     text-decoration: none;
-    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color var(--duration-fast) ease, transform var(--duration-fast) ease,
+        box-shadow var(--duration-fast) ease;
 }
 
 .card:hover {
@@ -25,19 +26,14 @@
 }
 
 .region {
-    font-family: "RedHatMono", monospace;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--heading);
+    composes: label from "../../styles/shared.module.css";
 }
 
 .name {
-    font-family: "RedHatDisplay", sans-serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    line-height: 1.2;
+    font-family: var(--font-brand);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-md);
+    line-height: var(--leading-tight);
     color: var(--foreground);
 }
 
@@ -46,9 +42,9 @@
     position: absolute;
     top: var(--space-md);
     right: var(--space-lg);
-    font-size: 1rem;
+    font-size: var(--text-base);
     color: color-mix(in srgb, var(--foreground) 40%, transparent);
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition: color var(--duration-fast) ease, transform var(--duration-fast) ease;
 }
 
 .card:hover .arrow {

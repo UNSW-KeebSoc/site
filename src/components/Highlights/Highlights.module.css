@@ -1,62 +1,54 @@
 .container {
     width: 100%;
     margin: 0 auto;
-    padding: var(--space-2xl);
+    padding: var(--space-lg) var(--space-md);
 }
 
 .header {
     margin-bottom: var(--space-lg);
 }
 
+/* Filled orange label. --tag-text is white in light mode and orange-100 in
+   dark, so it covers both themes without its own dark-mode block. */
 .title {
     display: inline-block;
     background-color: var(--orange-300);
-    color: white;
+    color: var(--tag-text);
     padding: var(--space-xs) var(--space-md);
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
     margin: 0;
     letter-spacing: 0.5px;
 }
 
-@media (prefers-color-scheme: dark) {
-    .title {
-        color: var(--orange-100);
-    }
-}
-
+/* One column on phones (all cards), then 2 / 3 / 4 columns. With 2 or 4
+   columns only the first 4 cards show, so the grid stays a full rectangle. */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: var(--space-lg);
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
     justify-items: center;
 }
 
 .card {
     width: 100%;
-    /* max-width: 350px; */
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+@media (min-width: 768px) {
     .container {
-        padding: var(--space-lg) var(--space-md);
+        padding: var(--space-2xl);
     }
 
     .grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-md);
-    }
-
-    .card {
-        max-width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-lg);
     }
 }
 
-/* 2 columns: show 4 (2x2), hide 5th and 6th */
-@media (min-width: 769px) and (max-width: 1109px) {
-    .grid> :nth-child(n+5) {
-        display: none;
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -64,8 +56,10 @@
     .grid {
         grid-template-columns: repeat(4, 1fr);
     }
+}
 
-    .grid> :nth-child(n+5) {
+@media (min-width: 768px) and (max-width: 1023px), (min-width: 1400px) {
+    .grid > :nth-child(n + 5) {
         display: none;
     }
 }
